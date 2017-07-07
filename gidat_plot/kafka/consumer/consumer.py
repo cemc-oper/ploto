@@ -57,11 +57,18 @@ def run_gidat_plot(message):
 
     print('running ncl...')
 
+    # ncl_pipe = subprocess.Popen(
+    #     ['/bin/bash', '-i', '-c', 'ncl file_path=\\"{file_path}\\" {ncl_script}'.format(
+    #         file_path=file_path,
+    #         ncl_script=ncl_script
+    #     )],
+    #     start_new_session=True
+    # )
+
     ncl_pipe = subprocess.Popen(
-        ['/bin/bash', '-i', '-c', 'ncl file_path=\\"{file_path}\\" {ncl_script}'.format(
-            file_path=file_path,
-            ncl_script=ncl_script
-        )],
+        ['/home/wangdp/nwpc/gidat/plot/workspace/env/bin/python',
+         '/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot/gidat_plot/ncl_script_plot.py',
+         '--param={param_string}'.format(param_string=json.dumps(param))],
         start_new_session=True
     )
 
@@ -69,8 +76,8 @@ def run_gidat_plot(message):
     ncl_pipe.wait()
     ncl_pipe.terminate()
 
-    print(stdout)
-    print(stderr)
+    # print(stdout)
+    # print(stderr)
 
     print('running ncl...done')
 
@@ -94,6 +101,7 @@ def main():
     consumer.max_buffer_size = 1000000
 
     try:
+        print("starting receiving message...")
         for consumer_record in consumer:
             print('new message: {offset}'.format(offset=consumer_record.offset))
             message_string = consumer_record.value.decode('utf-8')
@@ -103,9 +111,9 @@ def main():
     except KeyboardInterrupt as e:
         print(e)
     finally:
+        print("Warm shutdown...")
+        consumer.close()
         print("Warm shutdown...Done")
-
-    consumer.close()
 
 
 if __name__ == "__main__":

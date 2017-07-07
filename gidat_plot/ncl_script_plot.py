@@ -16,8 +16,8 @@ def ncl_script_plot(param):
             ncl_script=ncl_script
         )]
     )
-    print(ncl_result.stdout)
-    print(ncl_result.stderr)
+    # print(ncl_result.stdout)
+    # print(ncl_result.stderr)
 
 
 if __name__ == "__main__":
