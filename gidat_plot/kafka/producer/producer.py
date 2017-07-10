@@ -12,7 +12,7 @@ def get_ncl_script():
 
     var = f->TMP_P0_L1_GLL0
 
-    wks = gsn_open_wks("png", "tmp.png")
+    wks = gsn_open_wks("png", image_path)
 
     res = True
     res@tiMainString = "TEMP"

@@ -7,12 +7,12 @@ import json
 @click.option('--param', help='json param string')
 def ncl_script_plot(param):
     param_object = json.loads(param)
-    file_path = param_object['file_path']
+    ncl_params = param_object['ncl_params']
     ncl_script = param_object['ncl_script_path']
 
     ncl_result = subprocess.run(
-        ['/bin/bash', '-i', '-c', 'ncl file_path=\\"{file_path}\\" {ncl_script}'.format(
-            file_path=file_path,
+        ['/bin/bash', '-i', '-c', 'ncl {ncl_params} {ncl_script}'.format(
+            ncl_params=ncl_params,
             ncl_script=ncl_script
         )]
     )

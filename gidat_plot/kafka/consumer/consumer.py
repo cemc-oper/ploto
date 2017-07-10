@@ -40,11 +40,17 @@ def run_gidat_plot(message):
     os.chdir(work_dir)
 
     file_path = message['data']['file_path']
+    image_path = "image.png"
     ncl_script = message['data']['ncl_script']
 
     param = {
+        'ncl_script_path': 'draw.ncl',
+        'ncl_params': 'file_path=\\"{file_path}\\" image_path=\\"{image_path}\\"'.format(
+            file_path=file_path,
+            image_path=image_path
+        ),
         'file_path': file_path,
-        'ncl_script_path': 'draw.ncl'
+        'image_path': image_path
     }
 
     print('prepare data...')
@@ -52,18 +58,7 @@ def run_gidat_plot(message):
     print('prepare plot script...')
     save_ncl_script(param['ncl_script_path'], ncl_script)
 
-    file_path = param['file_path']
-    ncl_script = param['ncl_script_path']
-
     print('running ncl...')
-
-    # ncl_pipe = subprocess.Popen(
-    #     ['/bin/bash', '-i', '-c', 'ncl file_path=\\"{file_path}\\" {ncl_script}'.format(
-    #         file_path=file_path,
-    #         ncl_script=ncl_script
-    #     )],
-    #     start_new_session=True
-    # )
 
     ncl_pipe = subprocess.Popen(
         ['/home/wangdp/nwpc/gidat/plot/workspace/env/bin/python',
