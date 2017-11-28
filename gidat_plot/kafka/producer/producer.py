@@ -50,7 +50,12 @@ def main():
             ],
             'plotter': {
                 'type': 'ncl_plotter',
-                'ncl_script_content': get_ncl_script()
+                'ncl_script_content': get_ncl_script(),
+                'image_path': 'image.png',
+                'ncl_params': 'file_path=\\"{file_path}\\" image_path=\\"{image_path}\\"'.format(
+                    file_path='gmf.gra.2017070400009.grb2',
+                    image_path='image.png'
+                ),
             }
         }
     }
