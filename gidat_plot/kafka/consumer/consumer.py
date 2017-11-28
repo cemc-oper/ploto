@@ -13,6 +13,19 @@ sys.path.append('/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot')
 run_base_dir = "/home/wangdp/nwpc/gidat/plot/workspace/run_base"
 
 
+def prepare_environment():
+    temp_directory = str(uuid.uuid4())
+    os.chdir(run_base_dir)
+    work_dir = os.path.join(run_base_dir, temp_directory)
+    os.makedirs(work_dir)
+    os.chdir(work_dir)
+
+
+def prepare_data(files):
+    file_task = files[0]
+    download_ftp_data(file_task)
+
+
 def download_ftp_data(ftp_file_task):
     ftp = ftplib.FTP(ftp_file_task["host"])
     ftp.login(ftp_file_task["user"], ftp_file_task["password"])
@@ -29,39 +42,7 @@ def save_ncl_script(ncl_script_path, ncl_script):
         f.write(ncl_script)
 
 
-def run_gidat_plot(message):
-    print('begin plot...')
-    current_directory = os.getcwd()
-
-    print('prepare environment...')
-    temp_directory = str(uuid.uuid4())
-    os.chdir(run_base_dir)
-    work_dir = os.path.join(run_base_dir, temp_directory)
-    os.makedirs(work_dir)
-    os.chdir(work_dir)
-
-    files = message['data']['files']
-    file_task = files[0]
-    image_path = "image.png"
-    ncl_script = message['data']['ncl_script']
-
-    param = {
-        'ncl_script_path': 'draw.ncl',
-        'ncl_params': 'file_path=\\"{file_path}\\" image_path=\\"{image_path}\\"'.format(
-            file_path=file_task['file_name'],
-            image_path=image_path
-        ),
-        'file_path': file_task['file_name'],
-        'image_path': image_path
-    }
-
-    print('prepare data...')
-    download_ftp_data(file_task)
-    print('prepare plot script...')
-    save_ncl_script(param['ncl_script_path'], ncl_script)
-
-    print('running ncl...')
-
+def run_ncl_plotter_task(param):
     ncl_pipe = subprocess.Popen(
         ['/home/wangdp/nwpc/gidat/plot/workspace/env/bin/python',
          '/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot/gidat_plot/plotter/ncl_plotter/ncl_script_plot.py',
@@ -76,6 +57,36 @@ def run_gidat_plot(message):
     # print(stdout)
     # print(stderr)
 
+
+def run_gidat_plot(message):
+    print('begin plot...')
+    current_directory = os.getcwd()
+
+    print('prepare environment...')
+    prepare_environment()
+
+    print('prepare data...')
+    files = message['data']['files']
+    prepare_data(files)
+
+    print('prepare plot script...')
+    file_task = files[0]
+    image_path = "image.png"
+    ncl_script_content = message['data']['plotter']['ncl_script_content']
+
+    param = {
+        'ncl_script_path': 'draw.ncl',
+        'ncl_params': 'file_path=\\"{file_path}\\" image_path=\\"{image_path}\\"'.format(
+            file_path=file_task['file_name'],
+            image_path=image_path
+        ),
+        'file_path': file_task['file_name'],
+        'image_path': image_path
+    }
+    save_ncl_script(param['ncl_script_path'], ncl_script_content)
+
+    print('running ncl...')
+    run_ncl_plotter_task(param)
     print('running ncl...done')
 
     os.chdir(current_directory)

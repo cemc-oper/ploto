@@ -48,7 +48,10 @@ def main():
                     "file_name": "gmf.gra.2017070400009.grb2"
                 },
             ],
-            'ncl_script': get_ncl_script()
+            'plotter': {
+                'type': 'ncl_plotter',
+                'ncl_script_content': get_ncl_script()
+            }
         }
     }
 
