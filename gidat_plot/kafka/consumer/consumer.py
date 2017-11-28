@@ -13,13 +13,14 @@ sys.path.append('/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot')
 run_base_dir = "/home/wangdp/nwpc/gidat/plot/workspace/run_base"
 
 
-def download_data(file_path):
-    ftp = ftplib.FTP("10.28.32.114")
-    ftp.login("wangdp", "perilla")
-    ftp.cwd('/srv/files/ftp/GRAPES_GFS_ORIG_2017070400')
+def download_ftp_data(ftp_file_task):
+    ftp = ftplib.FTP(ftp_file_task["host"])
+    ftp.login(ftp_file_task["user"], ftp_file_task["password"])
+    ftp.cwd(ftp_file_task["directory"])
     ftp.retrbinary(
-        'RETR {file_path}'.format(file_path=file_path),
-        open('{file_path}'.format(file_path=file_path), 'wb').write)
+        'RETR {file_path}'.format(file_path=ftp_file_task["file_name"]),
+        open('{file_path}'.format(file_path=ftp_file_task["file_name"]), 'wb').write
+    )
     ftp.quit()
 
 
@@ -39,22 +40,23 @@ def run_gidat_plot(message):
     os.makedirs(work_dir)
     os.chdir(work_dir)
 
-    file_path = message['data']['file_path']
+    files = message['data']['files']
+    file_task = files[0]
     image_path = "image.png"
     ncl_script = message['data']['ncl_script']
 
     param = {
         'ncl_script_path': 'draw.ncl',
         'ncl_params': 'file_path=\\"{file_path}\\" image_path=\\"{image_path}\\"'.format(
-            file_path=file_path,
+            file_path=file_task['file_name'],
             image_path=image_path
         ),
-        'file_path': file_path,
+        'file_path': file_task['file_name'],
         'image_path': image_path
     }
 
     print('prepare data...')
-    download_data(param['file_path'])
+    download_ftp_data(file_task)
     print('prepare plot script...')
     save_ncl_script(param['ncl_script_path'], ncl_script)
 
@@ -62,7 +64,7 @@ def run_gidat_plot(message):
 
     ncl_pipe = subprocess.Popen(
         ['/home/wangdp/nwpc/gidat/plot/workspace/env/bin/python',
-         '/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot/gidat_plot/ncl_script_plot.py',
+         '/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot/gidat_plot/plotter/ncl_plotter/ncl_script_plot.py',
          '--param={param_string}'.format(param_string=json.dumps(param))],
         start_new_session=True
     )

@@ -38,7 +38,16 @@ def main():
         'type': 'gidat_plot',
         'timestamp': time.time(),
         'data': {
-            'file_path': "gmf.gra.2017070400009.grb2",
+            'files': [
+                {
+                    "type": "ftp",
+                    "host": "10.28.32.114",
+                    "user": "wangdp",
+                    "password": "perilla",
+                    "directory": "/srv/files/ftp/GRAPES_GFS_ORIG_2017070400",
+                    "file_name": "gmf.gra.2017070400009.grb2"
+                },
+            ],
             'ncl_script': get_ncl_script()
         }
     }
