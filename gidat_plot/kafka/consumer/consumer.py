@@ -1,13 +1,14 @@
 # coding=utf-8
 import json
-import ftplib
 import uuid
-import subprocess
 from kafka import KafkaConsumer
 
 import sys
 import os
 sys.path.append('/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot')
+
+from gidat_plot.plotter.ncl_plotter import ncl_script_util
+from gidat_plot.data_fetcher import ftp_fetcher
 
 
 run_base_dir = "/home/wangdp/nwpc/gidat/plot/workspace/run_base"
@@ -19,43 +20,28 @@ def prepare_environment():
     work_dir = os.path.join(run_base_dir, temp_directory)
     os.makedirs(work_dir)
     os.chdir(work_dir)
+    return work_dir
 
 
-def prepare_data(files):
-    file_task = files[0]
-    download_ftp_data(file_task)
+def prepare_data(files, work_dir):
+    os.chdir(work_dir)
+    for file_task in files:
+        file_type = file_task['type']
+        if file_type == 'ftp':
+            ftp_fetcher.download_ftp_data(file_task)
+        else:
+            print("file type not supported:", file_type)
 
 
-def download_ftp_data(ftp_file_task):
-    ftp = ftplib.FTP(ftp_file_task["host"])
-    ftp.login(ftp_file_task["user"], ftp_file_task["password"])
-    ftp.cwd(ftp_file_task["directory"])
-    ftp.retrbinary(
-        'RETR {file_path}'.format(file_path=ftp_file_task["file_name"]),
-        open('{file_path}'.format(file_path=ftp_file_task["file_name"]), 'wb').write
-    )
-    ftp.quit()
+def run_plotter(plotter_config):
+    if plotter_config['type'] == 'ncl_plotter':
+        ncl_script_util.run_ncl_plotter(plotter_config)
+    else:
+        print("plotter type is not supported:", plotter_config['type'])
 
 
-def save_ncl_script(ncl_script_path, ncl_script):
-    with open(ncl_script_path, 'w') as f:
-        f.write(ncl_script)
-
-
-def run_ncl_plotter_task(param):
-    ncl_pipe = subprocess.Popen(
-        ['/home/wangdp/nwpc/gidat/plot/workspace/env/bin/python',
-         '/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot/gidat_plot/plotter/ncl_plotter/ncl_script_plot.py',
-         '--param={param_string}'.format(param_string=json.dumps(param))],
-        start_new_session=True
-    )
-
-    stdout, stderr = ncl_pipe.communicate()
-    ncl_pipe.wait()
-    ncl_pipe.terminate()
-
-    # print(stdout)
-    # print(stderr)
+def clear_environment():
+    pass
 
 
 def run_gidat_plot(message):
@@ -63,31 +49,17 @@ def run_gidat_plot(message):
     current_directory = os.getcwd()
 
     print('prepare environment...')
-    prepare_environment()
+    work_dir = prepare_environment()
 
     print('prepare data...')
     files = message['data']['files']
-    prepare_data(files)
+    prepare_data(files, work_dir)
 
-    print('prepare plot script...')
-    file_task = files[0]
-    image_path = "image.png"
-    ncl_script_content = message['data']['plotter']['ncl_script_content']
+    print('running plotter...')
+    run_plotter(message['data']['plotter'])
 
-    param = {
-        'ncl_script_path': 'draw.ncl',
-        'ncl_params': 'file_path=\\"{file_path}\\" image_path=\\"{image_path}\\"'.format(
-            file_path=file_task['file_name'],
-            image_path=image_path
-        ),
-        'file_path': file_task['file_name'],
-        'image_path': image_path
-    }
-    save_ncl_script(param['ncl_script_path'], ncl_script_content)
-
-    print('running ncl...')
-    run_ncl_plotter_task(param)
-    print('running ncl...done')
+    print('clearing environment...')
+    clear_environment()
 
     os.chdir(current_directory)
     print('end plot')
