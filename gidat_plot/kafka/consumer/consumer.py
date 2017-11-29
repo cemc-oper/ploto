@@ -8,7 +8,7 @@ import os
 sys.path.append('/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot')
 
 from gidat_plot.plotter.ncl_plotter import ncl_script_util
-from gidat_plot.data_fetcher import ftp_fetcher
+from gidat_plot.data_fetcher import ftp_fetcher, local_fetcher
 
 
 run_base_dir = "/home/wangdp/nwpc/gidat/plot/workspace/run_base"
@@ -29,6 +29,8 @@ def prepare_data(files, work_dir):
         file_type = file_task['type']
         if file_type == 'ftp':
             ftp_fetcher.get_data(file_task, work_dir)
+        elif file_type == 'local':
+            local_fetcher.get_data(file_task, work_dir)
         else:
             print("file type not supported:", file_type)
 
