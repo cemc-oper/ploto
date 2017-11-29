@@ -28,19 +28,19 @@ def prepare_data(files, work_dir):
     for file_task in files:
         file_type = file_task['type']
         if file_type == 'ftp':
-            ftp_fetcher.download_ftp_data(file_task)
+            ftp_fetcher.get_data(file_task, work_dir)
         else:
             print("file type not supported:", file_type)
 
 
-def run_plotter(plotter_config):
+def draw_plot(plotter_config, work_dir):
     if plotter_config['type'] == 'ncl_plotter':
-        ncl_script_util.run_ncl_plotter(plotter_config)
+        ncl_script_util.run_plotter(plotter_config, work_dir)
     else:
         print("plotter type is not supported:", plotter_config['type'])
 
 
-def clear_environment():
+def clear_environment(work_dir):
     pass
 
 
@@ -55,11 +55,11 @@ def run_gidat_plot(message):
     files = message['data']['files']
     prepare_data(files, work_dir)
 
-    print('running plotter...')
-    run_plotter(message['data']['plotter'])
+    print('drawing plot...')
+    draw_plot(message['data']['plotter'], work_dir)
 
     print('clearing environment...')
-    clear_environment()
+    clear_environment(work_dir)
 
     os.chdir(current_directory)
     print('end plot')
