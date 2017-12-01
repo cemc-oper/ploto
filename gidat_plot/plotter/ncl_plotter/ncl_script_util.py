@@ -1,6 +1,7 @@
 # coding=utf-8
 import json
 import subprocess
+import os
 
 
 def save_ncl_script(ncl_script_path, ncl_script):
@@ -24,7 +25,7 @@ def run_plotter(plotter_config, work_dir):
 
     ncl_pipe = subprocess.Popen(
         ['/home/wangdp/nwpc/gidat/plot/workspace/env/bin/python',
-         '/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot/gidat_plot/plotter/ncl_plotter/ncl_script_plot.py',
+         os.path.join(os.path.dirname(__file__), 'ncl_script_plot.py'),
          '--param={param_string}'.format(param_string=json.dumps(param))],
         start_new_session=True
     )

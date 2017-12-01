@@ -5,7 +5,7 @@ from kafka import KafkaConsumer
 
 import sys
 import os
-sys.path.append('/home/wangdp/nwpc/gidat/plot/workspace/gidat-plot')
+sys.path.append(os.path.join(os.path.dirname(__file__), "../../../../../"))
 
 from gidat_plot.plotter.ncl_plotter import ncl_script_util
 from gidat_plot.data_fetcher import ftp_fetcher, local_fetcher
