@@ -11,7 +11,7 @@ def save_ddps_param_file(ddps_param_file_path, param):
         f.write(content)
 
 
-def download_ddps_fetcher(file_task, work_dir):
+def download_ddps_fetcher(file_task, work_dir, config):
     """
 
     file_task:
@@ -44,8 +44,10 @@ def download_ddps_fetcher(file_task, work_dir):
     ddps_param_file_path = 'ddps_param.config'
     save_ddps_param_file(ddps_param_file_path, query_param)
 
+    bsc_command = config['ddps_fetcher']['bsc_command']
+
     ddps_pipe = subprocess.Popen(
-        ['/home/wangdp/nwpc/gidat/data/ddps/BSC/bsc/bin/bsc',
+        [bsc_command,
          'ddps_param.config'],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
@@ -72,5 +74,5 @@ def download_ddps_fetcher(file_task, work_dir):
     ddps_pipe.terminate()
 
 
-def get_data(file_task, work_dir):
-    download_ddps_fetcher(file_task, work_dir)
+def get_data(file_task, work_dir, config):
+    download_ddps_fetcher(file_task, work_dir, config)

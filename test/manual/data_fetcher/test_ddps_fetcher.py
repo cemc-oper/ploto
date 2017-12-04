@@ -25,7 +25,11 @@ data_task = {
 }
 
 
-work_dir = "/home/wangdp/nwpc/gidat/plot/workspace/temp"
+work_dir = "/space/windroc/workspace/plot/playground/temp"
 
 
-ddps_fetcher.get_data(data_task, work_dir)
+ddps_fetcher.get_data(data_task, work_dir, config={
+    'ddps_fetcher': {
+        'bsc_command': "/space/project/BSC/bsc/bin/bsc"
+    }
+})
