@@ -3,6 +3,20 @@ import ftplib
 
 
 def download_ftp_data(ftp_file_task, work_dir):
+    """
+
+    :param ftp_file_task:
+        {
+            "type": "ftp",
+            "host": "ip host",
+            "user": "user name",
+            "password": "password",
+            "directory": "ftp file directory",
+            "file_name": "file name"
+        },
+    :param work_dir:
+    :return:
+    """
     ftp = ftplib.FTP(ftp_file_task["host"])
     ftp.login(ftp_file_task["user"], ftp_file_task["password"])
     ftp.cwd(ftp_file_task["directory"])
