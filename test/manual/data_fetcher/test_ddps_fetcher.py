@@ -20,7 +20,8 @@ data_task = {
             "levelist": "850",
             "savePath": "./ddps"
         }
-    }
+    },
+    'file_name': 'data_file.grib2'
 }
 
 

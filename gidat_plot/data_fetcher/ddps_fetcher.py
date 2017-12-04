@@ -33,7 +33,8 @@ def download_ddps_fetcher(file_task, work_dir):
                 "levelist":"850",
                 "savePath":"./ddps"
             }
-        }
+        },
+        target: 'data_file.grib2'
     }
 
     """
@@ -59,7 +60,12 @@ def download_ddps_fetcher(file_task, work_dir):
         result_line = std_lines[1]
         file_list_str = result_line[len('ExtractResultList:['):-1]
         file_list = file_list_str.split(',')
-        print(file_list)
+        if len(file_list) == 1:
+            os.rename(os.path.join(query_param['config']['savePath'], file_list[0]),
+                      os.path.join(work_dir, file_task['file_name']))
+        else:
+            print(file_list)
+            print("we don't support more than one file.")
     else:
         print('unknown error:', stdout)
     ddps_pipe.wait()
