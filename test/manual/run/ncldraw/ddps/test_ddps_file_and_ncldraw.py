@@ -33,7 +33,7 @@ def main():
                             "groupname": "DYN",
                             "expID": "G1600010",
                             "time": "1200,12:00",
-                            "step": "0",
+                            "step": "0,3",
                             "levtype": "pl",
                             "param": "t",
                             "levelist": "850",

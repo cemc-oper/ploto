@@ -7,6 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
 
 from gidat_plot.data_fetcher import prepare_data
 from gidat_plot.plotter import draw_plot
+from gidat_plot.logger import get_logger
 
 
 def prepare_environment(config):
@@ -17,31 +18,35 @@ def prepare_environment(config):
     os.chdir(run_base_dir)
     work_dir = os.path.join(run_base_dir, temp_directory)
     os.makedirs(work_dir)
-    print("entering work dir:", work_dir)
-    os.chdir(work_dir)
     return work_dir
 
 
-def clear_environment(work_dir):
+def clear_environment(work_dir, config):
     pass
 
 
 def run_gidat_plot(message, config):
-    print('begin plot...')
+    logger = get_logger()
+    logger.info('begin plot...')
     current_directory = os.getcwd()
 
-    print('prepare environment...')
+    logger.info('prepare environment...')
     work_dir = prepare_environment(config=config)
 
-    print('prepare data...')
+    logger.info("entering work dir: {work_dir}".format(work_dir=work_dir))
+    os.chdir(work_dir)
+
+    logger.info('prepare data...')
     files = message['data']['files']
     prepare_data(files, work_dir, config=config)
 
-    print('drawing plot...')
+    logger.info('drawing plot...')
     draw_plot(message['data']['plotter'], work_dir, config=config)
 
-    print('clearing environment...')
-    clear_environment(work_dir)
-
+    logger.info('leaving work_dir...')
     os.chdir(current_directory)
-    print('end plot')
+
+    logger.info('clearing environment...')
+    clear_environment(work_dir, config=config)
+
+    logger.info('end plot')

@@ -1,8 +1,9 @@
 # coding=utf-8
-import json
 import subprocess
 import pathlib
 import xml.etree.cElementTree as ET
+
+from gidat_plot.logger import get_logger
 
 
 def change_task_file(task_file, work_dir):
@@ -28,7 +29,9 @@ def change_task_file(task_file, work_dir):
 
 
 def run_plotter(plotter_task, work_dir, config):
-    print('prepare plot...')
+
+    logger = get_logger()
+    logger.info('prepare plot...')
 
     changed_task_file_path = change_task_file(plotter_task['task_file'], work_dir)
 
@@ -36,19 +39,19 @@ def run_plotter(plotter_task, work_dir, config):
         'task_file': changed_task_file_path,
         'time_level': plotter_task['time_level']
     }
-    print('running ncldraw...')
+    logger.info('running ncldraw...')
 
     command = ['ncldraw {task_file} {time_level}'.format(
         task_file=param['task_file'],
         time_level=param['time_level']
     )]
-    print(command)
+    # print(command)
 
     ncldraw_result = subprocess.run(
         command,
         shell=True
     )
-    print(ncldraw_result.stdout)
-    print(ncldraw_result.stderr)
+    # logger.debug(ncldraw_result.stdout)
+    # logger.debug(ncldraw_result.stderr)
 
-    print('running ncldraw...done')
+    logger.info('running ncldraw...done')

@@ -9,6 +9,7 @@ import yaml
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../../../"))
 from gidat_plot.run import run_gidat_plot
+from gidat_plot.logger import get_logger
 
 
 def load_config(config_file):
@@ -20,7 +21,7 @@ def load_config(config_file):
 @click.command()
 @click.option("-c", "--config-file", help="config file path")
 def cli(config_file):
-
+    logger = get_logger()
     config = load_config(config_file)
 
     kafka_config = config['kafka']
@@ -39,19 +40,19 @@ def cli(config_file):
     consumer.max_buffer_size = 1000000
 
     try:
-        print("starting receiving message...")
+        logger.info("starting receiving message...")
         for consumer_record in consumer:
-            print('new message: {offset}'.format(offset=consumer_record.offset))
+            logger.info('receive new message: {offset}'.format(offset=consumer_record.offset))
             message_string = consumer_record.value.decode('utf-8')
             message = json.loads(message_string)
             run_gidat_plot(message, config)
 
     except KeyboardInterrupt as e:
-        print(e)
+        logger.info(e)
     finally:
-        print("Warm shutdown...")
+        logger.info("Warm shutdown...")
         consumer.close()
-        print("Warm shutdown...Done")
+        logger.info("Warm shutdown...Done")
 
 
 if __name__ == "__main__":
