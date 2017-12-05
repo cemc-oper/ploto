@@ -5,9 +5,8 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
 
-from gidat_plot.plotter.ncl_plotter import ncl_script_util
-from gidat_plot.plotter.ncldraw_plotter import ncldraw_util
-from gidat_plot.data_fetcher import ftp_fetcher, local_fetcher, ddps_fetcher
+from gidat_plot.data_fetcher import prepare_data
+from gidat_plot.plotter import draw_plot
 
 
 def prepare_environment(config):
@@ -21,29 +20,6 @@ def prepare_environment(config):
     print("entering work dir:", work_dir)
     os.chdir(work_dir)
     return work_dir
-
-
-def prepare_data(files, work_dir, config):
-    os.chdir(work_dir)
-    for file_task in files:
-        file_type = file_task['type']
-        if file_type == 'ftp':
-            ftp_fetcher.get_data(file_task, work_dir)
-        elif file_type == 'local':
-            local_fetcher.get_data(file_task, work_dir)
-        elif file_type == 'ddps':
-            ddps_fetcher.get_data(file_task, work_dir, config)
-        else:
-            print("file type not supported:", file_type)
-
-
-def draw_plot(plotter_task, work_dir, config):
-    if plotter_task['type'] == 'ncl_plotter':
-        ncl_script_util.run_plotter(plotter_task, work_dir)
-    elif plotter_task['type'] == 'ncldraw_plotter':
-        ncldraw_util.run_plotter(plotter_task, work_dir, config=config)
-    else:
-        print("plotter type is not supported:", plotter_task['type'])
 
 
 def clear_environment(work_dir):
