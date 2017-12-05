@@ -6,6 +6,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
 
 from gidat_plot.plotter.ncl_plotter import ncl_script_util
+from gidat_plot.plotter.ncldraw_plotter import ncldraw_util
 from gidat_plot.data_fetcher import ftp_fetcher, local_fetcher, ddps_fetcher
 
 
@@ -35,11 +36,13 @@ def prepare_data(files, work_dir, config):
             print("file type not supported:", file_type)
 
 
-def draw_plot(plotter_config, work_dir):
-    if plotter_config['type'] == 'ncl_plotter':
-        ncl_script_util.run_plotter(plotter_config, work_dir)
+def draw_plot(plotter_task, work_dir, config):
+    if plotter_task['type'] == 'ncl_plotter':
+        ncl_script_util.run_plotter(plotter_task, work_dir)
+    elif plotter_task['type'] == 'ncldraw_plotter':
+        ncldraw_util.run_plotter(plotter_task, work_dir, config=config)
     else:
-        print("plotter type is not supported:", plotter_config['type'])
+        print("plotter type is not supported:", plotter_task['type'])
 
 
 def clear_environment(work_dir):
@@ -58,7 +61,7 @@ def run_gidat_plot(message, config):
     prepare_data(files, work_dir, config=config)
 
     print('drawing plot...')
-    draw_plot(message['data']['plotter'], work_dir)
+    draw_plot(message['data']['plotter'], work_dir, config=config)
 
     print('clearing environment...')
     clear_environment(work_dir)
