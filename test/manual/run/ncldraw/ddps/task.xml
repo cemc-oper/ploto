@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<task>
+    <workstation output="./image.png" backgroundcolor="white" addcycle="true" colormap="color_revrain" foregroundcolor="black">
+        <plotmanager type="normal">
+            <plot type="map" resourcefile="grapes/map.xml">
+                <plot type="textitem">
+                    <txString value="low cloud cover--lcc"/>
+                    <txFontHeightF value="0.013"/>
+                    <txJust value="CenterLeft"/>
+                    <boundary yAdjust="0.011" xAdjust="0.05" txJust="TopLeft"/>
+                </plot>
+                <plot type="textitem">
+                    <txString value="2014071000084"/>
+                    <txFontHeightF value="0.013"/>
+                    <txJust value="CenterRight"/>
+                    <boundary yAdjust="0.011" xAdjust="-0.05" txJust="TopRight"/>
+                </plot>
+                <plot type="textitem">
+                    <txString value="GRAPES 0.5~S~o~N~*0.5~S~o~N~ Valid Time: 2014071000 + 084 hrs"/>
+                    <txFontHeightF value="0.011"/>
+                    <txJust value="CenterLeft"/>
+                    <boundary yAdjust="-0.011" xAdjust="0.15" txJust="BottomLeft"/>
+                </plot>
+                <plot type="contour" datadir="." datafile="data.grb2" resourcefile="grapes/temp_fill.xml">
+                    <parameter discipline="0" parameternumber="0" center="BABJ" parametercategory="0" model="GRAPES" level="85000" validhourlist="0" leveltype="100"/>
+                </plot>
+            </plot>
+        </plotmanager>
+    </workstation>
+</task>

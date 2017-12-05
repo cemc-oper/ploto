@@ -18,6 +18,7 @@ def prepare_environment(config):
     os.chdir(run_base_dir)
     work_dir = os.path.join(run_base_dir, temp_directory)
     os.makedirs(work_dir)
+    print("entering work dir:", work_dir)
     os.chdir(work_dir)
     return work_dir
 
