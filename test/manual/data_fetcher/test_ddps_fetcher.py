@@ -4,7 +4,7 @@ from gidat_plot.data_fetcher import ddps_fetcher
 
 
 data_task = {
-    'type': 'ddps',
+    'type': 'ddps_fetcher',
     'query_param': {
         "username": "admin",
         "password": "admin",

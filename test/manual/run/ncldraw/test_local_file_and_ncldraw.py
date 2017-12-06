@@ -21,22 +21,22 @@ def main():
         'type': 'gidat-plot',
         'timestamp': time.time(),
         'data': {
-            'files': [
+            'data_fetcher': [
                 # {
-                #     "type": "ftp",
+                #     "type": "ftp_fetcher",
                 #     "host": "10.28.32.114",
-                #     "user": "wangdp",
-                #     "password": "perilla",
+                #     "user": "user",
+                #     "password": "password",
                 #     "directory": "/srv/files/ftp/GRAPES_GFS_ORIG_2017070400",
                 #     "file_name": "gmf.gra.2017070400009.grb2"
                 # },
                 {
-                    "type": "local",
+                    "type": "local_fetcher",
                     "directory": "/space/windroc/workspace/plot/playground/test_case_1",
                     "file_name": "data.grb2"
                 },
                 # {
-                #     'type': 'ddps',
+                #     'type': 'ddps_fetcher',
                 #     'query_param': {
                 #         "username": "admin",
                 #         "password": "admin",

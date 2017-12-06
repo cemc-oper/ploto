@@ -21,9 +21,9 @@ def main():
         'type': 'gidat-plot',
         'timestamp': time.time(),
         'data': {
-            'files': [
+            'data_fetcher': [
                 {
-                    'type': 'ddps',
+                    'type': 'ddps_fetcher',
                     'query_param': {
                         "username": "admin",
                         "password": "admin",

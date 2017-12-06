@@ -38,7 +38,7 @@ def run_gidat_plot(message, config):
     os.chdir(work_dir)
 
     logger.info('prepare data...')
-    files = message['data']['files']
+    files = message['data']['data_fetcher']
     prepare_data(files, work_dir, config=config)
 
     logger.info('drawing plot...')
