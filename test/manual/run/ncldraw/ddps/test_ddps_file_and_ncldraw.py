@@ -48,7 +48,18 @@ def main():
                 'task_file': os.path.join(os.path.dirname(__file__), "task.xml"),
                 'time_level': '201401010012000',
                 'image_path': 'image.png',
-            }
+            },
+            'post_processor': [
+                {
+                    'type': 'copy_file_post_processor',
+                    'files': [
+                        {
+                            'from': './image.png',
+                            'to': './dist/image.png'
+                        }
+                    ]
+                }
+            ]
         }
     }
 

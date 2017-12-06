@@ -7,6 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
 
 from gidat_plot.data_fetcher import prepare_data
 from gidat_plot.plotter import draw_plot
+from gidat_plot.post_processor import do_post_processing
 from gidat_plot.logger import get_logger
 
 
@@ -42,6 +43,9 @@ def run_gidat_plot(message, config):
 
     logger.info('drawing plot...')
     draw_plot(message['data']['plotter'], work_dir, config=config)
+
+    logger.info('doing post processing...')
+    do_post_processing(message['data']['post_processor'], work_dir, config=config)
 
     logger.info('leaving work_dir...')
     os.chdir(current_directory)
