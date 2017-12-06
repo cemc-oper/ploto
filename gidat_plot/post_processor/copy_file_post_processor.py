@@ -1,4 +1,18 @@
 # coding=utf-8
+"""
+Copy files to other location during post processing.
+
+task schema:
+    {
+        'type': 'copy_file_post_processor',
+        'files': [
+            {
+                'from': 'source file path',
+                'to': 'target file path'
+            }
+        ]
+    }
+"""
 import pathlib
 import shutil
 import os
