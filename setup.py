@@ -9,7 +9,10 @@ setup(
     description='GIDAT plot.',
     long_description=__doc__,
 
-    packages=['gidat_plot'],
+    packages=[
+        'gidat_plot',
+        'gidat_server'
+    ],
 
     include_package_data=True,
 
@@ -18,6 +21,7 @@ setup(
     install_requires=[
         'click',
         'pyyaml',
-        'kafka-python'
+        'kafka-python',
+        'flask'
     ]
 )
