@@ -24,5 +24,5 @@ def link_local_file(file_task, work_dir):
     os.symlink(source_file_path, target_file_path)
 
 
-def get_data(file_task, work_dir):
+def get_data(file_task, work_dir, config):
     link_local_file(file_task, work_dir)

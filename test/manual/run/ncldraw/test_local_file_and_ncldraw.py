@@ -15,6 +15,8 @@ def main():
         ]
     )
 
+    task_file_path = os.path.join(os.path.dirname(__file__), "task.xml")
+
     kafka_topic = "gidat-plot"
     message = {
         'app': 'gidat-plot',
@@ -58,10 +60,26 @@ def main():
             ],
             'plotter': {
                 'type': 'ncldraw_plotter',
-                'task_file': os.path.join(os.path.dirname(__file__), "task.xml"),
+                'task_files': [
+                    {
+                        'file_path': task_file_path,
+                        'file_content': open(task_file_path).read()
+                    }
+                ],
                 'time_level': '2017071400084',
                 'image_path': 'image.png',
-            }
+            },
+            'post_processor': [
+                {
+                    'type': 'copy_file_post_processor',
+                    'files': [
+                        {
+                            'from': 'image.png',
+                            'to': 'image_output.png'
+                        }
+                    ]
+                }
+            ]
         }
     }
 
