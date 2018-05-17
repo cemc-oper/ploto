@@ -11,15 +11,23 @@ from gidat_plot.post_processor import do_post_processing
 from gidat_plot.logger import get_logger
 
 
-def prepare_environment(config):
+def get_work_dir(config):
     base_config = config['base']
     run_base_dir = base_config['run_base_dir']
 
     temp_directory = str(uuid.uuid4())
     os.chdir(run_base_dir)
     work_dir = os.path.join(run_base_dir, temp_directory)
-    os.makedirs(work_dir)
+    try:
+        os.makedirs(work_dir)
+    except FileExistsError as e:
+        logger = get_logger()
+        logger.warn('directory already exists:', work_dir)
     return work_dir
+
+
+def prepare_environment(config):
+    return get_work_dir(config)
 
 
 def clear_environment(work_dir, config):
