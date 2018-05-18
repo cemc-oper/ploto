@@ -35,6 +35,7 @@ def clear_environment(work_dir, config):
 
 
 def run_gidat_plot(message, config):
+    message_data = message['data']
     logger = get_logger()
     logger.info('begin plot...')
     current_directory = os.getcwd()
@@ -46,14 +47,15 @@ def run_gidat_plot(message, config):
     os.chdir(work_dir)
 
     logger.info('prepare data...')
-    files = message['data']['data_fetcher']
+    files = message_data['data_fetcher']
     prepare_data(files, work_dir, config=config)
 
     logger.info('drawing plot...')
-    draw_plot(message['data']['plotter'], work_dir, config=config)
+    draw_plot(message_data['plotter'], work_dir, config=config)
 
     logger.info('doing post processing...')
-    do_post_processing(message['data']['post_processor'], work_dir, config=config)
+    if 'post_processor' in message_data:
+        do_post_processing(message_data['post_processor'], work_dir, config=config)
 
     logger.info('leaving work_dir...')
     os.chdir(current_directory)
