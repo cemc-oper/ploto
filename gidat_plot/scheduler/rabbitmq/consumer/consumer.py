@@ -2,7 +2,6 @@
 import json
 import sys
 import os
-import asyncio
 import threading
 import time
 
@@ -23,7 +22,6 @@ def load_config(config_file):
 
 def process_message(message, config):
     run_gidat_plot(message, config)
-    #time.sleep(10)
 
 
 @click.command()
@@ -57,7 +55,7 @@ def cli(config_file):
     channel.queue_bind(
         exchange=exchange_name,
         queue=queue_name,
-        routing_key="plot.task.*"
+        routing_key=rabbitmq_config['routing_keys']['pattern']
     )
 
     def consume_message(ch, method, properties, body):
@@ -69,7 +67,7 @@ def cli(config_file):
 
         while message_thread.is_alive():
             time.sleep(10)
-            logger.info("waiting for message thread...")
+            # logger.info("waiting for message thread...")
         logger.info("message thread done")
 
     channel.basic_qos(prefetch_count=1)

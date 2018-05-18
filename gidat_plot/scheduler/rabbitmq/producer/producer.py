@@ -16,8 +16,8 @@ def send_message(message: dict, config: dict):
 
     channel = connection.channel()
 
-    exchange_name = 'gidat_plot'
-    queue_name = "gidat_plot_task_queue"
+    exchange_name = config['exchange']
+    queue_name = config['queue']
 
     channel.exchange_declare(
         exchange=exchange_name,
@@ -31,14 +31,14 @@ def send_message(message: dict, config: dict):
     channel.queue_bind(
         exchange=exchange_name,
         queue=queue_name,
-        routing_key="plot.task.*"
+        routing_key=config['routing_keys']['pattern']
     )
 
     message_string = json.dumps(message)
     print(message_string)
     channel.basic_publish(
         exchange=exchange_name,
-        routing_key='plot.task.default',
+        routing_key=config['routing_keys']['default'],
         body=message_string.encode('utf-8'))
 
     connection.close()
@@ -124,4 +124,10 @@ if __name__ == "__main__":
             'host': '10.28.32.114',
             'port': 8672
         },
+        'routing_keys': {
+            'pattern': 'plot.task.*',
+            'default': 'plot.task.default'
+        },
+        'exchange': 'gidat_plot',
+        'queue': 'gidat_plot_task_queue'
     })
