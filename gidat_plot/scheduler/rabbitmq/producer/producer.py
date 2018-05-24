@@ -36,7 +36,7 @@ def send_message(message: dict, config: dict):
     )
 
     message_string = json.dumps(message)
-    print(message_string)
+    # print(message_string)
     channel.basic_publish(
         exchange=exchange_name,
         routing_key=config['routing_keys']['default'],
