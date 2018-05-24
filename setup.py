@@ -21,7 +21,9 @@ setup(
     install_requires=[
         'click',
         'pyyaml',
-        'kafka-python',
-        'flask'
+        'pika',
+        'flask',
+        'sqlalchemy',
+        'cx_Oracle'
     ]
 )
