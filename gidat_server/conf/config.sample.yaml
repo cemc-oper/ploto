@@ -9,8 +9,13 @@ broker:
   # a secret key for Flask application.
   secret_key: some secret key
 
-  kafka:
-    host: kafka host
-    port: kafka port
-    topic: kafka topic
-    group: kafka group
+  scheduler:
+    type: rabbitmq
+    server:
+      host: rabbitmq host
+      port: rabbitmq port
+    exchange: gidat_plot
+    queue: gidat_plot_task_queue
+    routing_keys:
+      pattern: plot.task.*
+      default: plot.task.default

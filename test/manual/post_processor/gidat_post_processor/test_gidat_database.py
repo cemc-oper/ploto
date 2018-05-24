@@ -7,7 +7,7 @@ task = {
     'plot_set_id': 42617
 }
 
-config= {
+config = {
     'gidat_post_processor': {
         'database': {
             'host': '10.20.67.76',

@@ -1,14 +1,9 @@
-"""
-config.py
-
-use environment var
-"""
-import os
+# coding=utf-8
 import yaml
 
 
 class Config(object):
-    def __init__(self, config_path):
+    def __init__(self, config_path: str):
         with open(config_path) as config_file:
             config_dict = yaml.load(config_file)
             broker_config = config_dict['broker']
@@ -22,14 +17,9 @@ class Config(object):
                         self.DEBUG = True
                     elif flask_debug is not True:
                         self.DEBUG = False
-    @classmethod
-    def load_config(cls, config_file_path: None or str = None):
-        if config_file_path is None:
-            if 'GIDAT_SERVER_CONFIG' in os.environ:
-                config_file_path = os.environ['GIDAT_SERVER_CONFIG']
-            else:
-                return None
 
+    @classmethod
+    def load_config(cls, config_file_path: str):
         print("config file path:", config_file_path)
 
         config_object = Config(config_file_path)
