@@ -8,6 +8,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
 from gidat_plot.data_fetcher import prepare_data
 from gidat_plot.plotter import draw_plot
 from gidat_plot.post_processor import do_post_processing
+from gidat_plot.pre_processor import do_pre_processing
 from gidat_plot.logger import get_logger
 
 
@@ -49,6 +50,10 @@ def run_gidat_plot(message, config):
     logger.info('prepare data...')
     files = message_data['data_fetcher']
     prepare_data(files, work_dir, config=config)
+
+    logger.info('doing pre processing...')
+    if 'pre_processor' in message_data:
+        do_pre_processing(message_data['pre_processor'], work_dir, config=config)
 
     logger.info('drawing plot...')
     draw_plot(message_data['plotter'], work_dir, config=config)

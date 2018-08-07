@@ -10,9 +10,9 @@ data_task = {
         "password": "admin",
         "operation": "extractdownload",
         "config": {
-            "date": "20140101",
             "groupname": "DYN",
             "expID": "G1600010",
+            "date": "20140101",
             "time": "1200,12:00",
             "step": "0",
             "levtype": "pl",
