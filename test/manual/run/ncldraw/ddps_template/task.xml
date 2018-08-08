@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<task>
+    <workstation foregroundcolor="black" colormap="color_tcloud" backgroundcolor="white" addcycle="true" output="/space/workspace/product/grapes/42826/42831.png">
+        <plotmanager type="normal">
+            <plot type="map" resourcefile="grapes/map.xml">
+                <plot type="textitem">
+                    <txString value="high cloud cover--hcc"/>
+                    <txFontHeightF value="0.013"/>
+                    <txJust value="CenterLeft"/>
+                    <boundary xAdjust="0.05" txJust="TopLeft" yAdjust="0.011"/>
+                </plot>
+                <plot type="textitem">
+                    <txString value="%tl%vh"/>
+                    <txFontHeightF value="0.013"/>
+                    <txJust value="CenterRight"/>
+                    <boundary xAdjust="-0.05" txJust="TopRight" yAdjust="0.011"/>
+                </plot>
+                <plot type="textitem">
+                    <txString value="GRAPES 0.5~S~o~N~*0.5~S~o~N~ Valid Time: %tl + %vh hrs"/>
+                    <txFontHeightF value="0.011"/>
+                    <txJust value="CenterLeft"/>
+                    <boundary xAdjust="0.15" txJust="BottomLeft" yAdjust="-0.011"/>
+                </plot>
+                <plot datafile="42831.grb2" type="contour" resourcefile="toolkits/diagnostic/level_3/hcc_fill.xml" datadir="/space/workspace/data/42757">
+                    <parameter leveltype="2" validhourlist="0" level="0" discipline="0" center="BABJ" parametercategory="6" parameternumber="5" model="GRAPES"/>
+                </plot>
+            </plot>
+        </plotmanager>
+    </workstation>
+</task>

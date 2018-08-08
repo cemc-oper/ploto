@@ -14,9 +14,6 @@ def get_data(file_path):
     ftp.quit()
 
 
-
-
-
 @click.command()
 @click.option('--param', help='json param string')
 def main(param):
