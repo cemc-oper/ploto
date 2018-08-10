@@ -67,6 +67,7 @@ def cli(config_file):
 
         while message_thread.is_alive():
             time.sleep(10)
+            connection.process_data_events()
             # logger.info("waiting for message thread...")
         logger.info("message thread done")
 

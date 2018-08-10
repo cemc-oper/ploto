@@ -58,8 +58,8 @@ def download_ddps_fetcher(file_task, work_dir, config):
     std_lines = stdout.split('\n')
     if len(std_lines) == 1:
         print('no data')
-        print(stdout)
-        print(stderr)
+        print(stdout.decode("utf-8"))
+        print(stderr.decode("utf-8"))
     elif len(std_lines) == 2:
         result_line = std_lines[1]
         file_list_str = result_line[len('ExtractResultList:['):-1]

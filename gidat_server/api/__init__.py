@@ -44,7 +44,7 @@ def receive_plot_metgui():
         from gidat_server.common.metgui import create_message_from_plot_task
         message = create_message_from_plot_task(plot_task)
 
-        print(json.dumps(message, indent=2))
+        # print(json.dumps(message, indent=2))
 
         from gidat_plot.scheduler.rabbitmq.producer.producer import send_message
         scheduler_config = current_app.config['BROKER_CONFIG']['scheduler']
