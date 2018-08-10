@@ -21,7 +21,7 @@ def generate_task_file(task_file_config, work_dir):
 
     for plot_node in root.findall(".//plot[@datadir]"):
         data_dir = plot_node.get('datadir')
-        data_dir = pathlib.Path(work_dir, data_dir)
+        data_dir = pathlib.Path(work_dir)
         plot_node.set('datadir', str(data_dir))
 
     changed_task_file_path = str(pathlib.Path(work_dir, task_file_name))
