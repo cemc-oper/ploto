@@ -14,29 +14,29 @@ def save_ddps_param_file(ddps_param_file_path, param):
 def download_ddps_fetcher(file_task, work_dir, config):
     """
 
-    file_task:
-
-    {
-        'type': 'ddps',
-        'query_param': {
-            "username":"admin",
-            "password":"admin",
-            "operation":"extractdownload",
-            "config":{
-                "date":"20140101",
-                "groupname":"DYN",
-                "expID":"G1600010",
-                "time":"1200,12:00",
-                "step":"0",
-                "levtype":"pl",
-                "param":"t",
-                "levelist":"850",
-                "savePath":"./ddps"
-            }
-        },
-        target: 'data_file.grib2'
-    }
-
+    :param file_task: ddps file task config
+        {
+            'type': 'ddps',
+            'query_param': {
+                "username":"admin",
+                "password":"admin",
+                "operation":"extractdownload",
+                "config":{
+                    "date":"20140101",
+                    "groupname":"DYN",
+                    "expID":"G1600010",
+                    "time":"1200,12:00",
+                    "step":"0",
+                    "levtype":"pl",
+                    "param":"t",
+                    "levelist":"850",
+                    "savePath":"./ddps"
+                }
+            },
+            target: 'data_file.grib2'
+        }
+    :param work_dir:
+    :param config:
     """
     query_param = file_task['query_param']
     query_param['config']['savePath'] = str(pathlib.Path(work_dir, query_param['config']['savePath']))

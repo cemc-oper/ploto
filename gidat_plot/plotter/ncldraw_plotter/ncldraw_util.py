@@ -57,11 +57,11 @@ def run_plotter(plotter_task, work_dir, config):
             'resource_files':[
                 {
                     'file_path': 'fill.xml', # resource file path, NOTE: this is a relative path currently.
-                    'file_content': 'content' # resource file content
+                    'file_content': 'content', # resource file content
                 }
-            ]
-            'time_level': '2017071400084' # YYYYMMDDHH + HHH, used by ncldraw program.
-            'image_path': 'image.png' # image file path
+            ],
+            'time_level': '2017071400084', # YYYYMMDDHH + HHH, used by ncldraw program.
+            'image_path': 'image.png', # image file path
         }
     :param work_dir:
     :param config:
