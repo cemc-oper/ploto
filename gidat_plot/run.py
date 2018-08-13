@@ -2,6 +2,7 @@
 import uuid
 import os
 import sys
+import json
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
 
@@ -46,6 +47,11 @@ def run_gidat_plot(message, config):
 
     logger.info("entering work dir: {work_dir}".format(work_dir=work_dir))
     os.chdir(work_dir)
+
+    # save message
+    with open('message.json', 'w') as f:
+        content = json.dumps(message_data, indent=2)
+        f.write(content)
 
     logger.info('prepare data...')
     files = message_data['data_fetcher']

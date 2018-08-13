@@ -34,6 +34,8 @@ def receive_plot_metgui():
     plot_task = None
     if 'plot_task' in request.form:
         plot_task = json.loads(request.form['plot_task'])
+    elif 'plot_task' in request.json:
+        plot_task = json.loads(request.json['plot_task'])
     else:
         return jsonify({
             'status': 'ok',

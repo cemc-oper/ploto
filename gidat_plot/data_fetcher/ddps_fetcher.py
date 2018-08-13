@@ -33,7 +33,7 @@ def download_ddps_fetcher(file_task, work_dir, config):
                     "savePath":"./ddps"
                 }
             },
-            target: 'data_file.grib2'
+            'file_name': 'data_file.grib2'
         }
     :param work_dir:
     :param config:
@@ -41,14 +41,14 @@ def download_ddps_fetcher(file_task, work_dir, config):
     query_param = file_task['query_param']
     query_param['config']['savePath'] = str(pathlib.Path(work_dir, query_param['config']['savePath']))
 
-    ddps_param_file_path = 'ddps_param.config'
+    ddps_param_file_path = file_task['file_name'] + '.config'
     save_ddps_param_file(ddps_param_file_path, query_param)
 
     bsc_command = config['ddps_fetcher']['bsc_command']
 
     ddps_pipe = subprocess.Popen(
         [bsc_command,
-         'ddps_param.config'],
+         ddps_param_file_path],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
@@ -58,8 +58,12 @@ def download_ddps_fetcher(file_task, work_dir, config):
     std_lines = stdout.split('\n')
     if len(std_lines) == 1:
         print('no data')
-        print(stdout.decode("utf-8"))
-        print(stderr.decode("utf-8"))
+        if isinstance(stdout, bytes):
+            stdout = stdout.decode('utf-8')
+        if isinstance(stderr, bytes):
+            stderr = stderr.decode('utf-8')
+        print(stdout)
+        print(stderr)
     elif len(std_lines) == 2:
         result_line = std_lines[1]
         file_list_str = result_line[len('ExtractResultList:['):-1]

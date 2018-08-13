@@ -19,7 +19,7 @@ def generate_task_file(task_file_config, work_dir):
     output_path = pathlib.Path(work_dir, output_path)
     work_station_node.set('output', str(output_path))
 
-    for plot_node in root.findall(".//plot[@datadir]"):
+    for plot_node in root.findall(".//*[@datadir]"):
         data_dir = plot_node.get('datadir')
         data_dir = pathlib.Path(work_dir)
         plot_node.set('datadir', str(data_dir))
