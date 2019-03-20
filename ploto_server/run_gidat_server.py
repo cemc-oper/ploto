@@ -10,7 +10,7 @@ def runserver(config_file):
         Run nwpc monitor broker.
     """
 
-    from gidat_server.app import create_app
+    from ploto_server.app import create_app
     app = create_app(config_file)
 
     app.run(

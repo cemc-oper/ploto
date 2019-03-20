@@ -1,7 +1,7 @@
 # coding=utf-8
 import time
 
-from gidat_plot.scheduler.rabbitmq.producer.producer import send_message
+from ploto.scheduler.rabbitmq.producer.producer import send_message
 
 
 if __name__ == "__main__":
@@ -23,8 +23,8 @@ if __name__ == "__main__":
     """
 
     message = {
-        'app': 'gidat_plot',
-        'type': 'gidat_plot',
+        'app': 'ploto',
+        'type': 'ploto',
         'timestamp': time.time(),
         'data': {
             'data_fetcher': [
@@ -86,6 +86,6 @@ if __name__ == "__main__":
             'pattern': 'plot.task.*',
             'default': 'plot.task.default'
         },
-        'exchange': 'gidat_plot',
+        'exchange': 'ploto',
         'queue': 'gidat_plot_task_queue'
     })

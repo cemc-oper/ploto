@@ -3,7 +3,7 @@ import subprocess
 import pathlib
 import xml.etree.cElementTree as ET
 
-from gidat_plot.logger import get_logger
+from ploto.logger import get_logger
 
 
 def generate_task_file(task_file_config, work_dir):

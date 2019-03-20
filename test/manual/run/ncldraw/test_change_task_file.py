@@ -2,7 +2,7 @@
 import os
 import xml.etree.cElementTree as ET
 
-from gidat_plot.plotter.ncldraw_plotter.ncldraw_util import change_task_file
+from ploto.plotter.ncldraw_plotter.ncldraw_util import change_task_file
 
 
 def main():

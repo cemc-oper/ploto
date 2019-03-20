@@ -1,16 +1,13 @@
 # coding: utf-8
 import uuid
 import os
-import sys
 import json
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
-
-from gidat_plot.data_fetcher import prepare_data
-from gidat_plot.plotter import draw_plot
-from gidat_plot.post_processor import do_post_processing
-from gidat_plot.pre_processor import do_pre_processing
-from gidat_plot.logger import get_logger
+from ploto.data_fetcher import prepare_data
+from ploto.plotter import draw_plot
+from ploto.post_processor import do_post_processing
+from ploto.pre_processor import do_pre_processing
+from ploto.logger import get_logger
 
 
 def get_work_dir(config):

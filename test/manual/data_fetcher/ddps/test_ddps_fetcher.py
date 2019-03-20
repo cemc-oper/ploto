@@ -1,6 +1,6 @@
 # coding: utf-8
 import os
-from gidat_plot.data_fetcher import ddps_fetcher
+from ploto.data_fetcher import ddps_fetcher
 
 
 def main():

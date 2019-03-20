@@ -11,8 +11,8 @@ import click
 import yaml
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../../../"))
-from gidat_plot.run import run_gidat_plot
-from gidat_plot.logger import get_logger
+from ploto.run import run_gidat_plot
+from ploto.logger import get_logger
 
 
 def load_config(config_file):

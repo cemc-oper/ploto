@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from gidat_plot.post_processor import gidat_post_processor
+from ploto.post_processor import gidat_post_processor
 
 task = {
     'plot_id': 16329,

@@ -1,5 +1,5 @@
 # coding=utf-8
-from gidat_plot.logger import get_logger
+from ploto.logger import get_logger
 
 
 def run_post_processor(task, work_dir, config):

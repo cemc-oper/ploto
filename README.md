@@ -2,4 +2,4 @@
 
 GIDAT plot.
 
-Poros
+Ploto

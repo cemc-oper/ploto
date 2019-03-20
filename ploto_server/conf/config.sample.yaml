@@ -14,7 +14,7 @@ broker:
     server:
       host: rabbitmq host
       port: rabbitmq port
-    exchange: gidat_plot
+    exchange: ploto
     queue: gidat_plot_task_queue
     routing_keys:
       pattern: plot.task.*

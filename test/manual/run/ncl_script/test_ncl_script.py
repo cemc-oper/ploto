@@ -32,10 +32,10 @@ def main():
         ]
     )
 
-    kafka_topic = "gidat_plot"
+    kafka_topic = "ploto"
     message = {
-        'app': 'gidat_plot',
-        'type': 'gidat_plot',
+        'app': 'ploto',
+        'type': 'ploto',
         'timestamp': time.time(),
         'data': {
             'data_fetcher': [

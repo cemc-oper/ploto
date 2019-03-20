@@ -14,7 +14,7 @@ def test_cat_file_pre_processor():
     }
 
     os.chdir("/space/windroc/workspace/plot/playground/cat_file_playground")
-    from gidat_plot.pre_processor.cat_file_pre_processor import run_pre_processor
+    from ploto.pre_processor.cat_file_pre_processor import run_pre_processor
     print("run test...")
     run_pre_processor(task, os.getcwd(), {})
     print("run test...Done")

@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 def test_ncldraw_util():
-    from gidat_plot.plotter.ncldraw_plotter.ncldraw_util import run_plotter
+    from ploto.plotter.ncldraw_plotter.ncldraw_util import run_plotter
 
     work_dir = "/space/windroc/workspace/plot/playground/test_case_1"
     config = {}

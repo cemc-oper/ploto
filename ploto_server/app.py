@@ -5,7 +5,7 @@ from pathlib import Path
 from flask import Flask
 from flask.json import JSONEncoder
 
-from gidat_server.common.config import Config
+from ploto_server.common.config import Config
 
 
 class ServerJSONEncoder(JSONEncoder):
@@ -34,10 +34,10 @@ def create_app(config_file_path=None):
 
     with app.app_context():
 
-        from gidat_server.main import main_app
+        from ploto_server.main import main_app
         app.register_blueprint(main_app)
 
-        from gidat_server.api import api_v1_app
+        from ploto_server.api import api_v1_app
         app.register_blueprint(api_v1_app, url_prefix="/api/v1")
 
     return app

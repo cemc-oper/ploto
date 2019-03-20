@@ -5,7 +5,7 @@ from click.testing import CliRunner
 
 
 def test_ncldraw_plot():
-    from gidat_plot.plotter.ncldraw_plotter.ncldraw_plot import ncldraw_plot
+    from ploto.plotter.ncldraw_plotter.ncldraw_plot import ncldraw_plot
     runner = CliRunner()
 
     param = {

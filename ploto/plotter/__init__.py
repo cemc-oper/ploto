@@ -2,8 +2,8 @@
 
 
 def draw_plot(plotter_task, work_dir, config):
-    from gidat_plot.plotter.ncl_plotter import ncl_script_util
-    from gidat_plot.plotter.ncldraw_plotter import ncldraw_util
+    from ploto.plotter.ncl_plotter import ncl_script_util
+    from ploto.plotter.ncldraw_plotter import ncldraw_util
 
     plotter_util_mapper = {
         'ncl_plotter': ncl_script_util,

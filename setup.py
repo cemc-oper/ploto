@@ -2,7 +2,7 @@
 from setuptools import setup
 
 setup(
-    name='gidat-plot',
+    name='ploto',
 
     version='0.1',
 
@@ -10,8 +10,8 @@ setup(
     long_description=__doc__,
 
     packages=[
-        'gidat_plot',
-        'gidat_server'
+        'ploto',
+        'ploto_server'
     ],
 
     include_package_data=True,

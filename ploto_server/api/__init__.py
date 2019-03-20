@@ -13,7 +13,7 @@ def receive_plot():
         pass
 
     if task_message is not None:
-        from gidat_plot.scheduler.rabbitmq.producer.producer import send_message
+        from ploto.scheduler.rabbitmq.producer.producer import send_message
         scheduler_config = current_app.config['BROKER_CONFIG']['scheduler']
         current_app.logger.info('Sending task to scheduler...')
         send_message(task_message, config=scheduler_config)
@@ -43,12 +43,12 @@ def receive_plot_metgui():
         })
 
     if plot_task is not None:
-        from gidat_server.common.metgui import create_message_from_plot_task
+        from ploto_server.common.metgui import create_message_from_plot_task
         message = create_message_from_plot_task(plot_task)
 
         # print(json.dumps(message, indent=2))
 
-        from gidat_plot.scheduler.rabbitmq.producer.producer import send_message
+        from ploto.scheduler.rabbitmq.producer.producer import send_message
         scheduler_config = current_app.config['BROKER_CONFIG']['scheduler']
         current_app.logger.info('Sending task to scheduler...')
         send_message(message, config=scheduler_config)

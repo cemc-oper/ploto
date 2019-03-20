@@ -1,5 +1,5 @@
 # coding=utf-8
-from gidat_plot.post_processor import copy_file_post_processor, empty_post_processor
+from ploto.post_processor import copy_file_post_processor, empty_post_processor
 
 
 post_processor_map = {
