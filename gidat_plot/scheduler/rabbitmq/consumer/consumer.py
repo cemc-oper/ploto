@@ -83,6 +83,7 @@ def cli(config_file):
         logger.info("starting receiving message...")
         channel.start_consuming()
     except KeyboardInterrupt as e:
+        logger.info("Shutdown by KeyboardInterrupt")
         logger.info(e)
     finally:
         logger.info("Warm shutdown...")
