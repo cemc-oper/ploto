@@ -9,11 +9,8 @@ def link_local_file(file_task, work_dir):
     :param file_task:
         {
             "type": "local",
-            "host": "10.28.32.114",
-            "user": "wangdp",
-            "password": "perilla",
             "directory": "/srv/files/ftp/GRAPES_GFS_ORIG_2017070400",
-            "file_name": "gmf.gra.2017070400009.grb2"
+            "file_name": "gmf.gra.2017070400009.grb2",
         },
     :param work_dir:
     :return:
