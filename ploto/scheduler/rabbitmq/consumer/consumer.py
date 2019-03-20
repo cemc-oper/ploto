@@ -1,7 +1,5 @@
 # coding=utf-8
 import json
-import sys
-import os
 import threading
 import time
 
@@ -9,7 +7,6 @@ import click
 import yaml
 import pika
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "../../../../../"))
 from ploto.run import run_gidat_plot
 from ploto.logger import get_logger
 
