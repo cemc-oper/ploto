@@ -1,11 +1,16 @@
 # coding: utf-8
+import importlib
+
+from ploto.logger import get_logger
 
 
-def run_plotter(plotter_config, work_dir, config):
+def run_plotter(plotter_config, work_dir, config) -> bool:
     """
 
     :param plotter_config:
         {
+            metric: 'climo',
+            figure: 'precip',
             common: {
                 model_info: {
                     id: "FGOALS-g3",
@@ -21,8 +26,6 @@ def run_plotter(plotter_config, work_dir, config):
                     end: "0060-12-31"
                 }
             },
-            metric: 'climo',
-            figure: 'precip',
         }
 
     :param work_dir:
@@ -34,8 +37,14 @@ def run_plotter(plotter_config, work_dir, config):
         }
     :return:
     """
+    logger = get_logger()
     metric = plotter_config["metric"]
-    figure = plotter_config["figure"]
-    common_config = plotter_config["common"]
-
-
+    from ploto.plotter import esmdiag_plotter
+    try:
+        metric_module = importlib.import_module(
+            "ploto.plotter.esmdiag_plotter.metrics.{metric}".format(metric=metric))
+    except ImportError:
+        logger.error("can't found metric {metric}".format(metric=metric))
+        return False
+    metric_module.run_task(plotter_config, work_dir, config)
+    return True

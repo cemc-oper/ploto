@@ -95,7 +95,7 @@ def run_task(task, work_dir, config) -> bool:
         elif interp_type == "log":
             interp_type = 2
         else:
-            logger.fatal("interp type is not supported:", interp_type)
+            logger.error("interp type is not supported:", interp_type)
             return False
 
         extrap = vinterp_task["extrap"]

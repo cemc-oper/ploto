@@ -74,7 +74,7 @@ def run_pre_processor(task, work_dir, config) -> bool:
         from ploto.pre_processor.esmdiag_data_processor import vinterp
         return vinterp.run_processor(task, work_dir, config)
     else:
-        logger.fatal("action type not supported:", action)
+        logger.error("action type not supported:", action)
         return False
 
 
