@@ -1,5 +1,3 @@
-# gidat-plot
+# Ploto
 
-GIDAT plot.
-
-Ploto
+A plot server for GIDAT.
