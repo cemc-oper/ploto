@@ -1,9 +1,10 @@
 # coding=utf-8
-from . import cat_file_pre_processor, empty_pre_processor
+from . import cat_file_pre_processor, empty_pre_processor, esmdiag_data_processor
 
 
 pre_processor_map = {
-    'cat_file_pre_processor': cat_file_pre_processor
+    'cat_file_pre_processor': cat_file_pre_processor,
+    'esmdiag_data_processor': esmdiag_data_processor
 }
 
 

@@ -111,19 +111,20 @@ def run_task(task, work_dir, config) -> bool:
         esmdiag_env = os.environ.copy()
         esmdiag_env["ESMDIAG_ROOT"] = config["esmdiag"]["root"]
 
-        from ploto.common import ncl_script_plot
-        script_path = Path(ncl_script_plot.__file__)
-
-        param = {
-            'ncl_script_path': str(vinterp_ncl_script),
-            'ncl_params':
+        logger.info("run vinterp.ncl for {var_name}...".format(var_name=var_name))
+        ncl_result = subprocess.run(
+            [
+                '/bin/bash',
+                '-i', '-c',
+                'ncl '
                 'ps_path=\\"{ps_path}\\" '
                 'var_path=\\"{var_path}\\" '
                 'var_name=\\"{var_name}\\" '
                 'plevs=\\(/{plevs}/\\) '
                 'interp_type={interp_type} '
                 'extrap={extrap} '
-                'out_path=\\"{out_path}\\"'.format(
+                'out_path=\\"{out_path}\\" '
+                '{ncl_script}'.format(
                     ps_path=ps_path,
                     var_path=var_path,
                     var_name=var_name,
@@ -131,20 +132,11 @@ def run_task(task, work_dir, config) -> bool:
                     interp_type=interp_type,
                     extrap=extrap,
                     out_path=out_path,
-                )
-        }
-
-        logger.info("run vinterp.ncl for {var_name}...".format(var_name=var_name))
-        ncl_pipe = subprocess.Popen(
-            [sys.executable,
-             script_path,
-             '--param={param_string}'.format(param_string=json.dumps(param))],
-            start_new_session=True,
-            env=esmdiag_env
+                    ncl_script=vinterp_ncl_script)
+            ],
+            env=esmdiag_env,
+            start_new_session=True
         )
 
-        stdout, stderr = ncl_pipe.communicate()
-        ncl_pipe.wait()
-        ncl_pipe.terminate()
         logger.info("run vinterp.ncl for {var_name}...done".format(var_name=var_name))
     return True
