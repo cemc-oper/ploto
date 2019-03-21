@@ -7,7 +7,7 @@ import click
 def runserver(config_file):
     """
     DESCRIPTION
-        Run nwpc monitor broker.
+        Run ploto server.
     """
 
     from ploto_server.app import create_app
