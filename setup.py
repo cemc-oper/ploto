@@ -4,9 +4,9 @@ from setuptools import setup
 setup(
     name='ploto',
 
-    version='0.1',
+    version='0.2',
 
-    description='GIDAT plot.',
+    description='Ploto project.',
     long_description=__doc__,
 
     packages=[
@@ -25,5 +25,11 @@ setup(
         'flask',
         'sqlalchemy',
         'cx_Oracle'
-    ]
+    ],
+
+    extras_require={
+        'test': [
+            'requests'
+        ]
+    }
 )
