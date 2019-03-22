@@ -1,6 +1,7 @@
 # coding=utf-8
 import pathlib
 import os
+import subprocess
 
 
 def link_local_file(file_task, work_dir):
@@ -21,5 +22,32 @@ def link_local_file(file_task, work_dir):
     os.symlink(source_file_path, target_file_path)
 
 
+def link_file_by_ln(file_task, work_dir):
+    """
+
+    :param file_task:
+        {
+            "type": "local",
+            "action": "ln"
+            "directory": "/srv/files/ftp/GRAPES_GFS_ORIG_2017070400",
+            "file_name": "*.grb2",
+        },
+    :param work_dir:
+    :return:
+    """
+    subprocess.run(
+        [
+            "ln", "-sf",
+            "{dir}/{file_name}".format(
+                dir=file_task['directory'],
+                file_name=file_task['file_name']),
+            "{work_dir}/".format(work_dir=work_dir)
+        ],
+        shell=True)
+
+
 def get_data(file_task, work_dir, config):
-    link_local_file(file_task, work_dir)
+    if 'action' in file_task and file_task['action'] == 'ln':
+        link_file_by_ln(file_task, work_dir)
+    else:
+        link_local_file(file_task, work_dir)
