@@ -17,7 +17,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
 
     :param figure_config:
         {
-            name: 'ice_area',
+            name: 'zonal_mean',
         }
     :param common_config:
         {

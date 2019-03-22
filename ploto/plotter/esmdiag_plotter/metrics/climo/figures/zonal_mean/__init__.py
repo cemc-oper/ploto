@@ -2,4 +2,4 @@
 from pathlib import Path
 
 
-NCL_SCRIPT_PATH = Path(Path(__file__).parent, "plot_zonal_mean.ncl.ncl")
+NCL_SCRIPT_PATH = Path(Path(__file__).parent, "plot_zonal_mean.ncl")

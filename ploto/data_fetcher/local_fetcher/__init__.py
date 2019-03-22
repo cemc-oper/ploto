@@ -37,11 +37,10 @@ def link_file_by_ln(file_task, work_dir):
     """
     subprocess.run(
         [
-            "ln", "-sf",
-            "{dir}/{file_name}".format(
+            "ln -sf {dir}/{file_name} {work_dir}/".format(
                 dir=file_task['directory'],
-                file_name=file_task['file_name']),
-            "{work_dir}/".format(work_dir=work_dir)
+                file_name=file_task['file_name'],
+                work_dir=work_dir)
         ],
         shell=True)
 

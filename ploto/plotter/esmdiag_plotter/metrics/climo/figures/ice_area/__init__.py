@@ -3,3 +3,4 @@ from pathlib import Path
 
 
 NCL_SCRIPT_PATH = Path(Path(__file__).parent, "plot_ice_area.ncl")
+

@@ -37,9 +37,11 @@ def generate_figure_task(figure_config, common_config) -> dict:
     """
     task = get_common_figure_task(figure_config, common_config)
 
-    task['data_fetcher'] = {
-        'type': 'local_fetcher',
-        'common': common_config,
-    }
+    task['data_fetcher'] = [
+        {
+            'type': 'local_fetcher',
+            'common': common_config,
+        }
+    ]
 
     return task
