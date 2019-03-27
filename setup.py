@@ -24,12 +24,11 @@ setup(
         'pika',
         'flask',
         'sqlalchemy',
-        'cx_Oracle'
+        'cx_Oracle',
+        'requests'
     ],
 
     extras_require={
-        'test': [
-            'requests'
-        ]
+        'test': []
     }
 )
