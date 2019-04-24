@@ -33,7 +33,7 @@ def clear_environment(work_dir, config):
     pass
 
 
-def run_gidat_plot(message, config):
+def run_ploto_plot(message, config):
     message_data = message['data']
     logger = get_logger()
     logger.info('begin plot...')

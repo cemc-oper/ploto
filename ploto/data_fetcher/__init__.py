@@ -3,11 +3,12 @@ import os
 
 
 def prepare_data(files, work_dir, config):
-    from ploto.data_fetcher import ftp_fetcher, local_fetcher, ddps_fetcher
+    from ploto.data_fetcher import ftp_fetcher, local_fetcher, ddps_fetcher, edp_fetcher
     data_fetcher_mapper = {
         'ftp_fetcher': ftp_fetcher,
         'local_fetcher': local_fetcher,
-        'ddps_fetcher': ddps_fetcher
+        'ddps_fetcher': ddps_fetcher,
+        'edp_fetcher': edp_fetcher,
     }
     os.chdir(work_dir)
     for file_task in files:
