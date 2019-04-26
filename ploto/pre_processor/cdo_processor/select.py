@@ -4,16 +4,16 @@ Cat file.
 
 task schema:
     {
-        'type': 'cdo_pre_processor',
+        'type': 'cdo_processor',
         'operator': 'select',
         'params': {
             'name': 'PS',
             'startdate': '1981-01-01',
-            'enddate': '1982-01-01'
+            'enddate': '1982-01-01',
         },
         'input_files': [
-            './data/GAMIL.gamil_wu_run11*.nc'
-        ]
+            './data/GAMIL.gamil_wu_run11*.nc',
+        ],
         'output_file': './temp/GAMIL.gamil_wu_run11.PS.monthly.1981-01-01:1981-12-31.nc',
     }
 """
