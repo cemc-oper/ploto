@@ -4,7 +4,7 @@ Cat file.
 
 task schema:
     {
-        'type': 'cat_file_pre_processor',
+        'type': 'cat_file_processor',
         'file_list': [
             'file_path'
         ]
@@ -14,7 +14,7 @@ task schema:
 import subprocess
 
 
-def run_pre_processor(task, work_dir, config):
+def run_processor(task, work_dir, config):
     command = 'cat '
     for a_file_path in task['file_list']:
         command += " {file_path}".format(file_path=a_file_path)

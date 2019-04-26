@@ -3,7 +3,7 @@ import os
 
 
 def main():
-    from ploto.pre_processor.esmdiag_data_processor.models.gamil.vinterp import run_task
+    from ploto.processor.esmdiag_data_processor.models.gamil.vinterp import run_task
     task = {
         'type': 'esmdiag_data_processor',
         'action': 'vinterp',

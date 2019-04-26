@@ -2,9 +2,9 @@
 import os
 
 
-def test_cat_file_pre_processor():
+def test_cat_file_processor():
     task = {
-        'type': 'cat_file_pre_processor',
+        'type': 'cat_file_processor',
         'file_list': [
             '1.txt',
             '2.txt',
@@ -14,10 +14,10 @@ def test_cat_file_pre_processor():
     }
 
     os.chdir("/space/windroc/workspace/plot/playground/cat_file_playground")
-    from ploto.pre_processor.cat_file_pre_processor import run_pre_processor
+    from ploto.processor.cat_file_processor import run_processor
     print("run test...")
-    run_pre_processor(task, os.getcwd(), {})
+    run_processor(task, os.getcwd(), {})
     print("run test...Done")
 
 
-test_cat_file_pre_processor()
+test_cat_file_processor()

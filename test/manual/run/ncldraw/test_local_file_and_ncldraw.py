@@ -76,7 +76,7 @@ def main():
                 },
                 'post_processor': [
                     {
-                        'type': 'copy_file_post_processor',
+                        'type': 'copy_file_processor',
                         'files': [
                             {
                                 'from': 'image.png',

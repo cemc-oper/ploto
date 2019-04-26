@@ -4,7 +4,7 @@ Copy files to other location during post processing.
 
 task schema:
     {
-        'type': 'copy_file_post_processor',
+        'type': 'copy_file_processor',
         'files': [
             {
                 'from': 'source file path',
@@ -18,7 +18,7 @@ import shutil
 import os
 
 
-def run_post_processor(task, work_dir, config):
+def run_processor(task, work_dir, config):
     files = task['files']
     for file_task in files:
         from_path = pathlib.Path(work_dir, file_task['from'])

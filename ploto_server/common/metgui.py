@@ -60,7 +60,7 @@ def create_message_from_plot_task(plot_task: dict) -> dict:
     # pre-processor
     data_file_name = Path(plot_task['data_file_path']).name
     cat_file_task = {
-        'type': 'cat_file_pre_processor',
+        'type': 'cat_file_processor',
         'file_list': data_file_list,
         'target': data_file_name
     }
@@ -85,7 +85,7 @@ def create_message_from_plot_task(plot_task: dict) -> dict:
     # post_processor
     post_processor_config = [
         {
-            'type': 'copy_file_post_processor',
+            'type': 'copy_file_processor',
             'files': [
                 {
                     'from': image_name,
@@ -94,7 +94,7 @@ def create_message_from_plot_task(plot_task: dict) -> dict:
             ]
         },
         {
-            'type': 'copy_file_post_processor',
+            'type': 'copy_file_processor',
             'files': [
                 {
                     'from': data_file_name,

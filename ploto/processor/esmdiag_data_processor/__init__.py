@@ -54,7 +54,7 @@ task schema:
 from ploto.logger import get_logger
 
 
-def run_pre_processor(task, work_dir, config) -> bool:
+def run_processor(task, work_dir, config) -> bool:
     """
 
     :param task:
@@ -71,7 +71,7 @@ def run_pre_processor(task, work_dir, config) -> bool:
 
     action = task["action"]
     if action == "vinterp":
-        from ploto.pre_processor.esmdiag_data_processor import vinterp
+        from ploto.processor.esmdiag_data_processor import vinterp
         return vinterp.run_processor(task, work_dir, config)
     else:
         logger.error("action type not supported:", action)

@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from ploto.post_processor import gidat_post_processor
+from ploto.processor import gidat_post_processor
 
 task = {
     'plot_id': 16329,
@@ -20,4 +20,4 @@ config = {
 }
 
 
-gidat_post_processor.run_post_processor(task, '', config)
+gidat_post_processor.run_processor(task, '', config)

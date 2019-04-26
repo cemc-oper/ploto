@@ -12,11 +12,11 @@ task schema:
 from ploto.logger import get_logger
 
 
-def run_pre_processor(task, work_dir, config):
+def run_processor(task, work_dir, config):
     logger = get_logger()
     cdo_operator = task['operator']
     if cdo_operator == 'select':
-        from ploto.pre_processor.cdo_processor.select import run_cdo
+        from ploto.processor.cdo_processor.select import run_cdo
         run_cdo(task, work_dir, config)
     else:
         logger.warn('cod operator is not supported: {cdo_operator}'.format(cdo_operator=cdo_operator))

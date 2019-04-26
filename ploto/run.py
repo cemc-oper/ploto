@@ -5,8 +5,7 @@ import json
 
 from ploto.data_fetcher import prepare_data
 from ploto.plotter import draw_plot
-from ploto.post_processor import do_post_processing
-from ploto.pre_processor import do_pre_processing
+from ploto.processor import do_processing
 from ploto.logger import get_logger
 
 
@@ -56,14 +55,14 @@ def run_ploto_plot(message, config):
 
     logger.info('doing pre processing...')
     if 'pre_processor' in message_data:
-        do_pre_processing(message_data['pre_processor'], work_dir, config=config)
+        do_processing(message_data['pre_processor'], work_dir, config=config)
 
     logger.info('drawing plot...')
     draw_plot(message_data['plotter'], work_dir, config=config)
 
     logger.info('doing post processing...')
     if 'post_processor' in message_data:
-        do_post_processing(message_data['post_processor'], work_dir, config=config)
+        do_processing(message_data['post_processor'], work_dir, config=config)
 
     logger.info('leaving work_dir...')
     os.chdir(current_directory)

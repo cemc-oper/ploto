@@ -18,7 +18,7 @@ def test_select():
     work_dir = '/home/hujk/clusterfs/wangdp/temp'
     config = {}
 
-    from ploto.pre_processor.cdo_processor.select import run_cdo
+    from ploto.processor.cdo_processor.select import run_cdo
     run_cdo(task, work_dir, config)
 
 

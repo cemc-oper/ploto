@@ -16,7 +16,7 @@ import os
 from sqlalchemy import create_engine
 
 
-def run_post_processor(task, work_dir, config):
+def run_processor(task, work_dir, config):
     processor_config = config['gidat_post_processor']
     database_config = processor_config['database']
     engine = create_engine(f'oracle+cx_oracle://{database_config["user"]}:{database_config["password"]}'
