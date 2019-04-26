@@ -40,7 +40,7 @@ def run_cdo(task, work_dir, config):
     command = 'cdo --history --sortname select,' \
               + select_argument + ' ' + input_files_argument + ' ' + output_file_argument
 
-    logger.info('run cdo command...{command}')
+    logger.info('run cdo command...')
     logger.info('=> {command}'.format(command=command))
     subprocess.run([command], shell=True, start_new_session=True)
     logger.info('run cdo command...done'.format(command=command))

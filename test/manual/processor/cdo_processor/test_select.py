@@ -3,7 +3,7 @@
 
 def test_select():
     task = {
-        'type': 'cdo_pre_processor',
+        'type': 'cdo_processor',
         'operator': 'select',
         'params': {
             'name': 'PS',

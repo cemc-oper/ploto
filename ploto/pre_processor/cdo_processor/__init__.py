@@ -4,7 +4,7 @@ Cat file.
 
 task schema:
     {
-        'type': 'cdo_pre_processor',
+        'type': 'cdo_processor',
         'operator': 'operator',
         ...
     }
@@ -14,7 +14,7 @@ from ploto.logger import get_logger
 
 def run_pre_processor(task, work_dir, config):
     logger = get_logger()
-    cdo_operator = config['operator']
+    cdo_operator = task['operator']
     if cdo_operator == 'select':
         from ploto.pre_processor.cdo_processor.select import run_cdo
         run_cdo(task, work_dir, config)
