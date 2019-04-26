@@ -146,8 +146,8 @@ def main():
         }
     }
 
-    from ploto.run import run_ploto_plot
-    run_ploto_plot(message, config)
+    from ploto.run import run_ploto
+    run_ploto(message, config)
 
 
 if __name__ == "__main__":

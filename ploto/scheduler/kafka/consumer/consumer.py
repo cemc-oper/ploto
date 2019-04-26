@@ -11,7 +11,7 @@ import click
 import yaml
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../../../"))
-from ploto.run import run_ploto_plot
+from ploto.run import run_ploto
 from ploto.logger import get_logger
 
 
@@ -22,7 +22,7 @@ def load_config(config_file):
 
 
 def process_message(message, config):
-    # run_ploto_plot(message, config)
+    # run_ploto(message, config)
     time.sleep(10)
 
 

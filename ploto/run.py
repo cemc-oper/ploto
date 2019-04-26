@@ -3,7 +3,7 @@ import uuid
 import os
 import json
 
-from ploto.data_fetcher import prepare_data
+from ploto.fetcher import run_fetcher
 from ploto.plotter import draw_plot
 from ploto.processor import do_processing
 from ploto.logger import get_logger
@@ -32,7 +32,7 @@ def clear_environment(work_dir, config):
     pass
 
 
-def run_ploto_plot(message, config):
+def run_ploto(message, config):
     message_data = message['data']
     logger = get_logger()
     logger.info('begin plot...')
@@ -51,7 +51,7 @@ def run_ploto_plot(message, config):
 
     logger.info('prepare data...')
     files = message_data['data_fetcher']
-    prepare_data(files, work_dir, config=config)
+    run_fetcher(files, work_dir, config=config)
 
     logger.info('doing pre processing...')
     if 'pre_processor' in message_data:

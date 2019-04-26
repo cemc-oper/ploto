@@ -1,5 +1,5 @@
 # coding: utf-8
-from ploto.data_fetcher import edp_fetcher
+from ploto.fetcher import edp_fetcher
 
 
 def main():
