@@ -1,6 +1,6 @@
 # coding=utf-8
 """
-Cat file.
+Run cdo select operator.
 
 task schema:
     {

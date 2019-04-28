@@ -9,6 +9,9 @@ from ploto.processor import do_processing
 from ploto.logger import get_logger
 
 
+logger = get_logger()
+
+
 def get_work_dir(config):
     base_config = config['base']
     run_base_dir = base_config['run_base_dir']
@@ -19,7 +22,6 @@ def get_work_dir(config):
     try:
         os.makedirs(work_dir)
     except FileExistsError as e:
-        logger = get_logger()
         logger.warn('directory already exists:', work_dir)
     return work_dir
 
@@ -34,7 +36,6 @@ def clear_environment(work_dir, config):
 
 def run_ploto(message, config):
     message_data = message['data']
-    logger = get_logger()
     logger.info('begin plot...')
     current_directory = os.getcwd()
 

@@ -5,53 +5,18 @@ task schema:
     {
         'type': 'esmdiag_data_processor',
         'action: 'vinterp',
-        'model': 'gamil',
-        'tasks': [
-            {
-                "var_name": "U",
-                "levels": [1000, 925, 850, 775, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 10],
-                "interp_type": "linear",
-                "extrap": "false"
-            },
-
-            {
-                "var_name": "V",
-                "levels": [1000, 925, 850, 775, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 10],
-                "interp_type": "linear",
-                "extrap": "false"
-            },
-            {
-                "var_name": "Q",
-                "levels": [1000, 925, 850, 775, 700, 600, 500, 400, 300],
-                "interp_type": "linear",
-                "extrap": "false"
-            },
-            {
-                "var_name": "T",
-                "levels": [1000, 925, 850, 775, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 10],
-                "interp_type": "log",
-                "extrap": "false"
-            }
-        ],
-        common: {
-            model_info: {
-                id: "FGOALS-g3",
-                atm_id: "GAMIL",
-                ocn_id: "LICOM",
-                ice_id: "CICE",
-            },
-            case_info: {
-                id: "piControl-bugfix-licom-80368d",
-            },
-            date: {
-                start: "0030-01-01",
-                end: "0060-12-31"
-            }
-        },
+        ...
     }
 """
 
 from ploto.logger import get_logger
+from ploto.processor.esmdiag_data_processor import vinterp
+
+action_map = {
+    'vinterp': vinterp
+}
+
+logger = get_logger()
 
 
 def run_processor(task, work_dir, config) -> bool:
@@ -67,15 +32,10 @@ def run_processor(task, work_dir, config) -> bool:
         }
     :return:
     """
-    logger = get_logger()
-
     action = task["action"]
-    if action == "vinterp":
-        from ploto.processor.esmdiag_data_processor import vinterp
-        return vinterp.run_processor(task, work_dir, config)
-    else:
+    action_processor = action_map.get(action, None)
+    if action_processor is None:
         logger.error("action type not supported:", action)
         return False
 
-
-
+    return action_processor.run_processor(task, work_dir, config)

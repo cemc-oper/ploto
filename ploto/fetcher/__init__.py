@@ -1,15 +1,21 @@
 # coding=utf-8
 import os
+from ploto.logger import get_logger
+from ploto.fetcher import ftp_fetcher, local_fetcher, ddps_fetcher, edp_fetcher
+
+
+data_fetcher_mapper = {
+    'ftp_fetcher': ftp_fetcher,
+    'local_fetcher': local_fetcher,
+    'ddps_fetcher': ddps_fetcher,
+    'edp_fetcher': edp_fetcher,
+}
+
+
+logger = get_logger()
 
 
 def run_fetcher(files, work_dir, config):
-    from ploto.fetcher import ftp_fetcher, local_fetcher, ddps_fetcher, edp_fetcher
-    data_fetcher_mapper = {
-        'ftp_fetcher': ftp_fetcher,
-        'local_fetcher': local_fetcher,
-        'ddps_fetcher': ddps_fetcher,
-        'edp_fetcher': edp_fetcher,
-    }
     os.chdir(work_dir)
     for file_task in files:
         file_type = file_task['type']
@@ -18,4 +24,4 @@ def run_fetcher(files, work_dir, config):
         if fetcher:
             fetcher.get_data(file_task, work_dir, config)
         else:
-            print("file type not supported:", file_type)
+            logger.warn("file type not supported: {file_type}".format(file_type=file_type))

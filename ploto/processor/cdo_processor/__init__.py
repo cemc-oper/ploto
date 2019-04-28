@@ -1,6 +1,8 @@
 # coding=utf-8
 """
-Cat file.
+cdo processor
+
+Run cdo command.
 
 task schema:
     {

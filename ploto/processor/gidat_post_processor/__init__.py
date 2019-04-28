@@ -9,10 +9,6 @@ task schema:
         'plot_set_id': '', # plot_set_id
     }
 """
-import pathlib
-import shutil
-import os
-
 from sqlalchemy import create_engine
 
 

@@ -1,6 +1,10 @@
 # coding=utf-8
+"""
+edp_fetcher
+
+Fetch data from EDP - Earth Data Platform
+"""
 import pathlib
-import os
 import subprocess
 import json
 
