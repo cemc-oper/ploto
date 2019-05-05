@@ -1,13 +1,11 @@
 # coding: utf-8
 """
-precip
+readiation_energy_budget
 
 data requires:
-    PS.monthly
-    PRECT.monthly
-    PRECC.monthly
-    PRECL.monthly
-    gw
+    FLUT.monthly
+    FSNTOA.monthly
+
 """
 import datetime
 
@@ -19,7 +17,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
 
     :param figure_config:
         {
-            name: 'precip',
+            name: 'readiation_energy_budget',
         }
     :param common_config:
         {
@@ -67,10 +65,8 @@ def generate_figure_task(figure_config, common_config) -> dict:
                 'file_prefix': step1_file_prefix,
                 'date_range': date_range,
                 'field_names': [
-                    'PRECT',
-                    'PRECC',
-                    'PRECL',
-                    'PS'
+                    'FLUT',
+                    'FSNTOA'
                 ],
                 'datedif': 'h0'
             },
@@ -98,10 +94,8 @@ def generate_figure_task(figure_config, common_config) -> dict:
     output_file_pattern = "{file_prefix}.{name}.monthly.{time_range}.nc"
 
     step1_fields = [
-        'PS',
-        'PRECT',
-        'PRECC',
-        'PRECL'
+        'FLUT',
+        'FSNTOA'
     ]
 
     task['pre_processor'] = [{
