@@ -65,7 +65,7 @@ def run_ploto(message, config):
     if 'post_processor' in message_data:
         do_processing(message_data['post_processor'], work_dir, config=config)
 
-    logger.info('leaving work_dir...')
+    logger.info("leaving work dir...{work_dir}".format(work_dir=work_dir))
     os.chdir(current_directory)
 
     logger.info('clearing environment...')
