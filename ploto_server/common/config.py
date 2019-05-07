@@ -5,7 +5,7 @@ import yaml
 class Config(object):
     def __init__(self, config_path: str):
         with open(config_path) as config_file:
-            config_dict = yaml.load(config_file)
+            config_dict = yaml.safe_load(config_file)
             broker_config = config_dict['broker']
             self.BROKER_CONFIG = broker_config
 

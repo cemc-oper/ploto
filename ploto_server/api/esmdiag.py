@@ -51,15 +51,22 @@ def receive_esmdiag_plot():
 
     metrics_config = task_message['metrics_config']
 
-    tasks = generate_metric_tasks(metrics_config, common_config)
+    all_tasks = []
 
-    for task in tasks:
+    for metric_config in metrics_config:
+        tasks = generate_metric_tasks(metric_config, common_config)
+        all_tasks.extend(tasks)
+
+    for task in all_tasks:
         from ploto.scheduler.rabbitmq.producer.producer import send_message
         scheduler_config = current_app.config['BROKER_CONFIG']['scheduler']
         current_app.logger.info('Sending task to scheduler...')
-        send_message(task, config=scheduler_config)
+        message = {
+            'data': task
+        }
+        send_message(message, config=scheduler_config)
 
     return jsonify({
         'status': 'ok',
-        'send_count': len(tasks)
+        'send_count': len(all_tasks)
     })
