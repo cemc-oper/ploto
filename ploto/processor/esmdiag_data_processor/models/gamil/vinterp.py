@@ -112,9 +112,7 @@ def run_task(task, work_dir, config) -> bool:
         esmdiag_env["ESMDIAG_ROOT"] = config["esmdiag"]["root"]
 
         logger.info("run vinterp.ncl for {var_name}...".format(var_name=var_name))
-        ncl_result = subprocess.run(
-            [
-                '/bin/bash',
+        ncl_command = ['/bin/bash',
                 '-i', '-c',
                 'ncl '
                 'ps_path=\\"{ps_path}\\" '
@@ -132,8 +130,10 @@ def run_task(task, work_dir, config) -> bool:
                     interp_type=interp_type,
                     extrap=extrap,
                     out_path=out_path,
-                    ncl_script=vinterp_ncl_script)
-            ],
+                    ncl_script=vinterp_ncl_script)]
+        logger.info(' '.join(ncl_command))
+        ncl_result = subprocess.run(
+            ncl_command,
             env=esmdiag_env,
             start_new_session=True
         )

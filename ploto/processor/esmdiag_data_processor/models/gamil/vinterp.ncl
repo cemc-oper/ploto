@@ -27,7 +27,7 @@ begin
   delete(f)
 
   ; 获取三维变量数据。
-  f = addfile(var_path, "w")
+  f = addfile(var_path, "r")
 
   time = f->time
   lat = f->lat
