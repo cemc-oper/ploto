@@ -1,13 +1,29 @@
 # coding=utf-8
-import time
 import json
 
 import click
 import pika
-import yaml
 
 
 def send_message(message: dict, config: dict):
+    """
+
+    :param message:
+    :param config:
+        {
+            server: {
+                host: host,
+                port: port
+            },
+            exchange: exchange name,
+            queue: queue name,
+            routing_keys: {
+                pattern: pattern,
+                default: default
+            }
+        }
+    :return:
+    """
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(
             host=config['server']['host'],
