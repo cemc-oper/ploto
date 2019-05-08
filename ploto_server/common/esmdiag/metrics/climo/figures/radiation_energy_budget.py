@@ -51,10 +51,10 @@ def generate_figure_task(figure_config, common_config) -> dict:
     step1_file_prefix = '{file_prefix}.step1'.format(
         file_prefix=file_prefix
     )
-    step2_file_prefix = '{file_prefix}.step2'.format(
-        file_prefix=file_prefix
+    step2_file_prefix = '{model_id}.{case_id}.step2'.format(
+        model_id=common_config['model_info']['id'],
+        case_id=common_config['case_info']['id']
     )
-
     task['data_fetcher'] = [
         {
             'common': common_config,

@@ -30,7 +30,7 @@ def test_esmdiag_plotter():
     }
 
     os.chdir(work_dir)
-    from ploto.plotter.esmdiag_plotter.esmdiag_util import run_plotter
+    from ploto.plotter.esmdiag_plotter import run_plotter
     run_plotter(task, work_dir, config)
 
 
