@@ -55,6 +55,15 @@ def generate_figure_task(figure_config, common_config) -> dict:
         model_id=common_config['model_info']['id'],
         case_id=common_config['case_info']['id']
     )
+
+    step1_fields = [
+        'FLUTOA',
+        'FSNTOA'
+    ]
+    step2_fields = [
+        'gw'
+    ]
+
     task['data_fetcher'] = [
         {
             'common': common_config,
@@ -64,10 +73,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
                 'output_dir': './data',
                 'file_prefix': step1_file_prefix,
                 'date_range': date_range,
-                'field_names': [
-                    'FLUT',
-                    'FSNTOA'
-                ],
+                'field_names': step1_fields,
                 'datedif': 'h0'
             },
         },
@@ -79,9 +85,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
                 'output_dir': './data',
                 'file_prefix': step2_file_prefix,
                 'date_range': date_range,
-                'field_names': [
-                    'gw'
-                ],
+                'field_names': step2_fields,
                 'datedif': 'h0'
             }
         }
@@ -92,11 +96,6 @@ def generate_figure_task(figure_config, common_config) -> dict:
         end_date=common_config['date']['end'],
     )
     output_file_pattern = "{file_prefix}.{name}.monthly.{time_range}.nc"
-
-    step1_fields = [
-        'FLUT',
-        'FSNTOA'
-    ]
 
     task['pre_processor'] = [{
         'type': 'cdo_processor',
@@ -126,7 +125,9 @@ def generate_figure_task(figure_config, common_config) -> dict:
             'input_files': [
                 './data/{step2_file_prefix}.*.nc'.format(step2_file_prefix=step2_file_prefix)
             ],
-            'output_file': './{file_prefix}.gw.nc'.format(file_prefix=file_prefix),
+            'output_file': './{model_id}.{case_id}.gw.nc'.format(
+                model_id=common_config['model_info']['id'],
+                case_id=common_config['case_info']['id']),
         }
     )
 
