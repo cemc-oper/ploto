@@ -11,14 +11,20 @@ task schema:
         ...
     }
 """
+import importlib
+
 from ploto.logger import get_logger
 
 
 def run_processor(task, work_dir, config):
     logger = get_logger()
     cdo_operator = task['operator']
-    if cdo_operator == 'select':
-        from ploto.processor.cdo_processor.select import run_cdo
-        run_cdo(task, work_dir, config)
-    else:
-        logger.warn('cod operator is not supported: {cdo_operator}'.format(cdo_operator=cdo_operator))
+    try:
+        operator_module = importlib.import_module(
+            ".{operator}".format(operator=cdo_operator), __package__)
+    except ImportError:
+        logger.error("cdo operator not supported: {operator}".format(
+            operator=cdo_operator))
+        return False
+    operator_module.run_cdo(task, work_dir, config)
+    return True

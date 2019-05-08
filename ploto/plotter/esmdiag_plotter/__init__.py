@@ -1,7 +1,4 @@
 # coding: utf-8
-import importlib
-
-from ploto.logger import get_logger
 
 
 def run_plotter(plotter_config, work_dir, config) -> bool:
@@ -37,14 +34,6 @@ def run_plotter(plotter_config, work_dir, config) -> bool:
         }
     :return:
     """
-    logger = get_logger()
-    metric = plotter_config["metric"]
-    from ploto.plotter import esmdiag_plotter
-    try:
-        metric_module = importlib.import_module(
-            "ploto.plotter.esmdiag_plotter.metrics.{metric}".format(metric=metric))
-    except ImportError:
-        logger.error("can't found metric {metric}".format(metric=metric))
-        return False
-    metric_module.run_task(plotter_config, work_dir, config)
+    from ploto.plotter.esmdiag_plotter import metric_task
+    metric_task.run_task(plotter_config, work_dir, config)
     return True
