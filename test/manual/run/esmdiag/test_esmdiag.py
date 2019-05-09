@@ -19,17 +19,17 @@ def main():
         }
     }
     task = {
-        'data_fetcher': [
+        'steps': [
             {
+                'step_type': 'fetcher',
                 'common': common_config,
                 "type": "local_fetcher",
                 "action": "ln",
                 "directory": "/home/wangdp/nwpc/earch/ploto/playground/gamil",
                 "file_name": "*.nc",
-            }
-        ],
-        'pre_processor': [
+            },
             {
+                'step_type': 'processor',
                 'type': 'esmdiag_data_processor',
                 'action': 'vinterp',
                 'model': 'gamil',
@@ -61,14 +61,15 @@ def main():
                     }
                 ],
                 'common': common_config,
+            },
+            {
+                'step_type': 'plotter',
+                'type': 'esmdiag_plotter',
+                'metric': 'climo',
+                'figure': 'zonal_mean',
+                'common': common_config,
             }
-        ],
-        'plotter': {
-            'type': 'esmdiag_plotter',
-            'metric': 'climo',
-            'figure': 'zonal_mean',
-            'common': common_config,
-        }
+        ]
     }
 
     message = {

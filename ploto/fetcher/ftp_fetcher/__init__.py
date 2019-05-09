@@ -27,5 +27,5 @@ def download_ftp_data(ftp_file_task, work_dir):
     ftp.quit()
 
 
-def get_data(file_task, work_dir, config):
-    download_ftp_data(file_task, work_dir)
+def get_data(task, work_dir, config):
+    download_ftp_data(task, work_dir)

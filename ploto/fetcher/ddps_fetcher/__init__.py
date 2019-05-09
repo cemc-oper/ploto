@@ -80,5 +80,5 @@ def download_ddps_fetcher(file_task, work_dir, config):
     ddps_pipe.terminate()
 
 
-def get_data(file_task, work_dir, config):
-    download_ddps_fetcher(file_task, work_dir, config)
+def get_data(task, work_dir, config):
+    download_ddps_fetcher(task, work_dir, config)

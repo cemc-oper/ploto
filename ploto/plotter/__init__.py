@@ -6,8 +6,8 @@ from ploto.logger import get_logger
 logger = get_logger()
 
 
-def run_step(plotter_task, work_dir, config):
-    plotter_type = plotter_task['type']
+def run_step(step, work_dir, config):
+    plotter_type = step['type']
 
     try:
         plotter_module = importlib.import_module('ploto.plotter.{plotter_type}'.format(plotter_type=plotter_type))
@@ -16,6 +16,6 @@ def run_step(plotter_task, work_dir, config):
         return
 
     plotter_module.run_plotter(
-        plotter_task=plotter_task,
+        plotter_task=step,
         work_dir=work_dir,
         config=config)

@@ -54,5 +54,5 @@ def download_edp_fetcher(file_task, work_dir, config):
     edp_pipe.terminate()
 
 
-def get_data(file_task, work_dir, config):
-    download_edp_fetcher(file_task, work_dir, config)
+def get_data(task, work_dir, config):
+    download_edp_fetcher(task, work_dir, config)

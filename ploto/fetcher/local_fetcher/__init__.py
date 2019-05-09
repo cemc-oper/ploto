@@ -45,8 +45,8 @@ def link_file_by_ln(file_task, work_dir):
         shell=True)
 
 
-def get_data(file_task, work_dir, config):
-    if 'action' in file_task and file_task['action'] == 'ln':
-        link_file_by_ln(file_task, work_dir)
+def get_data(task, work_dir, config):
+    if 'action' in task and task['action'] == 'ln':
+        link_file_by_ln(task, work_dir)
     else:
-        link_local_file(file_task, work_dir)
+        link_local_file(task, work_dir)

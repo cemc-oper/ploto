@@ -7,7 +7,7 @@ data requires:
     hi.monthly
 
 """
-from ploto_server.common.esmdiag.metrics.climo.figures import get_common_figure_task
+from ploto_server.common.esmdiag.metrics.climo.figures import get_plotter_step
 
 
 def generate_figure_task(figure_config, common_config) -> dict:
@@ -35,7 +35,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
         }
     :return:
     """
-    task = get_common_figure_task(figure_config, common_config)
+    task = get_plotter_step(figure_config, common_config)
 
     task['data_fetcher'] = [
         {

@@ -9,7 +9,7 @@ data requires:
 """
 import datetime
 
-from ploto_server.common.esmdiag.metrics.climo.figures import get_common_figure_task
+from ploto_server.common.esmdiag.metrics.climo.figures import get_plotter_step
 
 
 def generate_figure_task(figure_config, common_config) -> dict:
@@ -37,7 +37,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
         }
     :return:
     """
-    task = get_common_figure_task(figure_config, common_config)
+    task = get_plotter_step(figure_config, common_config)
 
     start_date = datetime.datetime.strptime(common_config['date']['start'], "%Y-%m-%d")
     end_date = datetime.datetime.strptime(common_config['date']['end'], "%Y-%m-%d")

@@ -11,7 +11,7 @@ data requires:
 """
 import datetime
 
-from ploto_server.common.esmdiag.metrics.climo.figures import get_common_figure_task
+from ploto_server.common.esmdiag.metrics.climo.figures import get_plotter_step
 
 
 def generate_figure_task(figure_config, common_config) -> dict:
@@ -39,7 +39,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
         }
     :return:
     """
-    task = get_common_figure_task(figure_config, common_config)
+    steps = []
 
     start_date = datetime.datetime.strptime(common_config['date']['start'], "%Y-%m-%d")
     end_date = datetime.datetime.strptime(common_config['date']['end'], "%Y-%m-%d")
@@ -68,8 +68,9 @@ def generate_figure_task(figure_config, common_config) -> dict:
         'gw'
     ]
 
-    task['data_fetcher'] = [
+    steps.extend([
         {
+            'step_type': 'fetcher',
             'common': common_config,
             'type': 'edp_fetcher',
             'query_param': {
@@ -82,6 +83,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
             },
         },
         {
+            'step_type': 'fetcher',
             'common': common_config,
             'type': 'edp_fetcher',
             'query_param': {
@@ -93,7 +95,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
                 'datedif': 'h0'
             }
         }
-    ]
+    ])
 
     time_range_string = "{start_date}:{end_date}".format(
         start_date=common_config['date']['start'],
@@ -101,7 +103,8 @@ def generate_figure_task(figure_config, common_config) -> dict:
     )
     output_file_pattern = "{file_prefix}.{name}.monthly.{time_range}.nc"
 
-    task['pre_processor'] = [{
+    steps.extend([{
+        'step_type': 'processor',
         'type': 'cdo_processor',
         'operator': 'select',
         'params': {
@@ -117,10 +120,11 @@ def generate_figure_task(figure_config, common_config) -> dict:
             time_range=time_range_string,
             name=field,
         ),
-    } for field in step1_fields]
+    } for field in step1_fields])
 
-    task['pre_processor'].append(
+    steps.append(
         {
+            'step_type': 'processor',
             'type': 'cdo_processor',
             'operator': 'select',
             'params': {
@@ -134,5 +138,10 @@ def generate_figure_task(figure_config, common_config) -> dict:
                 case_id=common_config['case_info']['id']),
         }
     )
+    steps.append(get_plotter_step(figure_config, common_config))
+
+    task = {
+        'steps': steps
+    }
 
     return task

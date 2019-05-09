@@ -1,7 +1,7 @@
 # coding: utf-8
 
 
-def get_common_figure_task(figure_config, common_config) -> dict:
+def get_plotter_step(figure_config, common_config) -> dict:
     """
 
     :param figure_config:
@@ -27,14 +27,10 @@ def get_common_figure_task(figure_config, common_config) -> dict:
     :return:
     """
     task = {
-        'data_fetcher': {
-            'common': common_config,
-        },
-        'plotter': {
-            'type': 'esmdiag_plotter',
-            'metric': 'climo',
-            'figure': figure_config["name"],
-            'common': common_config,
-        }
+        'step_type': 'plotter',
+        'type': 'esmdiag_plotter',
+        'metric': 'climo',
+        'figure': figure_config["name"],
+        'common': common_config,
     }
     return task

@@ -1,8 +1,6 @@
 # coding: utf-8
-from ploto import fetcher
-from ploto import plotter
-from ploto import processor
 from ploto.logger import get_logger
+from ploto.step import get_step_module
 from ploto.environment import (
     store_base_environment,
     prepare_environment,
@@ -30,21 +28,13 @@ def run_ploto(message, config):
     # save message
     save_task_message(message_data)
 
-    if 'data_fetcher' in message_data:
-        logger.info('prepare data...')
-        fetcher.run_step(message_data['data_fetcher'], work_dir, config=config)
-
-    if 'pre_processor' in message_data:
-        logger.info('doing pre processing...')
-        processor.run_step(message_data['pre_processor'], work_dir, config=config)
-
-    if 'plotter' in message_data:
-        logger.info('drawing plot...')
-        plotter.run_step(message_data['plotter'], work_dir, config=config)
-
-    if 'post_processor' in message_data:
-        logger.info('doing post processing...')
-        processor.run_step(message_data['post_processor'], work_dir, config=config)
+    steps = message_data['steps']
+    for step in steps:
+        step_module = get_step_module(step)
+        if step_module is None:
+            logger.error('step module is not found.')
+            break
+        step_module.run_step(step=step, work_dir=work_dir, config=config)
 
     logger.info("leaving work dir...{work_dir}".format(work_dir=work_dir))
     recovery_base_environment(base_env)
