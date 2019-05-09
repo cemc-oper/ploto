@@ -11,7 +11,7 @@ data requires:
 """
 import datetime
 
-from ploto_server.common.esmdiag.metrics.climo.figures import get_plotter_step
+from ploto_server.common.esmdiag.metrics.climo.util import get_plotter_step, get_gw_step
 
 
 def generate_figure_task(figure_config, common_config) -> dict:
@@ -53,10 +53,6 @@ def generate_figure_task(figure_config, common_config) -> dict:
     step1_file_prefix = '{file_prefix}.step1'.format(
         file_prefix=file_prefix
     )
-    step2_file_prefix = '{model_id}.{case_id}.step2'.format(
-        model_id=common_config['model_info']['id'],
-        case_id=common_config['case_info']['id']
-    )
 
     step1_fields = [
         'FSNS',
@@ -64,9 +60,12 @@ def generate_figure_task(figure_config, common_config) -> dict:
         'LHFLX',
         'SHFLX',
     ]
-    step2_fields = [
-        'gw'
-    ]
+
+    time_range_string = "{start_date}:{end_date}".format(
+        start_date=common_config['date']['start'],
+        end_date=common_config['date']['end'],
+    )
+    output_file_pattern = "{file_prefix}.{name}.monthly.{time_range}.nc"
 
     steps.extend([
         {
@@ -82,62 +81,32 @@ def generate_figure_task(figure_config, common_config) -> dict:
                 'datedif': 'h0'
             },
         },
-        {
-            'step_type': 'fetcher',
-            'common': common_config,
-            'type': 'edp_fetcher',
-            'query_param': {
-                'type': 'nc',
-                'output_dir': './data',
-                'file_prefix': step2_file_prefix,
-                'date_range': date_range,
-                'field_names': step2_fields,
-                'datedif': 'h0'
-            }
-        }
     ])
 
-    time_range_string = "{start_date}:{end_date}".format(
-        start_date=common_config['date']['start'],
-        end_date=common_config['date']['end'],
+    steps.extend(
+        [
+            {
+                'step_type': 'processor',
+                'type': 'cdo_processor',
+                'operator': 'select',
+                'params': {
+                    'name': field,
+                    'startdate': common_config['date']['start'],
+                    'enddate': common_config['date']['end']
+                },
+                'input_files': [
+                    './data/{step1_file_prefix}.*.nc'.format(step1_file_prefix=step1_file_prefix)
+                ],
+                'output_file': output_file_pattern.format(
+                    file_prefix=file_prefix,
+                    time_range=time_range_string,
+                    name=field,
+                ),
+            } for field in step1_fields
+        ]
     )
-    output_file_pattern = "{file_prefix}.{name}.monthly.{time_range}.nc"
 
-    steps.extend([{
-        'step_type': 'processor',
-        'type': 'cdo_processor',
-        'operator': 'select',
-        'params': {
-            'name': field,
-            'startdate': common_config['date']['start'],
-            'enddate': common_config['date']['end']
-        },
-        'input_files': [
-            './data/{step1_file_prefix}.*.nc'.format(step1_file_prefix=step1_file_prefix)
-        ],
-        'output_file': output_file_pattern.format(
-            file_prefix=file_prefix,
-            time_range=time_range_string,
-            name=field,
-        ),
-    } for field in step1_fields])
-
-    steps.append(
-        {
-            'step_type': 'processor',
-            'type': 'cdo_processor',
-            'operator': 'select',
-            'params': {
-                'name': 'gw',
-            },
-            'input_files': [
-                './data/{step2_file_prefix}.*.nc'.format(step2_file_prefix=step2_file_prefix)
-            ],
-            'output_file': './{model_id}.{case_id}.gw.nc'.format(
-                model_id=common_config['model_info']['id'],
-                case_id=common_config['case_info']['id']),
-        }
-    )
+    steps.extend(get_gw_step(figure_config, common_config))
     steps.append(get_plotter_step(figure_config, common_config))
 
     task = {

@@ -11,7 +11,7 @@ data requires:
 """
 import datetime
 
-from ploto_server.common.esmdiag.metrics.climo.figures import get_plotter_step
+from ploto_server.common.esmdiag.metrics.climo.util import get_plotter_step, get_gw_step
 
 
 def generate_figure_task(figure_config, common_config) -> dict:
@@ -53,9 +53,6 @@ def generate_figure_task(figure_config, common_config) -> dict:
     step1_file_prefix = '{file_prefix}.step1'.format(
         file_prefix=file_prefix
     )
-    step2_file_prefix = '{file_prefix}.step2'.format(
-        file_prefix=file_prefix
-    )
 
     steps.extend([
         {
@@ -76,21 +73,6 @@ def generate_figure_task(figure_config, common_config) -> dict:
                 ],
                 'datedif': 'h0'
             },
-        },
-        {
-            'step_type': 'fetcher',
-            'common': common_config,
-            'type': 'edp_fetcher',
-            'query_param': {
-                'type': 'nc',
-                'output_dir': './data',
-                'file_prefix': step2_file_prefix,
-                'date_range': date_range,
-                'field_names': [
-                    'gw'
-                ],
-                'datedif': 'h0'
-            }
         }
     ])
 
@@ -127,24 +109,6 @@ def generate_figure_task(figure_config, common_config) -> dict:
         ),
     } for field in step1_fields])
 
-    steps.append(
-        {
-            'step_type': 'processor',
-            'type': 'cdo_processor',
-            'operator': 'select',
-            'params': {
-                'name': 'gw',
-            },
-            'input_files': [
-                './data/{step2_file_prefix}.*.nc'.format(step2_file_prefix=step2_file_prefix)
-            ],
-            'output_file': './{model_id}.{case_id}.gw.nc'.format(
-                model_id=common_config['model_info']['id'],
-                case_id=common_config['case_info']['id']
-            ),
-        }
-    )
-
     steps.append({
         'step_type': 'processor',
         'type': 'esmdiag_data_processor',
@@ -180,6 +144,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
         'common': common_config,
     })
 
+    steps.extend(get_gw_step(figure_config, common_config))
     steps.append(get_plotter_step(figure_config, common_config))
 
     task = {
