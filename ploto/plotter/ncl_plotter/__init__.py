@@ -9,14 +9,14 @@ def save_ncl_script(ncl_script_path, ncl_script):
         f.write(ncl_script)
 
 
-def run_plotter(plotter_config, work_dir, config):
+def run_plotter(plotter_task, work_dir, config):
     print('prepare plot script...')
-    ncl_script_content = plotter_config['ncl_script_content']
-    image_path = plotter_config['image_path']
+    ncl_script_content = plotter_task['ncl_script_content']
+    image_path = plotter_task['image_path']
 
     param = {
         'ncl_script_path': 'draw.ncl',
-        'ncl_params': plotter_config['ncl_params'],
+        'ncl_params': plotter_task['ncl_params'],
         'image_path': image_path
     }
     save_ncl_script(param['ncl_script_path'], ncl_script_content)

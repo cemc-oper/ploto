@@ -1,30 +1,21 @@
 # coding=utf-8
-from ploto.processor import (
-    cat_file_processor,
-    cdo_processor,
-    copy_file_processor,
-    esmdiag_data_processor,
-    gidat_post_processor
-)
-from ploto.logger import get_logger
+import importlib
 
-processor_map = {
-    'cat_file_processor': cat_file_processor,
-    'cdo_processor': cdo_processor,
-    'copy_file_processor': copy_file_processor,
-    'esmdiag_data_processor': esmdiag_data_processor,
-    'gidat_post_processor': gidat_post_processor,
-}
+from ploto.logger import get_logger
 
 
 logger = get_logger()
 
 
-def do_processing(tasks, work_dir, config):
-    for task in tasks:
-        task_type = task['type']
-        processor = processor_map.get(task_type, None)
-        if processor is None:
-            logger.warn("processor type not supported: {type}".format(type=task['type']))
-            return
-        processor.run_processor(task, work_dir, config)
+def run_step(processor_steps, work_dir, config):
+    for task in processor_steps:
+        processor_type = task['type']
+        try:
+            processor_module = importlib.import_module('ploto.processor/{processor_type}'.format(
+                processor_type=processor_type
+            ))
+        except ImportError:
+            logger.error("processor type not supported: {processor_type}".format(
+                processor_type=processor_type))
+            continue
+        processor_module.run_processor(task, work_dir, config)

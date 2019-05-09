@@ -1,7 +1,7 @@
 # coding: utf-8
-from ploto.fetcher import run_fetcher
-from ploto.plotter import draw_plot
-from ploto.processor import do_processing
+from ploto import fetcher
+from ploto import plotter
+from ploto import processor
 from ploto.logger import get_logger
 from ploto.environment import (
     store_base_environment,
@@ -32,19 +32,19 @@ def run_ploto(message, config):
 
     if 'data_fetcher' in message_data:
         logger.info('prepare data...')
-        run_fetcher(message_data['data_fetcher'], work_dir, config=config)
+        fetcher.run_step(message_data['data_fetcher'], work_dir, config=config)
 
     if 'pre_processor' in message_data:
         logger.info('doing pre processing...')
-        do_processing(message_data['pre_processor'], work_dir, config=config)
+        processor.run_step(message_data['pre_processor'], work_dir, config=config)
 
     if 'plotter' in message_data:
         logger.info('drawing plot...')
-        draw_plot(message_data['plotter'], work_dir, config=config)
+        plotter.run_step(message_data['plotter'], work_dir, config=config)
 
     if 'post_processor' in message_data:
         logger.info('doing post processing...')
-        do_processing(message_data['post_processor'], work_dir, config=config)
+        processor.run_step(message_data['post_processor'], work_dir, config=config)
 
     logger.info("leaving work dir...{work_dir}".format(work_dir=work_dir))
     recovery_base_environment(base_env)
