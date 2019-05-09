@@ -60,7 +60,7 @@ def run_processor(task, work_dir, config) -> bool:
     model = task["model"]
     if model == 'gamil':
         from ploto.processor.esmdiag_data_processor.models.gamil import vinterp as gamil_vinterp
-        gamil_vinterp.run_task(task, work_dir, config)
+        return gamil_vinterp.run_task(task, work_dir, config)
     else:
         logger.error("model is not supported:", model)
         return False
