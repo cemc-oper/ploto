@@ -35,13 +35,16 @@ def generate_figure_task(figure_config, common_config) -> dict:
         }
     :return:
     """
-    task = get_plotter_step(figure_config, common_config)
-
-    task['data_fetcher'] = [
+    steps = [
         {
+            'step_type': 'fetcher',
             'type': 'local_fetcher',
             'common': common_config,
-        }
-    ]
+        },
+        get_plotter_step(figure_config, common_config)]
+
+    task = {
+        'steps': steps
+    }
 
     return task
