@@ -8,13 +8,10 @@ task schema:
         ...
     }
 """
+import importlib
 
 from ploto.logger import get_logger
 from ploto.processor.esmdiag_data_processor import vinterp
-
-action_map = {
-    'vinterp': vinterp
-}
 
 logger = get_logger()
 
@@ -33,9 +30,13 @@ def run_processor(task, work_dir, config) -> bool:
     :return:
     """
     action = task["action"]
-    action_processor = action_map.get(action, None)
-    if action_processor is None:
-        logger.error("action type not supported:", action)
+
+    try:
+        action_module = importlib.import_module('ploto.processor.esmdiag_data_processor.{action}'.format(
+            action=action
+        ))
+    except ImportError:
+        logger.error('action is not supported: {action}'.format(action=action))
         return False
 
-    return action_processor.run_processor(task, work_dir, config)
+    return action_module.run_processor(task, work_dir, config)

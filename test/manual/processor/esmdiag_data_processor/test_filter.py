@@ -1,0 +1,32 @@
+# coding: utf-8
+import os
+
+
+def main():
+    from ploto.processor.esmdiag_data_processor import run_processor
+    task = {
+        'type': 'esmdiag_data_processor',
+        'action': 'filter',
+        'input_file': 'GAMIL.gamil_wu_run11.OLR.daily.anomaly.1979-01-01:1980-12-31.nc',
+        'output_file': 'GAMIL.gamil_wu_run11.OLR.daily.anomaly.filtered.1979-01-01:1980-12-31.nc',
+        'var_name': 'OLR',
+        'method': 'butterworth',
+        'fca': '0.01',
+        'fcb': '0.05',
+    }
+    config = {
+        'esmdiag': {
+            'root': '/home/hujk/ploto/ploto/vendor/esmdiag'
+        }
+    }
+    work_dir = "/home/hujk/clusterfs/wangdp/temp/temp"
+    os.chdir(work_dir)
+    run_processor(
+        task,
+        work_dir,
+        config
+    )
+
+
+if __name__ == "__main__":
+    main()
