@@ -17,8 +17,8 @@ def run_processor(task, work_dir, config) -> bool:
             'output_file': '',
             'var_name': 'OLR',
             'method': 'butterworth', # or 'lanczos'
-            'fca': '0.01',
-            'fcb': '0.05',
+            'low_pass': 0.01,
+            'high_pass': 0.05,
         }
     :param work_dir:
     :param config:
@@ -52,8 +52,8 @@ def run_processor(task, work_dir, config) -> bool:
             'out_path=\\"{out_path}\\"'.format(
                 var_path=input_file_path,
                 var_name=task['var_name'],
-                fca=task['fca'],
-                fcb=task['fcb'],
+                fca=task['low_pass'],
+                fcb=task['high_pass'],
                 out_path=output_file_path,
                 ncl_script=ncl_script)
         ],

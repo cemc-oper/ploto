@@ -11,8 +11,8 @@ def main():
         'output_file': 'GAMIL.gamil_wu_run11.OLR.daily.anomaly.filtered.1979-01-01:1980-12-31.nc',
         'var_name': 'OLR',
         'method': 'butterworth',
-        'fca': '0.01',
-        'fcb': '0.05',
+        'low_pass': 0.01,
+        'high_pass': 0.05,
     }
     config = {
         'esmdiag': {
