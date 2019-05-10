@@ -109,6 +109,17 @@ def generate_figure_task(figure_config, common_config) -> dict:
         ),
     } for field in step1_fields])
 
+    var_file_pattern = "{model}.{case_id}.{name}.monthly.{start_date}:{end_date}.nc"
+    ps_file_path = var_file_pattern.format(
+        model='GAMIL',
+        case_id=common_config["case_info"]["id"],
+        name="PS",
+        start_date=common_config["date"]["start"],
+        end_date=common_config["date"]["end"],
+    )
+
+    uvt_levels = [1000, 925, 850, 775, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 10]
+    q_levels = [1000, 925, 850, 775, 700, 600, 500, 400, 300]
     steps.append({
         'step_type': 'processor',
         'type': 'esmdiag_data_processor',
@@ -116,27 +127,90 @@ def generate_figure_task(figure_config, common_config) -> dict:
         'model': 'gamil',
         'tasks': [
             {
+                "input_file_path": var_file_pattern.format(
+                    model='GAMIL',
+                    case_id=common_config["case_info"]["id"],
+                    name="U",
+                    start_date=common_config["date"]["start"],
+                    end_date=common_config["date"]["end"],
+                ),
+                "ps_file_path": ps_file_path,
+                "output_file_path": "{model}.{case_id}.{name}.monthly.vinterp{levels}.{start_date}:{end_date}.nc".format(
+                    model='GAMIL',
+                    case_id=common_config["case_info"]["id"],
+                    name='U',
+                    levels=":".join([str(level) for level in uvt_levels]),
+                    start_date=common_config["date"]["start"],
+                    end_date=common_config["date"]["end"],
+                ),
                 "var_name": "U",
-                "levels": [1000, 925, 850, 775, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 10],
+                "levels": uvt_levels,
                 "interp_type": "linear",
                 "extrap": "False"
             },
-
             {
+                "input_file_path": var_file_pattern.format(
+                    model='GAMIL',
+                    case_id=common_config["case_info"]["id"],
+                    name="V",
+                    start_date=common_config["date"]["start"],
+                    end_date=common_config["date"]["end"],
+                ),
+                "ps_file_path": ps_file_path,
+                "output_file_path": "{model}.{case_id}.{name}.monthly.vinterp{levels}.{start_date}:{end_date}.nc".format(
+                    model='GAMIL',
+                    case_id=common_config["case_info"]["id"],
+                    name='V',
+                    levels=":".join([str(level) for level in uvt_levels]),
+                    start_date=common_config["date"]["start"],
+                    end_date=common_config["date"]["end"],
+                ),
                 "var_name": "V",
-                "levels": [1000, 925, 850, 775, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 10],
+                "levels": uvt_levels,
                 "interp_type": "linear",
                 "extrap": "False"
             },
             {
+                "input_file_path": var_file_pattern.format(
+                    model='GAMIL',
+                    case_id=common_config["case_info"]["id"],
+                    name="Q",
+                    start_date=common_config["date"]["start"],
+                    end_date=common_config["date"]["end"],
+                ),
+                "ps_file_path": ps_file_path,
+                "output_file_path": "{model}.{case_id}.{name}.monthly.vinterp{levels}.{start_date}:{end_date}.nc".format(
+                    model='GAMIL',
+                    case_id=common_config["case_info"]["id"],
+                    name='Q',
+                    levels=":".join([str(level) for level in q_levels]),
+                    start_date=common_config["date"]["start"],
+                    end_date=common_config["date"]["end"],
+                ),
                 "var_name": "Q",
-                "levels": [1000, 925, 850, 775, 700, 600, 500, 400, 300],
+                "levels": q_levels,
                 "interp_type": "linear",
                 "extrap": "False"
             },
             {
+                "input_file_path": var_file_pattern.format(
+                    model='GAMIL',
+                    case_id=common_config["case_info"]["id"],
+                    name="T",
+                    start_date=common_config["date"]["start"],
+                    end_date=common_config["date"]["end"],
+                ),
+                "ps_file_path": ps_file_path,
+                "output_file_path": "{model}.{case_id}.{name}.monthly.vinterp{levels}.{start_date}:{end_date}.nc".format(
+                    model='GAMIL',
+                    case_id=common_config["case_info"]["id"],
+                    name='T',
+                    levels=":".join([str(level) for level in uvt_levels]),
+                    start_date=common_config["date"]["start"],
+                    end_date=common_config["date"]["end"],
+                ),
                 "var_name": "T",
-                "levels": [1000, 925, 850, 775, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 10],
+                "levels": uvt_levels,
                 "interp_type": "log",
                 "extrap": "False"
             }
