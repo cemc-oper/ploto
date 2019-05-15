@@ -1,4 +1,6 @@
 # coding=utf-8
+import importlib
+
 from ploto.logger import get_logger
 
 
@@ -20,21 +22,6 @@ def run_processor(task, work_dir, config) -> bool:
                     "extrap": "false",
                 },
             ],
-            common: {
-                model_info: {
-                    id: "FGOALS-g3",
-                    atm_id: "GAMIL",
-                    ocn_id: "LICOM",
-                    ice_id: "CICE",
-                },
-                case_info: {
-                    id: "piControl-bugfix-licom-80368d",
-                },
-                date: {
-                    start: "0030-01-01",
-                    end: "0060-12-31"
-                }
-            },
         }
     :param work_dir:
     :param config:
@@ -42,10 +29,9 @@ def run_processor(task, work_dir, config) -> bool:
     """
     logger = get_logger()
     model = task["model"]
-    if model == 'gamil':
-        from ploto.processor.esmdiag_data_processor.models.gamil import vinterp as gamil_vinterp
-        return gamil_vinterp.run_task(task, work_dir, config)
-    else:
-        logger.error("model is not supported:", model)
+    try:
+        vinterp_module = importlib.import_module(".models.{model}.vinterp".format(model=model), __package__)
+        return vinterp_module.run_task(task, work_dir, config)
+    except ImportError:
+        logger.error("model is not supported: {model}".format(model=model))
         return False
-

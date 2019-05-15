@@ -3,7 +3,11 @@ import os
 
 
 def main():
-    from ploto.processor.esmdiag_data_processor.models.gamil.vinterp import run_task
+    # WARNING: vinterp task has changed.
+    import warnings
+    warnings.warn("vinterp task has changed.")
+
+    from ploto.processor.esmdiag_data_processor.vinterp.models.gamil.vinterp import run_task
     task = {
         'type': 'esmdiag_data_processor',
         'action': 'vinterp',
@@ -35,21 +39,6 @@ def main():
                 "extrap": "False"
             }
         ],
-        'common': {
-            'model_info': {
-                'id': "FGOALS-g3",
-                'atm_id': "GAMIL",
-                'ocn_id': "LICOM",
-                'ice_id': "CICE",
-            },
-            'case_info': {
-                'id': "piControl-bugfix-licom-80368d",
-            },
-            'date': {
-                'start': "0030-01-01",
-                'end': "0060-12-31"
-            }
-        },
     }
     config = {
         'esmdiag': {

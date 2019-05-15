@@ -2,8 +2,6 @@
 from pathlib import Path
 import subprocess
 import os
-import sys
-import json
 
 from ploto.logger import get_logger
 
@@ -26,22 +24,7 @@ def run_task(task, work_dir, config) -> bool:
                     "interp_type": "linear",
                     "extrap": "false"
                 },
-            ],
-            common: {
-                model_info: {
-                    id: "FGOALS-g3",
-                    atm_id: "GAMIL",
-                    ocn_id: "LICOM",
-                    ice_id: "CICE",
-                },
-                case_info: {
-                    id: "piControl-bugfix-licom-80368d",
-                },
-                date: {
-                    start: "0030-01-01",
-                    end: "0060-12-31"
-                }
-            },
+            ]
         }
     :param work_dir:
     :param config:
