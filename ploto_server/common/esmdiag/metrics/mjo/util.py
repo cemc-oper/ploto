@@ -30,7 +30,7 @@ def get_plotter_step(figure_config, common_config) -> dict:
     task = {
         'step_type': 'plotter',
         'type': 'esmdiag_plotter',
-        'metric': 'climo',
+        'metric': 'mjo',
         'figure': figure_config["name"],
         'common': common_config,
     }

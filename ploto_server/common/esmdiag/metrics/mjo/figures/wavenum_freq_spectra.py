@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-zonal_mean.py
+wavenum_freq_spectra.py
 
 data requires:
     .OLR.daily.anomaly.
@@ -8,7 +8,7 @@ data requires:
 """
 import datetime
 
-from ploto_server.common.esmdiag.metrics.climo.util import get_plotter_step, get_gw_step
+from ploto_server.common.esmdiag.metrics.mjo.util import get_plotter_step, get_gw_step
 
 
 def generate_figure_task(figure_config, common_config) -> dict:
@@ -42,9 +42,12 @@ def generate_figure_task(figure_config, common_config) -> dict:
     end_date = datetime.datetime.strptime(common_config['date']['end'], "%Y-%m-%d")
     date_range = [start_date.strftime("%Y%m%d"), end_date.strftime("%Y%m%d")]
 
-    file_prefix = '{atm_id}.{case_id}'.format(
-        atm_id=common_config['model_info']['atm_id'],
-        case_id=common_config['case_info']['id']
+    model_id = common_config['model_info']['id']
+    case_id = common_config['case_info']['id']
+
+    file_prefix = '{model_id}.{case_id}'.format(
+        model_id=model_id,
+        case_id=case_id
     )
 
     step1_file_prefix = '{file_prefix}.step1'.format(
@@ -165,16 +168,16 @@ def generate_figure_task(figure_config, common_config) -> dict:
         'tasks': [
             {
                 "input_file_path": var_file_pattern.format(
-                    model='GAMIL',
-                    case_id=common_config["case_info"]["id"],
+                    model=model_id,
+                    case_id=case_id,
                     name="U",
                     start_date=common_config["date"]["start"],
                     end_date=common_config["date"]["end"],
                 ),
                 "ps_file_path": ps_file_path,
                 "output_file_path": "{model}.{case_id}.{name}.daily.anomaly.vinterp{levels}.{start_date}:{end_date}.nc".format(
-                    model='GAMIL',
-                    case_id=common_config["case_info"]["id"],
+                    model=model_id,
+                    case_id=case_id,
                     name='U',
                     levels=":".join([str(level) for level in u_levels]),
                     start_date=common_config["date"]["start"],
@@ -190,7 +193,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
     })
 
     steps.extend(get_gw_step(figure_config, common_config))
-    # steps.append(get_plotter_step(figure_config, common_config))
+    steps.append(get_plotter_step(figure_config, common_config))
 
     task = {
         'steps': steps
