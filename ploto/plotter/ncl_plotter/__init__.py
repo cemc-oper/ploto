@@ -3,6 +3,9 @@ import json
 import subprocess
 import os
 
+from ploto.logger import get_logger
+logger = get_logger()
+
 
 def save_ncl_script(ncl_script_path, ncl_script):
     with open(ncl_script_path, 'w') as f:
@@ -10,7 +13,7 @@ def save_ncl_script(ncl_script_path, ncl_script):
 
 
 def run_plotter(plotter_task, work_dir, config):
-    print('prepare plot script...')
+    logger.info('prepare plot script...')
     ncl_script_content = plotter_task['ncl_script_content']
     image_path = plotter_task['image_path']
 
@@ -21,7 +24,7 @@ def run_plotter(plotter_task, work_dir, config):
     }
     save_ncl_script(param['ncl_script_path'], ncl_script_content)
 
-    print('running ncl...')
+    logger.info('running ncl...')
 
     ncl_pipe = subprocess.Popen(
         ['/home/wangdp/nwpc/gidat/plot/workspace/env/bin/python',
@@ -37,4 +40,4 @@ def run_plotter(plotter_task, work_dir, config):
     # print(stdout)
     # print(stderr)
 
-    print('running ncl...done')
+    logger.info('running ncl...done')

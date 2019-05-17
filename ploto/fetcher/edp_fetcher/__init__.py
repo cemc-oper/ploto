@@ -32,6 +32,11 @@ def download_edp_fetcher(file_task, work_dir, config):
         }
     :param work_dir:
     :param config:
+        {
+            'edp_fetcher': {
+                'edp_script': 'edp script file path'
+            }
+        }
     """
     query_param = file_task['query_param']
     query_param['output_dir'] = str(pathlib.Path(work_dir, query_param['output_dir']))

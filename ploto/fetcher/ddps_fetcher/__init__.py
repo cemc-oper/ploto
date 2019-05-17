@@ -37,6 +37,12 @@ def download_ddps_fetcher(file_task, work_dir, config):
         }
     :param work_dir:
     :param config:
+
+        {
+            'ddps_fetcher': {
+                'bsc_command': 'bsc command file path'
+            }
+        }
     """
     query_param = file_task['query_param']
     query_param['config']['savePath'] = str(pathlib.Path(work_dir, query_param['config']['savePath']))

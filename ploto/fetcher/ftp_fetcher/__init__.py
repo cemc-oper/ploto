@@ -2,7 +2,7 @@
 import ftplib
 
 
-def download_ftp_data(ftp_file_task, work_dir):
+def download_ftp_data(ftp_file_task, work_dir, config):
     """
 
     :param ftp_file_task:
@@ -28,4 +28,4 @@ def download_ftp_data(ftp_file_task, work_dir):
 
 
 def get_data(task, work_dir, config):
-    download_ftp_data(task, work_dir)
+    download_ftp_data(task, work_dir, config)
