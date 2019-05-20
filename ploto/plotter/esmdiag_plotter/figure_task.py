@@ -38,28 +38,30 @@ def draw_figures(ncl_script, task, work_dir, config):
     esmdiag_env["ESMDIAG_ROOT"] = config["esmdiag"]["root"]
 
     logger.info("run ncl script...")
+    ncl_command = [
+        '/bin/bash',
+        '-i', '-c',
+        'ncl -Q '
+        'model_id=\\"{model_id}\\" '
+        'model_atm_id=\\"{model_atm_id}\\" '
+        'model_ocn_id=\\"{model_ocn_id}\\" '
+        'model_ice_id=\\"{model_ice_id}\\" '
+        'case_id=\\"{case_id}\\" '
+        'start_date=\\"{start_date}\\" '
+        'end_date=\\"{end_date}\\" '
+        '{ncl_script}'.format(
+            model_id=common_config["model_info"]["id"],
+            model_atm_id=common_config["model_info"]["atm_id"],
+            model_ocn_id=common_config["model_info"]["ocn_id"],
+            model_ice_id=common_config["model_info"]["ice_id"],
+            case_id=common_config["case_info"]["id"],
+            start_date=common_config["date"]["start"],
+            end_date=common_config["date"]["end"],
+            ncl_script=ncl_script)
+    ]
+    logger.info("ncl command: {ncl_command}".format(ncl_command=' '.join(ncl_command)))
     ncl_result = subprocess.run(
-        [
-            '/bin/bash',
-            '-i', '-c',
-            'ncl -Q '
-            'model_id=\\"{model_id}\\" '
-            'model_atm_id=\\"{model_atm_id}\\" '
-            'model_ocn_id=\\"{model_ocn_id}\\" '
-            'model_ice_id=\\"{model_ice_id}\\" '
-            'case_id=\\"{case_id}\\" '
-            'start_date=\\"{start_date}\\" '
-            'end_date=\\"{end_date}\\" '
-            '{ncl_script}'.format(
-                model_id=common_config["model_info"]["id"],
-                model_atm_id=common_config["model_info"]["atm_id"],
-                model_ocn_id=common_config["model_info"]["ocn_id"],
-                model_ice_id=common_config["model_info"]["ice_id"],
-                case_id=common_config["case_info"]["id"],
-                start_date=common_config["date"]["start"],
-                end_date=common_config["date"]["end"],
-                ncl_script=ncl_script)
-        ],
+        ncl_command,
         env=esmdiag_env,
         start_new_session=True
     )
