@@ -60,7 +60,7 @@ def run_task(task, work_dir, config) -> bool:
         ncl_command = [
             '/bin/bash',
             '-i', '-c',
-            'ncl -Q'
+            'ncl -Q '
             'ps_path=\\"{ps_path}\\" '
             'var_path=\\"{var_path}\\" '
             'var_name=\\"{var_name}\\" '
