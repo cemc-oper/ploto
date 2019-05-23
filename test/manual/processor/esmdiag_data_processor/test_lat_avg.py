@@ -9,7 +9,7 @@ def main():
         'action': 'lat_avg',
         'start_lat': -10.0,
         'end_lat': 10.0,
-        'use_wgt_lat': 'True',
+        'use_wgt_lat': 'False',
         'input_file': 'GAMIL.gamil_wu_run11.U.daily.anomaly.vinterp850:200.1979-01-01:1980-12-01.nc',
         'var_name': 'U',
         'output_file': 'GAMIL.gamil_wu_run11.U.daily.anomaly.vinterp850:200.lat_avg_lon_band.1979-01-01:1980-12-01.nc',
