@@ -186,7 +186,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
                 "var_name": "U",
                 "levels": u_levels,
                 "interp_type": "linear",
-                "extrap": "False"
+                "extrap": "True"
             },
         ],
         'common': common_config,
