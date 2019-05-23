@@ -6,11 +6,10 @@ load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/shea_util.ncl"
 load "$ESMDIAG_ROOT/ncl_scripts/tools.ncl"
 
 begin
-  print("begin...")
+
   prefix = model_id + "." + case_id
   suffix = start_date + ":" + end_date + ".nc"
 
-  print("add OLR files...")
   f = addfile(prefix + ".OLR.daily.anomaly." + suffix, "r")
   OLR_anomaly = f->OLR
   f = addfile(prefix + ".OLR.daily.anomaly.filtered." + suffix, "r")
@@ -34,7 +33,6 @@ begin
   OLR_variance_ratio_summer&lon = f->lon
   copy_VarCoords(OLR_variance_ratio_summer, OLR_variance_ratio_winter)
 
-  print("add U files...")
   f = addfile(prefix + ".U.daily.anomaly.vinterp850:200." + suffix, "r")
   U850_anomaly = f->U(:,{850},:,:)
   f = addfile(prefix + ".U.daily.anomaly.vinterp850:200.filtered." + suffix, "r")
@@ -52,7 +50,6 @@ begin
   U850_variance_ratio_summer&lon = f->lon
   copy_VarCoords(U850_variance_ratio_summer, U850_variance_ratio_winter)
 
-  print("begin to plot...")
   plots = new(2, graphic)
 
   res_plot = common_plot_settings()
@@ -87,21 +84,16 @@ begin
 
   res_panel = common_panel_settings()
 
-  print("plot for summer...")
   wks = gsn_open_wks("pdf", prefix + "mjo.variance_ratio.summer")
 
   gsn_define_colormap(wks, "amwg")
 
-  print("generate contour for U850...")
   plots(0) = gsn_csm_contour_map(wks, U850_variance_ratio_summer, res_u850)
-  print("generate contour for OLR...")
   plots(1) = gsn_csm_contour_map(wks, OLR_variance_ratio_summer, res_olr)
 
-  print("plot panel...")
   res_panel@txString = case_id + ": summer " + start_date + " - " + end_date
   gsn_panel(wks, plots, (/dimsizes(plots),1/), res_panel)
 
-  print("plot for winter...")
   wks = gsn_open_wks("pdf", prefix + "mjo.variance_ratio.winter")
 
   gsn_define_colormap(wks, "amwg")
@@ -111,6 +103,5 @@ begin
 
   res_panel@txString = case_id + ": winter " + start_date + " - " + end_date
   gsn_panel(wks, plots, (/dimsizes(plots),1/), res_panel)
-  
-  print("end...")
+
 end
