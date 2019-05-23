@@ -8,6 +8,10 @@ import pathlib
 import subprocess
 import json
 
+from ploto.logger import get_logger
+
+logger = get_logger()
+
 
 def download_edp_fetcher(file_task, work_dir, config):
     """
@@ -45,18 +49,23 @@ def download_edp_fetcher(file_task, work_dir, config):
 
     edp_script = config['edp_fetcher']['edp_script']
 
+    commands = [edp_script, query_string]
+
+    logger.info("run edp command: {command}".format(command=' '.join(commands)))
+
     edp_pipe = subprocess.Popen(
-        [edp_script,
-         query_string],
+        commands,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
 
     stdout, stderr = edp_pipe.communicate()
     stdout = stdout.decode('utf-8').strip()
-    print(stdout, stderr)
+    logger.info("edp command stdout: {stdout}".format(stdout=stdout))
+    logger.info("edp command stderr: {stderr}".format(stderr=stderr))
     edp_pipe.wait()
     edp_pipe.terminate()
+    logger.info("run edp command...done")
 
 
 def get_data(task, work_dir, config):
