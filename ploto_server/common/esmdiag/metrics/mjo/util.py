@@ -12,7 +12,7 @@ def get_plotter_step(figure_config, common_config) -> dict:
     :param common_config:
         {
             model_info: {
-                id: "FGOALS-g3",
+                id: "GAMIL",
                 atm_id: "GAMIL",
                 ocn_id: "LICOM",
                 ice_id: "CICE",
@@ -76,7 +76,7 @@ def get_gw_step(figure_config, common_config):
                 './data/{step2_file_prefix}.*.nc'.format(step2_file_prefix=step2_file_prefix)
             ],
             'output_file': './{model_id}.{case_id}.gw.nc'.format(
-                model_id=common_config['model_info']['id'],
+                model_id=common_config['model_info']['atm_id'],
                 case_id=common_config['case_info']['id']),
         }
     ]

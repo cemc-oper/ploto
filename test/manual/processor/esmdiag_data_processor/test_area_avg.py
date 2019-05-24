@@ -17,7 +17,7 @@ def main():
 
         'common_config': {
             'model_info': {
-                'id': "FGOALS-g3",
+                'id': "GAMIL",
                 'atm_id': "GAMIL",
                 'ocn_id': "LICOM",
                 'ice_id': "CICE",
