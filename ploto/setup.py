@@ -1,5 +1,5 @@
 # coding=utf-8
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='ploto',
@@ -9,10 +9,7 @@ setup(
     description='Ploto project.',
     long_description=__doc__,
 
-    packages=[
-        'ploto',
-        'ploto_server'
-    ],
+    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
 
     include_package_data=True,
 
@@ -22,14 +19,15 @@ setup(
         'click',
         'pyyaml',
         'pika',
-        'flask',
+        'requests',
         'sqlalchemy',
-        'cx_Oracle',
-        'requests'
     ],
 
     extras_require={
         'test': [],
+        'gidat': [
+            'cx_Oracle'
+        ],
         'edp': [
             'celery',
             'netCDF4',
