@@ -7,6 +7,7 @@ Fetch data from EDP - Earth Data Platform
 import pathlib
 import subprocess
 import json
+import sys
 
 from ploto.logger import get_logger
 
@@ -38,7 +39,7 @@ def download_edp_fetcher(file_task, work_dir, config):
     :param config:
         {
             'edp_fetcher': {
-                'edp_script': 'edp script file path'
+                'edp_module_path': 'edp_module_path'
             }
         }
     """
@@ -47,9 +48,14 @@ def download_edp_fetcher(file_task, work_dir, config):
 
     query_string = json.dumps(query_param)
 
-    edp_script = config['edp_fetcher']['edp_script']
+    # edp_script = config['edp_fetcher']['edp_script']
+    edp_script = str(pathlib.Path(pathlib.Path(__file__).parent, 'edp.py'))
 
-    commands = [edp_script, query_string]
+    commands = [
+        sys.executable,
+        edp_script,
+        '--edp-module-path={edp_module_path}'.format(edp_module_path=config['edp_fetcher']['edp_module_path']),
+        query_string]
 
     logger.info("run edp command: {command}".format(command=' '.join(commands)))
 

@@ -39,7 +39,7 @@ def test_ice_area():
             'python_exe': '/home/hujk/.pyenv/versions/ploto-env/bin/python3'
         },
         'edp_fetcher': {
-            'edp_script': '/home/hujk/ploto/script/edp.py'
+            'edp_module_path': "/home/hujk/pyProject/"
         },
         'esmdiag': {
             'root': '/home/hujk/ploto/ploto/vendor/esmdiag'

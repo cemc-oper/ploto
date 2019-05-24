@@ -29,6 +29,12 @@ setup(
     ],
 
     extras_require={
-        'test': []
+        'test': [],
+        'edp': [
+            'celery',
+            'netCDF4',
+            'elasticsearch==6.3.1',
+            'redis'
+        ]
     }
 )

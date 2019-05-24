@@ -24,7 +24,7 @@ def main():
 
     edp_fetcher.get_data(data_task, work_dir, config={
         'edp_fetcher': {
-            'edp_script': "/home/hujk/ploto/script/edp.py"
+            'edp_module_path': "/home/hujk/pyProject/"
         }
     })
 
