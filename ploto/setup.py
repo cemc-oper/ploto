@@ -13,6 +13,10 @@ setup(
 
     include_package_data=True,
 
+    package_data={
+        '': ['*.ncl'],
+    },
+
     zip_safe=False,
 
     install_requires=[
@@ -28,7 +32,7 @@ setup(
         'gidat': [
             'cx_Oracle'
         ],
-        'edp': [
+        'earth': [
             'celery',
             'netCDF4',
             'elasticsearch==6.3.1',

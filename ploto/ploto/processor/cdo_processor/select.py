@@ -37,7 +37,7 @@ def run_cdo(task, work_dir, config):
     output_file_path.parent.mkdir(parents=True, exist_ok=True)
     output_file_argument = str(output_file_path)
 
-    command = 'cdo --history --sortname select,' \
+    command = 'cdo --history select,' \
               + select_argument + ' ' + input_files_argument + ' ' + output_file_argument
 
     logger.info('run cdo command...')

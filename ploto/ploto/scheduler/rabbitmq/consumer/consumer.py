@@ -71,9 +71,9 @@ def cli(config_file):
     channel.basic_qos(prefetch_count=1)
 
     channel.basic_consume(
+        queue_name,
         consume_message,
-        queue=queue_name,
-        no_ack=True
+        auto_ack=True
     )
 
     try:
@@ -84,6 +84,7 @@ def cli(config_file):
         logger.info(e)
     finally:
         logger.info("Warm shutdown...")
+        channel.stop_consuming()
         connection.close()
         logger.info("Warm shutdown...Done")
 
