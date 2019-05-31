@@ -1,8 +1,16 @@
-FROM nwpcc/ploto:base
+FROM python:3.6
 
 LABEL maintainer="perilalroc@gmail.com"
 
-WORKDIR /srv/ploto_server
+COPY ploto/ /srv/ploto
+COPY ploto-server/ /srv/ploto-server
+
+RUN cd /srv/ploto \
+    && pip install . \
+    && cd /srv/ploto-server \
+    && pip install .
+
+WORKDIR /srv/ploto-server
 
 EXPOSE 80
 
