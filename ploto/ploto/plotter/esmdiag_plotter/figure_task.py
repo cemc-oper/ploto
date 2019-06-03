@@ -36,7 +36,7 @@ def draw_figures(ncl_script, task, work_dir, config):
 
     esmdiag_env = os.environ.copy()
     esmdiag_env["ESMDIAG_ROOT"] = config["esmdiag"]["root"]
-    logger.info(esmdiag_env)
+    # logger.info(esmdiag_env)
 
     logger.info("run ncl script...")
     ncl_command = [

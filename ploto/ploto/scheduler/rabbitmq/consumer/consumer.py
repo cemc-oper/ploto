@@ -55,6 +55,8 @@ def cli(config_file):
         routing_key=rabbitmq_config['routing_keys']['pattern']
     )
 
+    channel.basic_qos(prefetch_count=1)
+
     def consume_message(ch, method, properties, body):
         logger.info('receive new message')
         message_string = body.decode('utf-8')
@@ -67,8 +69,6 @@ def cli(config_file):
             connection.process_data_events()
             # logger.info("waiting for message thread...")
         logger.info("message thread done")
-
-    channel.basic_qos(prefetch_count=1)
 
     channel.basic_consume(
         queue_name,

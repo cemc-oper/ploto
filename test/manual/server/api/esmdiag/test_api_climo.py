@@ -24,6 +24,8 @@ def main():
                 'figures': [
                     {'name': 'precip'},
                     {'name': 'swcf'},
+                    {'name': 'lwcf'},
+                    {'name': 'zonal_mean'},
                 ]
             }
         ]
