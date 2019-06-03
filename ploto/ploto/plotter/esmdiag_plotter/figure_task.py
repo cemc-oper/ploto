@@ -36,11 +36,12 @@ def draw_figures(ncl_script, task, work_dir, config):
 
     esmdiag_env = os.environ.copy()
     esmdiag_env["ESMDIAG_ROOT"] = config["esmdiag"]["root"]
+    logger.info(esmdiag_env)
 
     logger.info("run ncl script...")
     ncl_command = [
-        '/bin/bash',
-        '-i', '-c',
+        # '/bin/bash',
+        # '-i', '-c',
         'ncl -Q '
         'model_id=\\"{model_id}\\" '
         'model_atm_id=\\"{model_atm_id}\\" '
@@ -63,7 +64,8 @@ def draw_figures(ncl_script, task, work_dir, config):
     ncl_result = subprocess.run(
         ncl_command,
         env=esmdiag_env,
-        start_new_session=True
+        # start_new_session=True,
+        shell=True,
     )
     logger.info("run ncl script...done")
 
