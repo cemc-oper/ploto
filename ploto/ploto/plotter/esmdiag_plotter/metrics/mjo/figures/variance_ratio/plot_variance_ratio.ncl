@@ -1,7 +1,7 @@
-load "$NCARG_NCARG/lib/ncarg/nclscripts/csm/gsn_code.ncl"
-load "$NCARG_NCARG/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
-load "$NCARG_NCARG/lib/ncarg/nclscripts/csm/contributed.ncl"
-load "$NCARG_NCARG/lib/ncarg/nclscripts/csm/shea_util.ncl"
+load "$NCARG_NCARG/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_NCARG/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_NCARG/nclscripts/csm/contributed.ncl"
+load "$NCARG_NCARG/nclscripts/csm/shea_util.ncl"
 
 load "$ESMDIAG_ROOT/ncl_scripts/tools.ncl"
 

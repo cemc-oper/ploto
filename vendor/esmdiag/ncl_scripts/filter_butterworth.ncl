@@ -1,6 +1,6 @@
-load "$NCARG_NCARG/lib/ncarg/nclscripts/csm/gsn_code.ncl"
-load "$NCARG_NCARG/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
-load "$NCARG_NCARG/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_NCARG/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_NCARG/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_NCARG/nclscripts/csm/contributed.ncl"
 
 load "$ESMDIAG_ROOT/ncl_scripts/save_to_file.ncl"
 
