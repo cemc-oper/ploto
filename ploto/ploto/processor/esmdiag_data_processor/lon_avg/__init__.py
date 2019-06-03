@@ -79,12 +79,11 @@ def run_processor(task, work_dir, config) -> bool:
 
     ncl_result = subprocess.run(
         [
-            '/bin/bash',
-            '-i', '-c',
             ncl_command
         ],
         env=esmdiag_env,
-        start_new_session=True
+        # start_new_session=True,
+        shell=True,
     )
     logger.info("run ncl script...done")
     return True

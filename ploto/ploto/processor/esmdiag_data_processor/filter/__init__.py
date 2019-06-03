@@ -39,26 +39,27 @@ def run_processor(task, work_dir, config) -> bool:
     if not ncl_script.exists():
         logger.error('filter method is not supported: {method}'.format(method=method))
 
+    ncl_command = [
+        'ncl -Q '
+        '{ncl_script} '
+        'var_path=\\"{var_path}\\" '
+        'var_name=\\"{var_name}\\" '
+        'fca={fca} '
+        'fcb={fcb} '
+        'out_path=\\"{out_path}\\"'.format(
+            var_path=input_file_path,
+            var_name=task['var_name'],
+            fca=task['low_pass'],
+            fcb=task['high_pass'],
+            out_path=output_file_path,
+            ncl_script=ncl_script)
+    ]
+
     ncl_result = subprocess.run(
-        [
-            '/bin/bash',
-            '-i', '-c',
-            'ncl -Q '
-            '{ncl_script} '
-            'var_path=\\"{var_path}\\" '
-            'var_name=\\"{var_name}\\" '
-            'fca={fca} '
-            'fcb={fcb} '
-            'out_path=\\"{out_path}\\"'.format(
-                var_path=input_file_path,
-                var_name=task['var_name'],
-                fca=task['low_pass'],
-                fcb=task['high_pass'],
-                out_path=output_file_path,
-                ncl_script=ncl_script)
-        ],
+        ncl_command,
         env=esmdiag_env,
-        start_new_session=True
+        # start_new_session=True,
+        shell=True,
     )
     logger.info("run ncl script...done")
     return True

@@ -58,8 +58,6 @@ def run_task(task, work_dir, config) -> bool:
 
         logger.info("run vinterp.ncl for {var_name}...".format(var_name=var_name))
         ncl_command = [
-            '/bin/bash',
-            '-i', '-c',
             'ncl -Q '
             'ps_path=\\"{ps_path}\\" '
             'var_path=\\"{var_path}\\" '
@@ -81,7 +79,8 @@ def run_task(task, work_dir, config) -> bool:
         ncl_result = subprocess.run(
             ncl_command,
             env=esmdiag_env,
-            start_new_session=True
+            # start_new_session=True,
+            shell=True,
         )
 
         logger.info("run vinterp.ncl for {var_name}...done".format(var_name=var_name))
