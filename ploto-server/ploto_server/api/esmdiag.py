@@ -11,7 +11,7 @@ def receive_esmdiag_plot():
     """
 
     POST DATA
-    task
+    task_message
         {
             model_info: {
                 id: "FGOALS-g3",
@@ -35,6 +35,41 @@ def receive_esmdiag_plot():
                     ]
                 }
             ]
+        }
+
+    model_info: 模式信息
+        id: 模式id
+        atm_id: 大气分量模式id
+        ocn_id: 海洋分量模式id
+        ice_id: 海冰分量模式id
+    case_info: 试验信息
+        id: 试验id
+    date: 时间范围
+        start: 起始时间，YYYY-MM-DD
+        end: 终止时间，YYYY-MM-DD
+    metrics: 数组，诊断方法列表，每个项目包含字段名
+        name: 诊断类型，[climo, mjo]
+        figures: 子类型列表，每个项目包含字段名
+            name: 子类型名，例如
+                climo包括：
+                    energy_balance
+                    ice_area
+                    lwcf
+                    precip
+                    radition_energy_budget
+                    swcf
+                    zonal_mean
+                mjo包括：
+                    combined_eof
+                    lag
+                    mean_state
+                    variance_ratio
+                    wavenum_freq_spectra
+
+    返回值：
+        {
+            'status': 'ok',
+            'send_count': task_count 发送的任务数量
         }
     """
     task_message = None
