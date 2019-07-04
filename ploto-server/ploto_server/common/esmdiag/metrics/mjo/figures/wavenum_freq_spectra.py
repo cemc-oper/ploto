@@ -8,7 +8,7 @@ data requires:
 """
 import datetime
 
-from ploto_server.common.esmdiag.metrics.mjo.util import get_plotter_step, get_gw_step
+from ploto_server.common.esmdiag.metrics.mjo.util import get_plotter_step, get_gw_step, get_convert_step
 
 
 def generate_figure_task(figure_config, common_config) -> dict:
@@ -194,6 +194,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
 
     steps.extend(get_gw_step(figure_config, common_config))
     steps.append(get_plotter_step(figure_config, common_config))
+    steps.extend(get_convert_step(figure_config, common_config))
 
     task = {
         'steps': steps

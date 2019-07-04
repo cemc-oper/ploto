@@ -82,3 +82,21 @@ def get_gw_step(figure_config, common_config):
     ]
 
     return steps
+
+
+def get_convert_step(figure_config, common_config):
+    steps = [
+        {
+            'step_type': 'processor',
+            'type': 'convert_processor',
+            'operator': 'general',
+            'params': [
+                '-density 300',
+                '-set filename:f "%t"',
+                '*.pdf',
+                '%[filename:f].png'
+            ]
+        }
+    ]
+
+    return steps
