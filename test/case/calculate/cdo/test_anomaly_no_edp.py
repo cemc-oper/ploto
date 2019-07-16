@@ -18,7 +18,7 @@ def test_anomaly():
         },
         'date': {
             'start': "1982-01-01",
-            'end': "1991-12-31"
+            'end': "1986-12-31"
         },
     }
 
@@ -34,15 +34,11 @@ def test_anomaly():
     steps.append({
         'step_type': 'fetcher',
         'common': common_config,
-        'type': 'edp_fetcher',
-        'query_param': {
-            'type': 'nc',
-            'output_dir': './data',
-            'file_prefix': 'step1.',
-            'date_range': date_range,
-            'field_names': ['U'],
-            'datedif': 'h1'
-        },
+        "type": "local_fetcher",
+        "action": "ln",
+        "directory": "/home/hujk/clusterfs/GAMIL",
+        "file_name": "gamil_wu_run11.gamil.h1.*.nc",
+        "output_directory": "./data"
     })
 
     time_range_string = "{start_date}:{end_date}".format(
@@ -61,7 +57,7 @@ def test_anomaly():
             'enddate': common_config['date']['end']
         },
         'input_files': [
-            './data/{step1_file_prefix}.*.nc'.format(step1_file_prefix='step1.')
+            './data/gamil_wu_run11.gamil.h1.*.nc'.format(step1_file_prefix='step1.')
         ],
         'output_file': output_file_pattern.format(
             file_prefix='step2.',
