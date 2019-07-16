@@ -31,16 +31,21 @@ def link_file_by_ln(file_task, work_dir):
             "action": "ln"
             "directory": "/srv/files/ftp/GRAPES_GFS_ORIG_2017070400",
             "file_name": "*.grb2",
+            "output_directory": "./data"
         },
     :param work_dir:
     :return:
     """
+    output_directory = pathlib.Path(work_dir, file_task['output_directory'])
+    output_directory.mkdir(parents=True)
+
     subprocess.run(
         [
-            "ln -sf {dir}/{file_name} {work_dir}/".format(
+            "ln -sf {dir}/{file_name} {work_dir}/{output_directory}".format(
                 dir=file_task['directory'],
                 file_name=file_task['file_name'],
-                work_dir=work_dir)
+                work_dir=work_dir,
+                output_directory=file_task['output_directory'])
         ],
         shell=True)
 
