@@ -1,6 +1,6 @@
 # coding: utf-8
 from ploto.logger import get_logger
-from ploto.step import get_step_module
+from ploto.step import run_steps
 from ploto.environment import (
     store_base_environment,
     prepare_environment,
@@ -29,12 +29,7 @@ def run_ploto(message, config):
     save_task_message(message_data)
 
     steps = message_data['steps']
-    for step in steps:
-        step_module = get_step_module(step)
-        if step_module is None:
-            logger.error('step module is not found.')
-            break
-        step_module.run_step(step=step, work_dir=work_dir, config=config)
+    _ = run_steps(steps, work_dir, config)
 
     logger.info("leaving work dir...{work_dir}".format(work_dir=work_dir))
     recovery_base_environment(base_env)
