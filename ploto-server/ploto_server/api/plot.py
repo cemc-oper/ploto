@@ -13,7 +13,7 @@ def receive_plot():
 
     if task_message is not None:
         from ploto.scheduler.rabbitmq.producer.producer import send_message
-        scheduler_config = current_app.config['BROKER_CONFIG']['scheduler']
+        scheduler_config = current_app.config['server_config']['broker']['scheduler']
         current_app.logger.info('Sending task to scheduler...')
         send_message(task_message, config=scheduler_config)
 

@@ -30,8 +30,14 @@ def receive_esmdiag_plot():
                 {
                     name: 'climo',
                     figures: [
-                        { name: 'precip'},
-                        { name: 'swcf'},
+                        {
+                            name: 'precip',
+                            task_id: 'task_id'
+                        },
+                        {
+                            name: 'swcf',
+                            task_id: 'task_id'
+                        },
                     ]
                 }
             ]
@@ -50,6 +56,7 @@ def receive_esmdiag_plot():
     metrics: 数组，诊断方法列表，每个项目包含字段名
         name: 诊断类型，[climo, mjo]
         figures: 子类型列表，每个项目包含字段名
+            task_id: 单个诊断任务的id
             name: 子类型名，例如
                 climo包括：
                     energy_balance
@@ -86,15 +93,18 @@ def receive_esmdiag_plot():
 
     metrics_config = task_message['metrics_config']
 
-    all_tasks = []
+    server_config = current_app.config['server_config']
 
+    # generate tasks
+    all_tasks = []
     for metric_config in metrics_config:
-        tasks = generate_metric_tasks(metric_config, common_config)
+        tasks = generate_metric_tasks(metric_config, common_config, server_config)
         all_tasks.extend(tasks)
 
+    # send all tasks
     for task in all_tasks:
         from ploto.scheduler.rabbitmq.producer.producer import send_message
-        scheduler_config = current_app.config['BROKER_CONFIG']['scheduler']
+        scheduler_config = server_config['broker']['scheduler']
         current_app.logger.info('Sending task to scheduler...')
         message = {
             'data': task

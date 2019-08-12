@@ -23,7 +23,7 @@ def receive_plot_metgui():
         # print(json.dumps(message, indent=2))
 
         from ploto.scheduler.rabbitmq.producer.producer import send_message
-        scheduler_config = current_app.config['BROKER_CONFIG']['scheduler']
+        scheduler_config = current_app.config['server_config']['broker']['scheduler']
         current_app.logger.info('Sending task to scheduler...')
         send_message(message, config=scheduler_config)
 

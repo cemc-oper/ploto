@@ -1,9 +1,10 @@
 # coding=utf-8
 import importlib
+
 from ploto_server.common.esmdiag import metrics
 
 
-def generate_metric_tasks(metric_config, common_config) -> list:
+def generate_metric_tasks(metric_config, common_config, server_config) -> list:
     metric_name = metric_config["name"]
     try:
         metric_package = importlib.import_module("ploto_server.common.esmdiag.metrics.{metric}".format(metric=metric_name), metrics)
@@ -13,7 +14,8 @@ def generate_metric_tasks(metric_config, common_config) -> list:
 
     tasks = metrics.generate_figure_tasks(
         metric_config=metric_config,
-        common_config=common_config
+        common_config=common_config,
+        server_config=server_config,
     )
 
     return tasks

@@ -14,12 +14,13 @@ import datetime
 from ploto_server.common.esmdiag.metrics.climo.util import get_plotter_step, get_gw_step, get_convert_step
 
 
-def generate_figure_task(figure_config, common_config) -> dict:
+def generate_figure_task(figure_config, common_config, server_config) -> dict:
     """
 
     :param figure_config:
         {
             name: 'energy_balance',
+            task_id: 'task_id',
         }
     :param common_config:
         {
@@ -37,6 +38,7 @@ def generate_figure_task(figure_config, common_config) -> dict:
                 end: "0060-12-31"
             }
         }
+    :param server_config:
     :return:
     """
     steps = []

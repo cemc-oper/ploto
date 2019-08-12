@@ -14,8 +14,8 @@ def runserver(config_file):
     app = create_app(config_file)
 
     app.run(
-        host=app.config['BROKER_CONFIG']['host']['ip'],
-        port=app.config['BROKER_CONFIG']['host']['port']
+        host=app.config['server_config']['broker']['host']['ip'],
+        port=app.config['server_config']['broker']['host']['port']
     )
 
 
