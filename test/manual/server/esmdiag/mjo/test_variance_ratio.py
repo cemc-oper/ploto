@@ -1,5 +1,6 @@
 # coding: utf-8
 import json
+import uuid
 
 
 def test_variance_ratio():
@@ -9,7 +10,8 @@ def test_variance_ratio():
 
     task = generate_figure_task(
         figure_config={
-            'name': 'variance_ratio'
+            'name': 'variance_ratio',
+            'task_id': str(uuid.uuid4())
         },
         common_config={
             'model_info': {
@@ -25,7 +27,18 @@ def test_variance_ratio():
                 'start': "1979-01-01",
                 'end': "1980-12-31"
             }
-        }
+        },
+        server_config={
+            'esmdiag': {
+                'web': {
+                    'url': 'http://192.168.212.201:8088',
+                    'api': {
+                        'task_status': '/api/task/status'
+                    },
+                    'plot_base_dir': '/home/hujk/clusterfs/wangdp/ploto/plot_base',
+                },
+            },
+        },
     )
 
     print(json.dumps(task, indent=2))

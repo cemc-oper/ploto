@@ -30,6 +30,7 @@ def create_app(config_file_path=None):
                 template_folder=template_folder)
 
     app.config.from_object(Config.load_config(config_file_path))
+    app.config['server_config'] = app.config['SERVER_CONFIG']
     app.json_encoder = ServerJSONEncoder
 
     with app.app_context():

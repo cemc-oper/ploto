@@ -46,12 +46,14 @@ def get_send_status_steps(status: TaskStatus, figure_config, common_config, serv
         }
     :return:
     """
-    esmdiag_server_diag = server_config['esmdiag']['web']
+    esmdiag_web_config = server_config['esmdiag']['web']
     steps = [
         {
             'step_type': 'distributor',
             'type': 'requests_distributor',
-            'url': esmdiag_server_diag['url'],
+            'url': "{base_url}{api_path}".format(
+                base_url=esmdiag_web_config['url'],
+                api_path=esmdiag_web_config['api']['task_status']),
             'requests': [
                 {
                     'method': 'POST',
@@ -71,6 +73,8 @@ def get_send_status_steps(status: TaskStatus, figure_config, common_config, serv
 
 def get_local_distribution_steps(figure_config, common_config, server_config):
     """
+    copy all png files on work dir to esmdiag's web plot base dir.
+
     :param figure_config:
         {
             name: '...',
@@ -102,7 +106,7 @@ def get_local_distribution_steps(figure_config, common_config, server_config):
         }
     :return:
     """
-    esmdiag_server_diag = server_config['esmdiag']['server']
+    esmdiag_web_config = server_config['esmdiag']['web']
     steps = [
         {
             'step_type': 'distributor',
@@ -111,7 +115,7 @@ def get_local_distribution_steps(figure_config, common_config, server_config):
                 {
                     'from': './*.png',
                     'to': "{plot_base_dir}/{task_id}".format(
-                        plot_base_dir=esmdiag_server_diag['plot_base_dir'],
+                        plot_base_dir=esmdiag_web_config['plot_base_dir'],
                         task_id=figure_config['task_id']),
                 }
             ]

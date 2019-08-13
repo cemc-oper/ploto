@@ -1,5 +1,6 @@
 # coding: utf-8
 import json
+import uuid
 
 
 def test_ice_area():
@@ -9,7 +10,8 @@ def test_ice_area():
 
     task = generate_figure_task(
         figure_config={
-            'name': 'ice_area'
+            'name': 'ice_area',
+            'task_id': str(uuid.uuid4())
         },
         common_config={
             'model_info': {
@@ -25,7 +27,18 @@ def test_ice_area():
                 'start': "1981-01-01",
                 'end': "1981-12-01"
             }
-        }
+        },
+        server_config={
+            'esmdiag': {
+                'web': {
+                    'url': 'http://192.168.212.201:8088',
+                    'api': {
+                        'task_status': '/api/task/status'
+                    },
+                    'plot_base_dir': '/home/hujk/clusterfs/wangdp/ploto/plot_base',
+                },
+            },
+        },
     )
 
     print(json.dumps(task, indent=2))

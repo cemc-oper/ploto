@@ -34,7 +34,7 @@ def run_distributor(task: dict, work_dir, config):
         if request_task_url is None:
             logger.warnning('url must be sent')
             continue
-        data = task['data']
+        data = request_task['data']
         logger.info('sending request...')
         logger.info('   => url: {url}'.format(url=request_task_url))
         result = requests.request(method, request_task_url, data=data, timeout=10)

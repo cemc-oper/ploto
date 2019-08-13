@@ -1,5 +1,6 @@
 # coding: utf-8
 import json
+import uuid
 
 
 def test_lag():
@@ -25,7 +26,18 @@ def test_lag():
                 'start': "1992-01-01",
                 'end': "1993-12-31"
             }
-        }
+        },
+        server_config={
+            'esmdiag': {
+                'web': {
+                    'url': 'http://192.168.212.201:8088',
+                    'api': {
+                        'task_status': '/api/task/status'
+                    },
+                    'plot_base_dir': '/home/hujk/clusterfs/wangdp/ploto/plot_base',
+                },
+            },
+        },
     )
 
     print(json.dumps(task, indent=2))

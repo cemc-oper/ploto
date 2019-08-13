@@ -1,5 +1,6 @@
 # coding: utf-8
 import json
+import uuid
 
 
 def test_radiation_energy_budget():
@@ -9,7 +10,8 @@ def test_radiation_energy_budget():
 
     task = generate_figure_task(
         figure_config={
-            'name': 'radiation_energy_budget'
+            'name': 'radiation_energy_budget',
+            'task_id': str(uuid.uuid4())
         },
         common_config={
             'model_info': {
@@ -25,7 +27,18 @@ def test_radiation_energy_budget():
                 'start': "1981-01-01",
                 'end': "1981-12-01"
             }
-        }
+        },
+        server_config={
+            'esmdiag': {
+                'web': {
+                    'url': 'http://192.168.212.201:8088',
+                    'api': {
+                        'task_status': '/api/task/status'
+                    },
+                    'plot_base_dir': '/home/hujk/clusterfs/wangdp/ploto/plot_base',
+                },
+            },
+        },
     )
 
     print(json.dumps(task, indent=2))

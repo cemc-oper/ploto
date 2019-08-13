@@ -7,7 +7,7 @@ class Config(object):
         with open(config_path) as config_file:
             config_dict = yaml.safe_load(config_file)
             broker_config = config_dict['broker']
-            self.server_config = config_dict
+            self.SERVER_CONFIG = config_dict
 
             if 'debug' in broker_config:
                 debug_config = broker_config['debug']
