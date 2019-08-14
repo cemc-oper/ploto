@@ -1,6 +1,7 @@
 # coding: utf-8
 import requests
 import json
+import uuid
 
 
 def main():
@@ -22,16 +23,17 @@ def main():
             {
                 'name': 'climo',
                 'figures': [
-                    {'name': 'precip'},
-                    {'name': 'swcf'},
-                    {'name': 'lwcf'},
-                    {'name': 'zonal_mean'},
+                    {'name': 'precip', 'task_id': str(uuid.uuid4())},
+                    {'name': 'swcf', 'task_id': str(uuid.uuid4())},
+                    {'name': 'lwcf', 'task_id': str(uuid.uuid4())},
+                    {'name': 'zonal_mean', 'task_id': str(uuid.uuid4())},
                 ]
             }
         ]
     }
 
-    result = requests.post("http://localhost:8085/api/v1/esmdiag/plot", data={
+    url = "http://localhost:8085/api/v1/esmdiag/plot"
+    result = requests.post(url, data={
         'task_message': json.dumps(task_message)
     })
 

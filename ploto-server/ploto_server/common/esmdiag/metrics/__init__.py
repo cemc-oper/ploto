@@ -6,7 +6,7 @@ from ploto.logger import get_logger
 logger = get_logger()
 
 
-def generate_figure_tasks(metric_config, common_config) -> list:
+def generate_figure_tasks(metric_config, common_config, server_config) -> list:
     """
 
     :param metric_config:
@@ -33,7 +33,7 @@ def generate_figure_tasks(metric_config, common_config) -> list:
         except ImportError:
             logger.warn("figure not found: {figure}".format(figure=figure_name))
             continue
-        task = figure_module.generate_figure_task(figure_config, common_config)
+        task = figure_module.generate_figure_task(figure_config, common_config, server_config)
         tasks.append(task)
 
     return tasks
