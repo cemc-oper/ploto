@@ -21,11 +21,8 @@ def process_message(message, config):
     run_ploto(message, config)
 
 
-@click.command()
-@click.option("-c", "--config-file", help="config file path")
-def cli(config_file):
+def run_blocking_connection(config):
     logger = get_logger()
-    config = load_config(config_file)
 
     rabbitmq_config = config['rabbitmq']
     exchange_name = rabbitmq_config['exchange']
@@ -62,11 +59,12 @@ def cli(config_file):
         message_string = body.decode('utf-8')
         message = json.loads(message_string)
         message_thread = threading.Thread(target=process_message, args=(message, config))
+        message_thread.daemon = True
         message_thread.start()
 
         while message_thread.is_alive():
-            time.sleep(10)
             connection.process_data_events()
+            connection.sleep(5)
             # logger.info("waiting for message thread...")
         logger.info("message thread done")
 
@@ -87,6 +85,13 @@ def cli(config_file):
         channel.stop_consuming()
         connection.close()
         logger.info("Warm shutdown...Done")
+
+
+@click.command()
+@click.option("-c", "--config-file", help="config file path")
+def cli(config_file):
+    config = load_config(config_file)
+    run_blocking_connection(config)
 
 
 if __name__ == "__main__":
