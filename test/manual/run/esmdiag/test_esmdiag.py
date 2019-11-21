@@ -1,8 +1,10 @@
 # coding: utf-8
 import time
+import warnings
 
 
 def main():
+    warnings.warn("this method needs to be modified", DeprecationWarning)
     common_config = {
         'model_info': {
             'id': "FGOALS-g3",

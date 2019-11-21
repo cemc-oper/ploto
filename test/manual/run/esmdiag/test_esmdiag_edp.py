@@ -19,8 +19,9 @@ def main():
         }
     }
     task = {
-        'data_fetcher': [
+        'steps': [
             {
+                'step_type': 'fetcher',
                 'common': common_config,
                 'type': 'edp_fetcher',
                 'query_param': {
@@ -38,6 +39,7 @@ def main():
                 },
             },
             {
+                'step_type': 'fetcher',
                 'common': common_config,
                 'type': 'edp_fetcher',
                 'query_param': {
@@ -50,10 +52,9 @@ def main():
                     ],
                     'datedif': 'h0'
                 }
-            }
-        ],
-        'pre_processor': [
+            },
             {
+                'step_type': 'processor',
                 'type': 'cdo_processor',
                 'operator': 'select',
                 'params': {
@@ -66,7 +67,9 @@ def main():
                 ],
                 'output_file': './GAMIL.gamil_wu_run11.PS.monthly.1981-01-01:1981-12-01.nc',
             },
+
             {
+                'step_type': 'processor',
                 'type': 'cdo_processor',
                 'operator': 'select',
                 'params': {
@@ -80,6 +83,7 @@ def main():
                 'output_file': './GAMIL.gamil_wu_run11.PRECT.monthly.1981-01-01:1981-12-01.nc',
             },
             {
+                'step_type': 'processor',
                 'type': 'cdo_processor',
                 'operator': 'select',
                 'params': {
@@ -94,6 +98,7 @@ def main():
             },
 
             {
+                'step_type': 'processor',
                 'type': 'cdo_processor',
                 'operator': 'select',
                 'params': {
@@ -107,6 +112,7 @@ def main():
                 'output_file': './GAMIL.gamil_wu_run11.PRECL.monthly.1981-01-01:1981-12-01.nc',
             },
             {
+                'step_type': 'processor',
                 'type': 'cdo_processor',
                 'operator': 'select',
                 'params': {
@@ -115,15 +121,16 @@ def main():
                 'input_files': [
                     './data/GAMIL.gamil_wu_run11.step2.*.nc'
                 ],
-                'output_file': './GAMIL.gamil_wu_run11.gw.nc',
+                'output_file': './FGOALS-g3.gamil_wu_run11.gw.nc',
+            },
+            {
+                'step_type': 'plotter',
+                'type': 'esmdiag_plotter',
+                'metric': 'climo',
+                'figure': 'precip',
+                'common': common_config,
             },
         ],
-        'plotter': {
-            'type': 'esmdiag_plotter',
-            'metric': 'climo',
-            'figure': 'precip',
-            'common': common_config,
-        }
     }
 
     message = {
