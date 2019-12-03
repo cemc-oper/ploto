@@ -1,10 +1,13 @@
 # coding: utf-8
 import json
 import os
+import warnings
+
 from click.testing import CliRunner
 
 
 def test_ncldraw_plot():
+    warnings.warn("ncldraw is no longer used in NWPC.", DeprecationWarning)
     from ploto.plotter.ncldraw_plotter.ncldraw_plot import ncldraw_plot
     runner = CliRunner()
 

@@ -1,9 +1,10 @@
 # coding: utf-8
-import os
 from ploto.fetcher import ddps_fetcher
+import warnings
 
 
-def main():
+def test_ddps_fetcher():
+    warnings.warn("DDPS is no longer used in NWPC.", DeprecationWarning)
     data_task = {
         'type': 'ddps_fetcher',
         'query_param': {
@@ -27,12 +28,14 @@ def main():
 
     work_dir = "/space/windroc/workspace/plot/playground/temp"
 
-    ddps_fetcher.get_data(data_task, work_dir, config={
+    ddps_config = {
         'ddps_fetcher': {
             'bsc_command': "/space/project/BSC/bsc/bin/bsc"
         }
-    })
+    }
+
+    ddps_fetcher.get_data(data_task, work_dir, config=ddps_config)
 
 
 if __name__ == "__main__":
-    main()
+    test_ddps_fetcher()

@@ -2,7 +2,7 @@
 import os
 
 
-def main():
+def test_lon_avg():
     from ploto.processor.esmdiag_data_processor import run_processor
     task = {
         'type': 'esmdiag_data_processor',
@@ -44,4 +44,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    test_lon_avg()

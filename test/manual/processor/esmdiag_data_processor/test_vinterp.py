@@ -2,10 +2,9 @@
 import os
 
 
-def main():
-    # WARNING: vinterp task has changed.
+def test_vinterp():
     import warnings
-    warnings.warn("vinterp task has changed.")
+    warnings.warn("vinterp task has changed.", DeprecationWarning)
 
     from ploto.processor.esmdiag_data_processor.vinterp.models.gamil.vinterp import run_task
     task = {
@@ -55,4 +54,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    test_vinterp()

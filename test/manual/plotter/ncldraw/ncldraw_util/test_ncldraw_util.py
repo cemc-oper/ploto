@@ -2,10 +2,12 @@
 import json
 import os
 from pathlib import Path
+import warnings
 
 
 def test_ncldraw_util():
-    from ploto.plotter.ncldraw_plotter.ncldraw_util import run_plotter
+    warnings.warn("ncldraw is no longer used in NWPC.", DeprecationWarning)
+    from ploto.plotter.ncldraw_plotter import run_plotter
 
     work_dir = "/space/windroc/workspace/plot/playground/test_case_1"
     config = {}

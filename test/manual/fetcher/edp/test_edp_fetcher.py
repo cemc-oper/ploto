@@ -2,7 +2,7 @@
 from ploto.fetcher import edp_fetcher
 
 
-def main():
+def test_edp_fetcher():
     data_task = {
         'type': 'edp_fetcher',
         'query_param': {
@@ -22,12 +22,18 @@ def main():
 
     work_dir = "/home/hujk/clusterfs/wangdp/temp"
 
-    edp_fetcher.get_data(data_task, work_dir, config={
+    edp_config = {
         'edp_fetcher': {
             'edp_module_path': "/home/hujk/pyProject/"
         }
-    })
+    }
+
+    edp_fetcher.get_data(
+        data_task,
+        work_dir,
+        config=edp_config
+    )
 
 
 if __name__ == "__main__":
-    main()
+    test_edp_fetcher()

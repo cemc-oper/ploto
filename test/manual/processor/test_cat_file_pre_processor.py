@@ -20,4 +20,5 @@ def test_cat_file_processor():
     print("run test...Done")
 
 
-test_cat_file_processor()
+if __name__ == "__main__":
+    test_cat_file_processor()
