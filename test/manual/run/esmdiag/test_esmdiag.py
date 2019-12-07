@@ -3,7 +3,7 @@ import time
 import warnings
 
 
-def main():
+def test_esmdiag():
     warnings.warn("this method needs to be modified", DeprecationWarning)
     common_config = {
         'model_info': {
@@ -100,4 +100,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    test_esmdiag()

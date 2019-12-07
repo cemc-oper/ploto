@@ -2,7 +2,10 @@
 import time
 
 
-def main():
+def test_esmdiag_edp():
+    """
+    test A climo/precip ESMDiag task using data from EDP(earth data platform)
+    """
     common_config = {
         'model_info': {
             'id': "FGOALS-g3",
@@ -158,4 +161,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    test_esmdiag_edp()

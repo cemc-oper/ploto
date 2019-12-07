@@ -1,6 +1,7 @@
 # coding=utf-8
 import time
 import json
+import warnings
 
 from kafka import KafkaClient, KafkaProducer
 from kafka.errors import KafkaError
@@ -24,7 +25,8 @@ end
 """
 
 
-def main():
+def test_ncl_script():
+    warnings.warn("kafka producer is no longer supported", DeprecationWarning)
     producer = KafkaProducer(
         bootstrap_servers=['{kafka_host}:{kafka_port}'.format(
             kafka_host='10.28.32.114',
@@ -106,4 +108,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    test_ncl_script()

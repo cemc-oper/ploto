@@ -1,27 +1,31 @@
 # coding=utf-8
 import time
 import json
+import warnings
 
 import requests
 
 
-if __name__ == "__main__":
-    def get_ncl_script():
-        return """begin
-        f = addfile(file_path,"r")
+def get_ncl_script():
+    return """begin
+f = addfile(file_path,"r")
 
-        var = f->TMP_P0_L100_GLL0
+var = f->TMP_P0_L100_GLL0
 
-        wks = gsn_open_wks("png", image_path)
+wks = gsn_open_wks("png", image_path)
 
-        res = True
-        res@tiMainString = "TEMP"
-        res@cnFillOn = True
+res = True
+res@tiMainString = "TEMP"
+res@cnFillOn = True
 
-        plot = gsn_csm_contour_map(wks,var,res)
+plot = gsn_csm_contour_map(wks,var,res)
 
-    end
-    """
+end
+"""
+
+
+def test_receive_plot():
+
 
     message = {
         'app': 'ploto',
@@ -82,3 +86,6 @@ if __name__ == "__main__":
         'task_message': json.dumps(message)
     })
     print(result.content)
+
+if __name__ == "__main__":
+    test_receive_plot()

@@ -1,11 +1,13 @@
 # coding=utf-8
-import time
+import warnings
 import json
 
 import requests
 
 
-if __name__ == "__main__":
+def test_receive_plot_metgui():
+    warnings.warn("metgui is no longer used.", DeprecationWarning)
+
     plot_task = {
         "data_file_path": "/space/workspace/data/42946/42955.grb2",
         "image_path": "/space/workspace/product/grapes/42947/42955.png",
@@ -73,3 +75,7 @@ if __name__ == "__main__":
         'plot_task': json.dumps(plot_task)
     })
     print(result.content)
+
+
+if __name__ == "__main__":
+    test_receive_plot_metgui()

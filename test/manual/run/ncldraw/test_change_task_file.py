@@ -1,13 +1,15 @@
 # coding=utf-8
 import os
-import xml.etree.cElementTree as ET
+import warnings
+from xml.etree import cElementTree
 
-from ploto.plotter.ncldraw_plotter.ncldraw_util import change_task_file
+# from ploto.plotter.ncldraw_plotter import change_task_file
 
 
-def main():
+def test_change_task_file():
+    warnings.warn("this test is not completed", Warning)
     task_file_path = os.path.join(os.path.dirname(__file__), 'task.xml')
-    tree = ET.parse(task_file_path)
+    tree = cElementTree.parse(task_file_path)
     root = tree.getroot()
 
     node = root.find(".//task/workstation")
@@ -16,4 +18,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    test_change_task_file()

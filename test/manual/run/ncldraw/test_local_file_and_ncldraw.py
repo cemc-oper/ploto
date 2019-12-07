@@ -3,11 +3,13 @@ import time
 import json
 import os
 import asyncio
+import warnings
 
 from aiokafka import AIOKafkaProducer
 
 
-def main():
+def test_local_file_and_ncldraw():
+    warnings.warn("ncldraw is no longer used", DeprecationWarning)
     loop = asyncio.get_event_loop()
 
     async def send_one():
@@ -106,4 +108,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    test_local_file_and_ncldraw()

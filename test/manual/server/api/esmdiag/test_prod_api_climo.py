@@ -3,7 +3,7 @@ import requests
 import json
 
 
-def main():
+def test_api_climo_prod():
     task_message = {
         'model_info': {
             'id': "FGOALS-g3",
@@ -37,4 +37,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    test_api_climo_prod()

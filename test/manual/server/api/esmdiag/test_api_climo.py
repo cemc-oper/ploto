@@ -4,7 +4,7 @@ import json
 import uuid
 
 
-def main():
+def test_api_climo():
     task_message = {
         'model_info': {
             'id': "FGOALS-g3",
@@ -39,4 +39,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    test_api_climo()
