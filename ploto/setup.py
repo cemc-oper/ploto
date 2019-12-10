@@ -25,6 +25,7 @@ setup(
         'pika',
         'requests',
         'sqlalchemy',
+        'loguru',
     ],
 
     extras_require={
