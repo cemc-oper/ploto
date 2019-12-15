@@ -1,4 +1,4 @@
-FROM nwpcc/ploto-earth:base
+FROM nwpc-oper/ploto-earth:base
 
 LABEL maintainer="perilalroc@gmail.com"
 
