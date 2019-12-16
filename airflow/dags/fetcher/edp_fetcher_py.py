@@ -1,6 +1,11 @@
 # coding: utf-8
-# airflow trigger_dag --conf '{"step_config":"{\"work_dir\": \"/home/hujk/clusterfs/wangdp/temp\"}"}' \
-#   ploto_fetcher_edp_fetcher_py
+"""
+use python operator, command:
+   airflow trigger_dag \
+    --conf '{"step_config":"{\"work_dir\": \"/home/hujk/clusterfs/wangdp/temp\"}"}' \
+    ploto_fetcher_edp_fetcher_py
+"""
+
 import json
 
 import airflow.utils.dates

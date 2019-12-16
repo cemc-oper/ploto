@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# bash operator command
+
 set -x
 #source ~/start_pyenv.sh
 #pyenv activate ploto-env

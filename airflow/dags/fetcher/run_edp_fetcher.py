@@ -1,4 +1,7 @@
 # coding: utf-8
+"""
+python command line tool for bash operator.
+"""
 import json
 
 import click
