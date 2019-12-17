@@ -63,7 +63,7 @@ args = {
 
 
 dag = DAG(
-    dag_id="ploto_fetcher_edp_fetcher_py",
+    dag_id="ploto_fetcher_edp_fetcher",
     default_args=args,
     schedule_interval=None,
 )

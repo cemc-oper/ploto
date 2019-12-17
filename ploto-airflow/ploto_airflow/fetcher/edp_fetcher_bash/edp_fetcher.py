@@ -19,7 +19,7 @@ args = {
 
 
 dag = DAG(
-    dag_id="ploto_fetcher_edp_fetcher",
+    dag_id="ploto_fetcher_edp_fetcher_bash",
     default_args=args,
     schedule_interval=None,
 )
@@ -33,7 +33,8 @@ show_step = BashOperator(
 
 run_step = BashOperator(
     task_id="run_dep_fetcher",
-    bash_command='/home/hujk/ploto/ploto/airflow/dags/fetcher/edp_fetcher.sh "{{ dag_run.conf["step_config"] }}"',
+    bash_command='/home/hujk/ploto/ploto/airflow/dags/fetcher/edp_fetcher_bash/edp_fetcher.sh '
+                 '"{{ dag_run.conf["step_config"] }}"',
     # bash_command='ls',
     dag=dag,
 )
