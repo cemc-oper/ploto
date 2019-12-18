@@ -27,17 +27,7 @@ args = {
 dag_id = "ploto_fetcher_edp_fetcher"
 
 
-with DAG(
-    dag_id=dag_id,
-    default_args=args,
-    schedule_interval=None,
-) as dag:
-    show_step = BashOperator(
-        task_id="show_date",
-        bash_command='date',
-        dag=dag,
-    )
-
+def generate_operator(task_id: str):
     def run_edp_fetcher_step(**context):
         drag_run_config = context["dag_run"].conf
         step_config = drag_run_config['step_config']
@@ -51,11 +41,28 @@ with DAG(
             config=config
         )
 
-    run_step = PythonOperator(
-        task_id="run_dep_fetcher",
+    airflow_task = PythonOperator(
+        task_id=task_id,
         provide_context=True,
         python_callable=run_edp_fetcher_step,
+    )
+
+    return airflow_task
+
+
+with DAG(
+    dag_id=dag_id,
+    default_args=args,
+    schedule_interval=None,
+) as dag:
+    show_task = BashOperator(
+        task_id="show_date",
+        bash_command='date',
         dag=dag,
     )
 
-    run_step.set_upstream(show_step)
+    run_task_id = "run_dep_fetcher"
+    run_task = generate_operator(run_task_id)
+    run_task.dag = dag
+
+    run_task.set_upstream(show_task)
