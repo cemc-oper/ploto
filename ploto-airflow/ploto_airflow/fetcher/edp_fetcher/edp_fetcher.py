@@ -2,7 +2,7 @@
 """
 use python operator, command:
    airflow trigger_dag \
-    --conf '{"step_config":"{\"work_dir\": \"/home/hujk/clusterfs/wangdp/temp\"}"}' \
+    --conf '{"step_config":"{"work_dir": "/home/hujk/clusterfs/wangdp/temp"}"}' \
     ploto_fetcher_edp_fetcher
 """
 import json
@@ -38,7 +38,7 @@ with DAG(
 
     def run_edp_fetcher_step(**context):
         drag_run_config = context["dag_run"].conf
-        step_config = json.loads(drag_run_config['step_config'])
+        step_config = drag_run_config['step_config']
         # task = step_config["task"]
         work_dir = step_config["work_dir"]
         # config = step_config["config"]
