@@ -1,0 +1,29 @@
+{
+    "step_config": {
+        "work_dir": "/home/hujk/clusterfs/wangdp/temp",
+        "task": {
+            "type": "edp_fetcher",
+            "query_param": {
+                "type": "nc",
+                "output_dir": "./data",
+                "file_prefix": "GAMIL.gamil_wu_run11",
+                "date_range": [
+                    "19810101",
+                    "19820101"
+                ],
+                "field_names": [
+                    "PRECT",
+                    "PRECC",
+                    "PRECL",
+                    "PS"
+                ],
+                "datedif": "h0"
+            }
+        },
+        "config": {
+            "edp_fetcher": {
+                "edp_module_path": "/home/hujk/pyProject/"
+            }
+        }
+    }
+}

@@ -2,8 +2,10 @@
 """
 use python operator, command:
    airflow trigger_dag \
-    --conf '{"step_config":"{"work_dir": "/home/hujk/clusterfs/wangdp/temp"}"}' \
+    --conf "$(jq '.' ./edp_fetcher_example.json)" \
     ploto_fetcher_edp_fetcher
+
+NOTE: jq is required to get json string from file.
 """
 import json
 
@@ -39,34 +41,9 @@ with DAG(
     def run_edp_fetcher_step(**context):
         drag_run_config = context["dag_run"].conf
         step_config = drag_run_config['step_config']
-        # task = step_config["task"]
+        task = step_config["task"]
         work_dir = step_config["work_dir"]
-        # config = step_config["config"]
-
-        task = {
-            'type': 'edp_fetcher',
-            'query_param': {
-                'type': 'nc',
-                'output_dir': './data',
-                'file_prefix': 'GAMIL.gamil_wu_run11',
-                'date_range': ['19810101', '19820101'],
-                'field_names': [
-                    'PRECT',
-                    'PRECC',
-                    'PRECL',
-                    'PS'
-                ],
-                'datedif': 'h0'
-            }
-        }
-
-        # work_dir = "/home/hujk/clusterfs/wangdp/temp"
-
-        config = {
-            'edp_fetcher': {
-                'edp_module_path': "/home/hujk/pyProject/"
-            }
-        }
+        config = step_config["config"]
 
         edp_fetcher.get_data(
             task,
