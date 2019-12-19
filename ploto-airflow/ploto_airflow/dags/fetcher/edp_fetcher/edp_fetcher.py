@@ -4,7 +4,7 @@ This is a test DAG to get data using edp fetcher. Python operator is used.
 
 Run the following command to test:
    airflow trigger_dag \
-    --conf "$(jq '.' ./edp_fetcher_example.json)" \
+    --conf "$(jq '.' ./example.json)" \
     ploto_fetcher_edp_fetcher
 
 NOTE: jq is required to get json string from file.
@@ -12,9 +12,8 @@ NOTE: jq is required to get json string from file.
 import airflow.utils.dates
 from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
-from airflow.operators.python_operator import PythonOperator
 
-from ploto.fetcher import edp_fetcher
+from ploto_airflow.fetcher.edp_fecher import generate_operator as generate_edp_fetcher_operator
 
 
 args = {
@@ -25,30 +24,6 @@ args = {
 
 
 dag_id = "ploto_fetcher_edp_fetcher"
-
-
-def generate_operator(task_id: str):
-    def run_step(**context):
-        drag_run_config = context["dag_run"].conf
-        step_config = drag_run_config['step_config']
-
-        task = step_config["task"]
-        work_dir = step_config["work_dir"]
-        config = step_config["config"]
-
-        edp_fetcher.get_data(
-            task,
-            work_dir,
-            config=config
-        )
-
-    airflow_task = PythonOperator(
-        task_id=task_id,
-        provide_context=True,
-        python_callable=run_step,
-    )
-
-    return airflow_task
 
 
 with DAG(
@@ -63,7 +38,7 @@ with DAG(
     )
 
     run_task_id = "run_dep_fetcher"
-    run_task = generate_operator(run_task_id)
+    run_task = generate_edp_fetcher_operator(run_task_id)
     run_task.dag = dag
 
     run_task.set_upstream(show_task)
