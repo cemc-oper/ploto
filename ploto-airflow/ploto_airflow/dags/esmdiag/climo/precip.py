@@ -17,10 +17,13 @@ from ploto_airflow.esmdiag.climo.util import (
     generate_gw_cdo_select_params,
     generate_plotter_params,
 )
+from ploto_airflow.operators.environment import generate_create_dir_operator
 from ploto_airflow.operators.fetcher.edp_fecher import (
-    generate_operator as generate_edp_fetcher_operator)
+    generate_operator as generate_edp_fetcher_operator
+)
 from ploto_airflow.operators.processor.cdo_processor.select import (
-    generate_operator as generate_cdo_select_operator)
+    generate_operator as generate_cdo_select_operator
+)
 from ploto_airflow.operators.plotter.esmdiag_plotter import (
     generate_operator as generate_plotter_operator
 )
@@ -38,6 +41,11 @@ with DAG(
         default_args=args,
         schedule_interval=None,
 ) as dag:
+    create_dir_step = generate_create_dir_operator(
+        "create_work_dir"
+    )
+    create_dir_step.dag = dag
+
     fields = [
         'PRECT',
         'PRECC',
@@ -51,6 +59,7 @@ with DAG(
     )
 
     fetch_data_step.dag = dag
+    fetch_data_step.set_upstream(create_dir_step)
 
     select_steps = []
 
@@ -71,6 +80,7 @@ with DAG(
         ["gw"],
     )
     gw_fetch_data_step.dag = dag
+    gw_fetch_data_step.set_upstream(create_dir_step)
 
     gw_select_step = generate_cdo_select_operator(
         "select_gw",
@@ -82,6 +92,7 @@ with DAG(
 
     gw_select_step.set_upstream(gw_fetch_data_step)
 
+    # plot
     plot_step = generate_plotter_operator(
         "plot",
         generate_plotter_params,
