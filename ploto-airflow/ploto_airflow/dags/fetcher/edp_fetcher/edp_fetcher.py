@@ -4,7 +4,7 @@ This is a test DAG to get data using edp fetcher. Python operator is used.
 
 Run the following command to test:
    airflow trigger_dag \
-    --conf "$(jq '.' ./example.json)" \
+    --conf "$(jq '.' ./common_example.json)" \
     ploto_fetcher_edp_fetcher
 
 NOTE: jq is required to get json string from file.
@@ -13,7 +13,7 @@ import airflow.utils.dates
 from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
 
-from ploto_airflow.fetcher.edp_fecher import generate_operator as generate_edp_fetcher_operator
+from ploto_airflow.fetcher.edp_fecher import generate_operator as generate_edp_fetcher_operator, generate_params
 
 
 args = {
@@ -38,7 +38,7 @@ with DAG(
     )
 
     run_task_id = "run_dep_fetcher"
-    run_task = generate_edp_fetcher_operator(run_task_id)
+    run_task = generate_edp_fetcher_operator(run_task_id, generate_params)
     run_task.dag = dag
 
     run_task.set_upstream(show_task)
