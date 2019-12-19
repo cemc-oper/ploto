@@ -1,5 +1,5 @@
 {
-    "work_dir": "/home/hujk/clusterfs/wangdp/temp",
+    "work_dir": "/home/hujk/clusterfs/wangdp/temp/airflow",
     "figure_config": {
         "metric": "climo",
         "name": "precip"
@@ -16,7 +16,7 @@
         },
         "date": {
             "start": "1981-01-01",
-            "end": "1982-01-01"
+            "end": "1981-12-01"
         }
     },
     "worker_config": {
@@ -24,7 +24,7 @@
             "edp_module_path": "/home/hujk/pyProject/"
         },
         "esmdiag": {
-            "root": "/home/wangdp/nwpc/earch/ploto/ploto/vendor/esmdiag"
+            "root": "/home/hujk/ploto/ploto/vendor/esmdiag"
         }
     }
 }

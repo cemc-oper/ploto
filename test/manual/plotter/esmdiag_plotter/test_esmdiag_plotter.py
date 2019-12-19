@@ -5,27 +5,27 @@ import os
 def test_esmdiag_plotter():
     task = {
         'metric': 'climo',
-        'figure': 'lwcf',
-        'common': {
-            'model_info': {
-                'id': "FGOALS-g3",
-                'atm_id': "GAMIL",
-                'ocn_id': "LICOM",
-                'ice_id': "CICE",
+        'figure': 'precip',
+        "common": {
+            "model_info": {
+                "id": "FGOALS-g3",
+                "atm_id": "GAMIL",
+                "ocn_id": "LICOM",
+                "ice_id": "CICE"
             },
-            'case_info': {
-                'id': "piControl-bugfix-licom-80368d",
+            "case_info": {
+                "id": "gamil_wu_run11"
             },
-            'date': {
-                'start': "0030-01-01",
-                'end': "0060-12-31"
+            "date": {
+                "start": "1981-01-01",
+                "end": "1981-12-01"
             }
         },
     }
-    work_dir = "/home/wangdp/nwpc/earch/ploto/playground/gamil"
+    work_dir = "/home/hujk/clusterfs/wangdp/temp"
     config = {
-        'esmdiag': {
-            'root': '/home/wangdp/nwpc/earch/ploto/ploto/vendor/esmdiag'
+        "esmdiag": {
+            "root": "/home/hujk/ploto/ploto/vendor/esmdiag"
         }
     }
 
