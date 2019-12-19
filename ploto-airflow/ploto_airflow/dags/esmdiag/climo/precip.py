@@ -15,11 +15,15 @@ from ploto_airflow.esmdiag.climo.util import (
     generate_cdo_select_params,
     generate_gw_fetcher_params,
     generate_gw_cdo_select_params,
+    generate_plotter_params,
 )
 from ploto_airflow.operators.fetcher.edp_fecher import (
     generate_operator as generate_edp_fetcher_operator)
 from ploto_airflow.operators.processor.cdo_processor.select import (
     generate_operator as generate_cdo_select_operator)
+from ploto_airflow.operators.plotter.esmdiag_plotter import (
+    generate_operator as generate_plotter_operator
+)
 
 args = {
     "owner": "ploto",
@@ -77,3 +81,12 @@ with DAG(
     select_steps.append(gw_select_step)
 
     gw_select_step.set_upstream(gw_fetch_data_step)
+
+    plot_step = generate_plotter_operator(
+        "plot",
+        generate_plotter_params,
+    )
+    plot_step.dag = dag
+
+    for a_step in select_steps:
+        a_step.set_downstream(plot_step)

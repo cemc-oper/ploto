@@ -1,10 +1,10 @@
 # coding: utf-8
 
 
-def run_plotter(plotter_task, work_dir, config) -> bool:
+def run_plotter(task, work_dir, config) -> bool:
     """
 
-    :param plotter_task:
+    :param task:
         {
             metric: 'climo',
             figure: 'precip',
@@ -35,5 +35,5 @@ def run_plotter(plotter_task, work_dir, config) -> bool:
     :return:
     """
     from ploto.plotter.esmdiag_plotter import metric_task
-    metric_task.run_task(plotter_task, work_dir, config)
+    metric_task.run_task(task, work_dir, config)
     return True
