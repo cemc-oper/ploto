@@ -32,6 +32,7 @@ def draw_figures(ncl_script, task, work_dir, config):
     :return:
     """
     logger = get_logger()
+    os.chdir(work_dir)
     common_config = task["common"]
 
     esmdiag_env = os.environ.copy()
