@@ -2,14 +2,17 @@
 """
 Run the following command to test:
    airflow trigger_dag \
-    --conf "$(jq '.' ./example.json)" \
+    --conf "$(jq '.' ./common_example.json)" \
     ploto_processor_cdo_select
 """
 import airflow.utils.dates
 from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
 
-from ploto_airflow.processor.cdo_processor.select import generate_operator as generate_cdo_select_operator
+from ploto_airflow.processor.cdo_processor.select import (
+    generate_operator as generate_cdo_select_operator,
+    generate_params
+)
 
 
 args = {
@@ -34,7 +37,7 @@ with DAG(
     )
 
     run_task_id = "run_cdo_select"
-    run_task = generate_cdo_select_operator(run_task_id)
+    run_task = generate_cdo_select_operator(run_task_id, generate_params, "PS")
     run_task.dag = dag
 
     run_task.set_upstream(show_task)
