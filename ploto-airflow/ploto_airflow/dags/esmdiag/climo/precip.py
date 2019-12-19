@@ -13,6 +13,8 @@ from airflow.models import DAG
 from ploto_airflow.esmdiag.climo.util import (
     generate_fetcher_params,
     generate_cdo_select_params,
+    generate_gw_fetcher_params,
+    generate_gw_cdo_select_params,
 )
 from ploto_airflow.operators.fetcher.edp_fecher import (
     generate_operator as generate_edp_fetcher_operator)
@@ -57,3 +59,21 @@ with DAG(
         select_data_step.dag = dag
         select_data_step.set_upstream(fetch_data_step)
         select_steps.append(select_data_step)
+
+    # gw
+    gw_fetch_data_step = generate_edp_fetcher_operator(
+        "fetch_gw",
+        generate_gw_fetcher_params,
+        ["gw"],
+    )
+    gw_fetch_data_step.dag = dag
+
+    gw_select_step = generate_cdo_select_operator(
+        "select_gw",
+        generate_gw_cdo_select_params,
+        "gw",
+    )
+    gw_select_step.dag = dag
+    select_steps.append(gw_select_step)
+
+    gw_select_step.set_upstream(gw_fetch_data_step)

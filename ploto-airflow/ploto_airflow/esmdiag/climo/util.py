@@ -83,3 +83,70 @@ def generate_cdo_select_params(drag_run_config: dict, field: str) -> dict:
         "work_dir": work_dir,
         "config": worker_config,
     }
+
+
+def generate_gw_fetcher_params(drag_run_config: dict, fields: list) -> dict:
+    common_config = drag_run_config["common_config"]
+    work_dir = drag_run_config["work_dir"]
+    worker_config = drag_run_config["worker_config"]
+
+    start_date = datetime.datetime.strptime(common_config['date']['start'], "%Y-%m-%d")
+    end_date = datetime.datetime.strptime(common_config['date']['end'], "%Y-%m-%d")
+    date_range = [start_date.strftime("%Y%m%d"), end_date.strftime("%Y%m%d")]
+
+    step2_file_prefix = '{model_id}.{case_id}.step2'.format(
+        model_id=common_config['model_info']['id'],
+        case_id=common_config['case_info']['id']
+    )
+
+    task_config = {
+        'step_type': 'fetcher',
+        'common': common_config,
+        'type': 'edp_fetcher',
+        'query_param': {
+            'type': 'nc',
+            'output_dir': './data',
+            'file_prefix': step2_file_prefix,
+            'date_range': date_range,
+            'field_names': fields,
+            'datedif': 'h0'
+        }
+    }
+
+    return {
+        "task": task_config,
+        "work_dir": work_dir,
+        "config": worker_config,
+    }
+
+
+def generate_gw_cdo_select_params(drag_run_config: dict, field: str) -> dict:
+    common_config = drag_run_config["common_config"]
+    work_dir = drag_run_config["work_dir"]
+    worker_config = drag_run_config["worker_config"]
+
+    step2_file_prefix = '{model_id}.{case_id}.step2'.format(
+        model_id=common_config['model_info']['id'],
+        case_id=common_config['case_info']['id']
+    )
+
+    task_config = {
+        'step_type': 'processor',
+        'type': 'cdo_processor',
+        'operator': 'select',
+        'params': {
+            'name': 'gw',
+        },
+        'input_files': [
+            './data/{step2_file_prefix}.*.nc'.format(step2_file_prefix=step2_file_prefix)
+        ],
+        'output_file': './{model_id}.{case_id}.gw.nc'.format(
+            model_id=common_config['model_info']['id'],
+            case_id=common_config['case_info']['id']),
+    }
+
+    return {
+        "task": task_config,
+        "work_dir": work_dir,
+        "config": worker_config,
+    }
