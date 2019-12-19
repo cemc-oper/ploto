@@ -9,7 +9,7 @@ import airflow.utils.dates
 from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
 
-from ploto_airflow.processor.cdo_processor.select import (
+from ploto_airflow.operators.processor.cdo_processor.select import (
     generate_operator as generate_cdo_select_operator
 )
 from ploto_airflow.esmdiag.util import generate_cdo_select_params
