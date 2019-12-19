@@ -16,6 +16,6 @@ def run_step(step, work_dir, config):
         return
 
     plotter_module.run_plotter(
-        plotter_task=step,
+        task=step,
         work_dir=work_dir,
         config=config)
