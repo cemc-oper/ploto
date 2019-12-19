@@ -13,9 +13,8 @@ import airflow.utils.dates
 from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
 
+from ploto_airflow.esmdiag.climo.util import generate_fetcher_params
 from ploto_airflow.operators.fetcher.edp_fecher import generate_operator as generate_edp_fetcher_operator
-from ploto_airflow.esmdiag.util import generate_fetcher_params
-
 
 args = {
     "owner": "ploto",
@@ -23,14 +22,12 @@ args = {
     'start_date': airflow.utils.dates.days_ago(2),
 }
 
-
 dag_id = "ploto_fetcher_edp_fetcher"
 
-
 with DAG(
-    dag_id=dag_id,
-    default_args=args,
-    schedule_interval=None,
+        dag_id=dag_id,
+        default_args=args,
+        schedule_interval=None,
 ) as dag:
     show_task = BashOperator(
         task_id="show_date",
@@ -39,7 +36,13 @@ with DAG(
     )
 
     run_task_id = "run_dep_fetcher"
-    run_task = generate_edp_fetcher_operator(run_task_id, generate_fetcher_params)
+    fields = [
+        'PRECT',
+        'PRECC',
+        'PRECL',
+        'PS'
+    ]
+    run_task = generate_edp_fetcher_operator(run_task_id, generate_fetcher_params, fields)
     run_task.dag = dag
 
     run_task.set_upstream(show_task)

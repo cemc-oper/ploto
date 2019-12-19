@@ -8,13 +8,14 @@ from ploto.fetcher import edp_fetcher
 
 def generate_operator(
         task_id: str,
-        params_generator: Callable[[dict], dict]
+        params_generator: Callable[[dict, list], dict],
+        fields: list
 ):
     def run_step(**context):
         drag_run_config = context["dag_run"].conf
 
         edp_fetcher.get_data(
-            **params_generator(drag_run_config)
+            **params_generator(drag_run_config, fields)
         )
 
     airflow_task = PythonOperator(

@@ -2,7 +2,7 @@
 import datetime
 
 
-def generate_fetcher_params(drag_run_config: dict) -> dict:
+def generate_fetcher_params(drag_run_config: dict, fields: list) -> dict:
     common_config = drag_run_config["common_config"]
     work_dir = drag_run_config["work_dir"]
     worker_config = drag_run_config["worker_config"]
@@ -13,7 +13,7 @@ def generate_fetcher_params(drag_run_config: dict) -> dict:
 
     file_prefix = '{atm_id}.{case_id}'.format(
         atm_id=common_config['model_info']['atm_id'],
-        case_id=common_config['case_info']['id']
+        case_id=common_config['case_info']['id'],
     )
 
     step1_file_prefix = '{file_prefix}.step1'.format(
@@ -29,12 +29,7 @@ def generate_fetcher_params(drag_run_config: dict) -> dict:
             'output_dir': './data',
             'file_prefix': step1_file_prefix,
             'date_range': date_range,
-            'field_names': [
-                'PRECT',
-                'PRECC',
-                'PRECL',
-                'PS'
-            ],
+            'field_names': fields,
             'datedif': 'h0'
         },
     }

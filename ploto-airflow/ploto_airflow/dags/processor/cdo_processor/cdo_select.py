@@ -12,7 +12,7 @@ from airflow.operators.bash_operator import BashOperator
 from ploto_airflow.operators.processor.cdo_processor.select import (
     generate_operator as generate_cdo_select_operator
 )
-from ploto_airflow.esmdiag.util import generate_cdo_select_params
+from ploto_airflow.esmdiag.climo.util import generate_cdo_select_params
 
 
 args = {
