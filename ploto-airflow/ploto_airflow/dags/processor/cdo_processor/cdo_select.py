@@ -10,9 +10,9 @@ from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
 
 from ploto_airflow.processor.cdo_processor.select import (
-    generate_operator as generate_cdo_select_operator,
-    generate_params
+    generate_operator as generate_cdo_select_operator
 )
+from ploto_airflow.esmdiag.util import generate_cdo_select_params
 
 
 args = {
@@ -37,7 +37,7 @@ with DAG(
     )
 
     run_task_id = "run_cdo_select"
-    run_task = generate_cdo_select_operator(run_task_id, generate_params, "PS")
+    run_task = generate_cdo_select_operator(run_task_id, generate_cdo_select_params, "PS")
     run_task.dag = dag
 
     run_task.set_upstream(show_task)
