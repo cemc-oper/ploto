@@ -1,14 +1,14 @@
 # coding: utf-8
 """
-use python operator, command:
+This is a test DAG to get data using edp fetcher. Python operator is used.
+
+Run the following command to test:
    airflow trigger_dag \
     --conf "$(jq '.' ./edp_fetcher_example.json)" \
     ploto_fetcher_edp_fetcher
 
 NOTE: jq is required to get json string from file.
 """
-import json
-
 import airflow.utils.dates
 from airflow.models import DAG
 from airflow.operators.bash_operator import BashOperator
@@ -28,9 +28,10 @@ dag_id = "ploto_fetcher_edp_fetcher"
 
 
 def generate_operator(task_id: str):
-    def run_edp_fetcher_step(**context):
+    def run_step(**context):
         drag_run_config = context["dag_run"].conf
         step_config = drag_run_config['step_config']
+
         task = step_config["task"]
         work_dir = step_config["work_dir"]
         config = step_config["config"]
@@ -44,7 +45,7 @@ def generate_operator(task_id: str):
     airflow_task = PythonOperator(
         task_id=task_id,
         provide_context=True,
-        python_callable=run_edp_fetcher_step,
+        python_callable=run_step,
     )
 
     return airflow_task
