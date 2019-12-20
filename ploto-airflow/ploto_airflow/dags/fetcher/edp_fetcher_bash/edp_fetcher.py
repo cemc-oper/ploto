@@ -1,9 +1,16 @@
 # coding: utf-8
-"""
-use bash operator to run edp fetcher, command:
-    airflow trigger_dag \
-        --conf '{"step_config":"{\\\"work_dir\\\": \\\"/home/hujk/clusterfs/wangdp/temp\\\"}"}' \
-        ploto_fetcher_edp_fetcher
+"""use bash operator to run edp fetcher.
+
+Warning
+-------
+Bash operator is only for test. Please use python versions.
+
+Example
+-------
+command:
+    $ airflow trigger_dag \
+      --conf '{"step_config":"{\\\"work_dir\\\": \\\"/home/hujk/clusterfs/wangdp/temp\\\"}"}' \
+      ploto_fetcher_edp_fetcher
 """
 
 import airflow.utils.dates

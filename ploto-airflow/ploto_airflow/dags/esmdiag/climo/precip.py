@@ -1,9 +1,13 @@
 # coding: utf-8
-"""
+"""ESMDIAG's climo/precip figure workflow.
+
+Example
+-------
 Run the following command to test:
-   airflow trigger_dag \
-    --conf "$(jq '.' ./common_example.json)" \
-    ploto_esmdiag_climo_precip
+
+   $ airflow trigger_dag \
+     --conf "$(jq '.' ./common_example.json)" \
+     ploto_esmdiag_climo_precip
 
 NOTE: jq is required to get json string from file.
 """
@@ -41,11 +45,13 @@ with DAG(
         default_args=args,
         schedule_interval=None,
 ) as dag:
+    # prepare environment
     create_dir_step = generate_create_dir_operator(
         "create_work_dir"
     )
     create_dir_step.dag = dag
 
+    # fetch and process data
     fields = [
         'PRECT',
         'PRECC',
@@ -73,7 +79,7 @@ with DAG(
         select_data_step.set_upstream(fetch_data_step)
         select_steps.append(select_data_step)
 
-    # gw
+    # fetch and process gw
     gw_fetch_data_step = generate_edp_fetcher_operator(
         "fetch_gw",
         generate_gw_fetcher_params,
@@ -99,5 +105,4 @@ with DAG(
     )
     plot_step.dag = dag
 
-    for a_step in select_steps:
-        a_step.set_downstream(plot_step)
+    plot_step.set_upstream(select_steps)

@@ -1,8 +1,32 @@
 # coding: utf-8
+"""Params generator for climo step.
+
+Each function return a dict of params needed by run step function of ploto.
+    {
+        "task": task dict,
+        "work_dir": work dir string,
+        "config": config dict,
+    }
+
+"""
 import datetime
 
 
 def generate_fetcher_params(drag_run_config: dict, fields: list) -> dict:
+    """generate edp_fetcher.get_data params
+
+    Parameters
+    ----------
+    drag_run_config: dict
+        drag run config assigned by airflow trigger_bag's --conf option.
+    fields: list
+        fields name list
+
+    Return
+    ------
+    dict
+        ploto.fetcher.edp_fetcher.get_data params
+    """
     common_config = drag_run_config["common_config"]
     work_dir = drag_run_config["work_dir"]
     worker_config = drag_run_config["worker_config"]
@@ -41,6 +65,20 @@ def generate_fetcher_params(drag_run_config: dict, fields: list) -> dict:
 
 
 def generate_cdo_select_params(drag_run_config: dict, field: str) -> dict:
+    """generate `ploto.processor.cdo_processor.select.run_cdo` params
+
+    Parameters
+    ----------
+    drag_run_config: dict
+        drag run config assigned by airflow trigger_bag's --conf option.
+    field: str
+        field name
+
+    Return
+    ------
+    dict
+        `ploto.processor.cdo_processor.select.run_cdo` params
+    """
     common_config = drag_run_config["common_config"]
     work_dir = drag_run_config["work_dir"]
     worker_config = drag_run_config["worker_config"]
@@ -86,6 +124,8 @@ def generate_cdo_select_params(drag_run_config: dict, field: str) -> dict:
 
 
 def generate_gw_fetcher_params(drag_run_config: dict, fields: list) -> dict:
+    """generate edp fetcher params for gw.
+    """
     common_config = drag_run_config["common_config"]
     work_dir = drag_run_config["work_dir"]
     worker_config = drag_run_config["worker_config"]
@@ -121,6 +161,8 @@ def generate_gw_fetcher_params(drag_run_config: dict, fields: list) -> dict:
 
 
 def generate_gw_cdo_select_params(drag_run_config: dict, field: str) -> dict:
+    """generate cdo select params for gw.
+    """
     common_config = drag_run_config["common_config"]
     work_dir = drag_run_config["work_dir"]
     worker_config = drag_run_config["worker_config"]
@@ -153,6 +195,18 @@ def generate_gw_cdo_select_params(drag_run_config: dict, field: str) -> dict:
 
 
 def generate_plotter_params(drag_run_config: dict) -> dict:
+    """generate `ploto.plotter.esmdiag_plotter.run_plotter` params
+
+    Parameters
+    ----------
+    drag_run_config: dict
+        drag run config assigned by airflow trigger_bag's --conf option.
+
+    Return
+    ------
+    dict
+        `ploto.plotter.esmdiag_plotter.run_plotter` params
+    """
     common_config = drag_run_config["common_config"]
     work_dir = drag_run_config["work_dir"]
     worker_config = drag_run_config["worker_config"]

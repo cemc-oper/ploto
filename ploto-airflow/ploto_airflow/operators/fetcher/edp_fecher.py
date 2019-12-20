@@ -10,7 +10,28 @@ def generate_operator(
         task_id: str,
         params_generator: Callable[[dict, list], dict],
         fields: list
-):
+) -> PythonOperator:
+    """Generate python operator for `ploto.fetcher.edp_fetcher` task.
+
+    Parameters
+    ----------
+    task_id: str
+        task name, should be unique in one DAG.
+    params_generator: Callable[[dict, list], dict]
+        a function to return params of edp_fetcher.get_data function.
+        The function should has two parameters:
+            drag_run_config: dict
+                config set by trigger_run command
+            fields: list
+                same as fields option.
+    fields: list
+        fields' name list.
+
+    Returns
+    -------
+    PythonOperator
+        `ploto.fetcher.edp_fetcher` task with task_id
+    """
     def run_step(**context):
         drag_run_config = context["dag_run"].conf
 

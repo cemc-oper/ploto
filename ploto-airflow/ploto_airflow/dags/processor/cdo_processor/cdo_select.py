@@ -1,9 +1,12 @@
 # coding: utf-8
-"""
+"""A DAG to test cdo select operator.
+
+Example
+-------
 Run the following command to test:
-   airflow trigger_dag \
-    --conf "$(jq '.' ./common_example.json)" \
-    ploto_processor_cdo_select
+   $ airflow trigger_dag \
+     --conf "$(jq '.' ./common_example.json)" \
+     ploto_processor_cdo_select
 """
 import airflow.utils.dates
 from airflow.models import DAG

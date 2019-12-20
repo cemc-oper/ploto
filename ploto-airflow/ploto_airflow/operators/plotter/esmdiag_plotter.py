@@ -10,6 +10,23 @@ def generate_operator(
         task_id: str,
         params_generator: Callable[[dict], dict]
 ):
+    """Generate python operator for `ploto.plotter.esmdiag_plotter` task.
+
+    Parameters
+    ----------
+    task_id: str
+        task name, should be unique in one DAG.
+    params_generator: Callable[[dict, list], dict]
+        a function to return params of `ploto.plotter.esmdiag_plotter.run_plotter` function.
+        The function should has two parameters:
+            drag_run_config: dict
+                config set by trigger_run command
+
+    Returns
+    -------
+    PythonOperator
+        `ploto.plotter.esmdiag_plotter` task with task_id
+    """
     def run_step(**context):
         drag_run_config = context["dag_run"].conf
 

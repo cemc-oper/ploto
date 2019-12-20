@@ -1,5 +1,10 @@
 # coding: utf-8
-# NOTE: this file does not working.
+"""A 'dagbag' for all enabled DAGs in this project.
+
+WARNING
+-------
+this file does not working.
+"""
 import pathlib
 
 from airflow.models import DagBag

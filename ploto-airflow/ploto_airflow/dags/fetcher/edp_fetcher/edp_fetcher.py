@@ -1,11 +1,12 @@
 # coding: utf-8
-"""
-This is a test DAG to get data using edp fetcher. Python operator is used.
+"""This is a test DAG to get data using edp fetcher. Python operator is used.
 
+Example
+-------
 Run the following command to test:
-   airflow trigger_dag \
-    --conf "$(jq '.' ./common_example.json)" \
-    ploto_fetcher_edp_fetcher
+   $ airflow trigger_dag \
+     --conf "$(jq '.' ./common_example.json)" \
+     ploto_fetcher_edp_fetcher
 
 NOTE: jq is required to get json string from file.
 """

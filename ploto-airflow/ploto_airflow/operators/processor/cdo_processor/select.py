@@ -11,6 +11,27 @@ def generate_operator(
         params_generator: Callable[[dict, str], dict],
         field: str
 ):
+    """Generate python operator for `ploto.processor.cdo_processor.select` task.
+
+    Parameters
+    ----------
+    task_id: str
+        task name, should be unique in one DAG.
+    params_generator: Callable[[dict, list], dict]
+        a function to return params of `ploto.processor.cdo_processor.select.run_cdo` function.
+        The function should has two parameters:
+            drag_run_config: dict
+                config set by trigger_run command
+            field: str
+                field name
+    field: str
+        field name
+
+    Returns
+    -------
+    PythonOperator
+        `ploto.processor.cdo_processor.select` task with task_id
+    """
     def run_step(**context):
         drag_run_config = context["dag_run"].conf
 
