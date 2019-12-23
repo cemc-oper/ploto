@@ -10,6 +10,8 @@ Each function return a dict of params needed by run step function of ploto.
 
 """
 import datetime
+import importlib
+from typing import Callable
 
 
 def generate_fetcher_params(drag_run_config: dict, fields: list) -> dict:
@@ -225,3 +227,15 @@ def generate_plotter_params(drag_run_config: dict) -> dict:
         "work_dir": work_dir,
         "config": worker_config,
     }
+
+
+def generate_esmdiag_vinterp_processor_params(
+        model: str,
+) -> Callable[[dict, list], dict]:
+    try:
+        model_module = importlib.import_module(
+            "ploto_airflow.esmdiag.models.{model}".format(model=model)
+        )
+        return model_module.generate_vinterp_processor_params
+    except ImportError:
+        raise
