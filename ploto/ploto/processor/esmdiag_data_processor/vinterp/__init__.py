@@ -14,7 +14,7 @@ def run_processor(task, work_dir, config) -> bool:
             'tasks': [
                 {
                     "input_file_path": "",
-                    "ps_file_path", "",
+                    "ps_file_path": "",
                     "output_file_path": "",
                     "var_name": "U",
                     "levels": [1000, 925, 850, 775, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30, 10],
