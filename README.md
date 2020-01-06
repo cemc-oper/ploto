@@ -1,6 +1,6 @@
 # Ploto
 
-A plot server for plot system in NWPC.
+A distributed scheduling platform for plotting system in NWPC.
 
 ## Docker
 
@@ -23,3 +23,11 @@ server:
 ```
 sudo docker build --rm --tag nwpc-oper/ploto-server -f docker/server/Dockerfile .
 ```
+
+## LICENSE
+
+Copyright 2017-2020, perillaroc at nwpc-oper.
+
+`ploto` is licensed under [GPL-3.0](./LICENSE.md).
+
+Components named `esmdiag` are based on [dongli/esmdiag](https://github.com/dongli/esmdiag).
