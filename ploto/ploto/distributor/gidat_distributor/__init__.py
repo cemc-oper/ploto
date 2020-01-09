@@ -4,7 +4,8 @@ Copy files to other location during post processing.
 
 task schema:
     {
-        'type': 'gidat_post_processor',
+        "step_type": "distributor",
+        'type': 'gidat_distributor',
         'plot_id': '', # plot_id,
         'plot_set_id': '', # plot_set_id
     }
@@ -12,7 +13,7 @@ task schema:
 from sqlalchemy import create_engine
 
 
-def run_processor(task, work_dir, config):
+def run_distributor(task: dict, work_dir, config):
     processor_config = config['gidat_post_processor']
     database_config = processor_config['database']
     engine = create_engine(f'oracle+cx_oracle://{database_config["user"]}:{database_config["password"]}'

@@ -4,7 +4,7 @@ import warnings
 
 def test_gidat_database():
     warnings.warn("this does not worked", DeprecationWarning)
-    from ploto.processor import gidat_post_processor
+    from ploto.distributor import gidat_distributor
 
     task = {
         'plot_id': 16329,
@@ -23,7 +23,7 @@ def test_gidat_database():
         }
     }
 
-    gidat_post_processor.run_processor(task, '', config)
+    gidat_distributor.run_distributor(task, '', config)
 
 
 if __name__ == "__main__":
