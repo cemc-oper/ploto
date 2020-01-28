@@ -50,7 +50,7 @@ def create_message_from_plot_task(plot_task: dict) -> dict:
     file_config_list = []
     for a_plot_data in plot_data_list:
         file_config = {
-            'type': 'ddps_fetcher'
+            'type': 'plot_gidat.fetcher.ddps_fetcher'
         }
         file_config.update(a_plot_data)
         file_config_list.append(file_config)
@@ -76,7 +76,7 @@ def create_message_from_plot_task(plot_task: dict) -> dict:
 
     image_name = str(Path(plot_task['image_path']).name)
     plotter_config = {
-        'type': 'ploto.plotter.ncldraw_plotter',
+        'type': 'ploto_gidat.plotter.ncldraw_plotter',
         'task_files': task_files,
         'time_level': plot_task['time_level'],
         'image_path': str(Path(plot_task['image_path']).name),

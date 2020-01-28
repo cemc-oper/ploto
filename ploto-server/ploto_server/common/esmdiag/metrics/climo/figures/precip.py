@@ -59,7 +59,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
         {
             'step_type': 'fetcher',
             'common': common_config,
-            'type': 'ploto.fetcher.edp_fetcher',
+            'type': 'ploto_esmdiag.fetcher.edp_fetcher',
             'query_param': {
                 'type': 'nc',
                 'output_dir': './data',

@@ -55,7 +55,7 @@ def get_gw_step(figure_config, common_config):
         {
             'step_type': 'fetcher',
             'common': common_config,
-            'type': 'ploto.fetcher.edp_fetcher',
+            'type': 'ploto_esmdiag.fetcher.edp_fetcher',
             'query_param': {
                 'type': 'nc',
                 'output_dir': './data',

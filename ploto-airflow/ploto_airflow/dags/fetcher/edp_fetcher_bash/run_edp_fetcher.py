@@ -5,7 +5,7 @@ import json
 
 import click
 
-from ploto.fetcher import edp_fetcher
+from ploto_esmdiag.fetcher import edp_fetcher
 
 
 @click.command()

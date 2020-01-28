@@ -3,7 +3,7 @@ from typing import Callable
 
 from airflow.operators.python_operator import PythonOperator
 
-from ploto.plotter import esmdiag_plotter
+from ploto_esmdiag.plotter import esmdiag_plotter
 
 
 def generate_operator(
