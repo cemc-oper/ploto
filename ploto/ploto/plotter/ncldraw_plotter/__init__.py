@@ -47,7 +47,7 @@ def run_plotter(plotter_task, work_dir, config):
 
     :param plotter_task: a dict config of plotter task.
         {
-            'type': 'ncldraw_plotter',
+            'type': 'ploto.plotter.ncldraw_plotter',
             'task_files': [
                 {
                     'file_path': 'task.xml',

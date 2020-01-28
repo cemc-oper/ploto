@@ -19,7 +19,7 @@ def download_edp_fetcher(file_task, work_dir, config):
 
     :param file_task: ddps file task config
         {
-            'type': 'edp',
+            'type': 'ploto.fetcher.edp',
             'query_param': {
                 'type': 'nc',
                 'output_dir': './data',

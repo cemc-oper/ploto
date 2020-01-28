@@ -16,7 +16,7 @@ def download_ddps_fetcher(file_task, work_dir, config):
 
     :param file_task: ddps file task config
         {
-            'type': 'ddps',
+            'type': 'ploto.fetcher.ddps_fetcher',
             'query_param': {
                 "username":"admin",
                 "password":"admin",

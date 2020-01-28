@@ -3,7 +3,7 @@
 
 def test_select():
     task = {
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'select',
         'params': {
             'name': 'PS',

@@ -3,7 +3,7 @@
 
 def test_chname():
     task = {
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'chname',
         'params': [
             {

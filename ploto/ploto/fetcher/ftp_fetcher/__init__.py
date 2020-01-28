@@ -7,7 +7,7 @@ def download_ftp_data(ftp_file_task, work_dir, config):
 
     :param ftp_file_task:
         {
-            "type": "ftp",
+            "type": "ploto.fetcher.ftp_fetcher",
             "host": "ip host",
             "user": "user name",
             "password": "password",

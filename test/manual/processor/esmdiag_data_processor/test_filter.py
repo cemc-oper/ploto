@@ -5,7 +5,7 @@ import os
 def test_filter():
     from ploto.processor.esmdiag_data_processor import run_processor
     task = {
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'filter',
         'input_file': 'GAMIL.gamil_wu_run11.OLR.daily.anomaly.1979-01-01:1980-12-31.nc',
         'output_file': 'GAMIL.gamil_wu_run11.OLR.daily.anomaly.filtered.1979-01-01:1980-12-31.nc',

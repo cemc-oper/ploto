@@ -5,7 +5,7 @@ import os
 def test_lat_avg():
     from ploto.processor.esmdiag_data_processor import run_processor
     task = {
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'lat_avg',
         'start_lat': -10.0,
         'end_lat': 10.0,

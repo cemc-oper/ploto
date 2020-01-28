@@ -3,7 +3,7 @@
 
 def test_sub():
     task = {
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'sub',
         'params': [
             {

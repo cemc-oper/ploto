@@ -11,7 +11,7 @@ def run_processor(task, work_dir, config) -> bool:
 
     :param task:
         {
-            'type': 'esmdiag_data_processor',
+            'type': 'ploto.processor.esmdiag_data_processor',
             'action': 'lon_avg',
             'start_lon': 80.0,
             'end_lon': 10.0,

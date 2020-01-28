@@ -78,7 +78,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
         {
             'step_type': 'fetcher',
             'common': common_config,
-            'type': 'edp_fetcher',
+            'type': 'ploto.fetcher.edp_fetcher',
             'query_param': {
                 'type': 'nc',
                 'output_dir': './data',
@@ -98,7 +98,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
 
     steps.extend([{
         'step_type': 'processor',
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'select',
         'params': {
             'name': field,
@@ -117,7 +117,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
 
     steps.append({
         'step_type': 'processor',
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'chname',
         'params': [
             {

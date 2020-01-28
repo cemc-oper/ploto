@@ -17,7 +17,7 @@ def run_edp_fetcher_step(step_config):
     # config = drag_run_config["config"]
 
     task = {
-        'type': 'edp_fetcher',
+        'type': 'ploto.fetcher.edp_fetcher',
         'query_param': {
             'type': 'nc',
             'output_dir': './data',

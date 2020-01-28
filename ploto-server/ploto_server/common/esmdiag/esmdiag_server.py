@@ -50,7 +50,7 @@ def get_send_status_steps(status: TaskStatus, figure_config, common_config, serv
     steps = [
         {
             'step_type': 'distributor',
-            'type': 'requests_distributor',
+            'type': 'ploto.distributor.requests_distributor',
             'url': "{base_url}{api_path}".format(
                 base_url=esmdiag_web_config['url'],
                 api_path=esmdiag_web_config['api']['task_status']),
@@ -110,7 +110,7 @@ def get_local_distribution_steps(figure_config, common_config, server_config):
     steps = [
         {
             'step_type': 'distributor',
-            'type': 'local_distributor',
+            'type': 'ploto.distributor.local_distributor',
             'items': [
                 {
                     'from': './*.png',

@@ -5,7 +5,7 @@ Copy files to other location during post processing.
 task schema:
     {
         "step_type": "distributor",
-        'type': 'gidat_distributor',
+        'type': 'ploto.distributor.gidat_distributor',
         'plot_id': '', # plot_id,
         'plot_set_id': '', # plot_set_id
     }

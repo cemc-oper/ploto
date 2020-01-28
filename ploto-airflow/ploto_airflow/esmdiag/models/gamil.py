@@ -39,7 +39,7 @@ def generate_vinterp_processor_params(
 
     task_config = {
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'vinterp',
         'model': 'gamil',
         "tasks": vinterp_tasks,

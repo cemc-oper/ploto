@@ -34,7 +34,7 @@ def test_anomaly():
     steps.append({
         'step_type': 'fetcher',
         'common': common_config,
-        'type': 'edp_fetcher',
+        'type': 'ploto.fetcher.edp_fetcher',
         'query_param': {
             'type': 'nc',
             'output_dir': './data',
@@ -53,7 +53,7 @@ def test_anomaly():
 
     steps.append({
         'step_type': 'processor',
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'select',
         'params': {
             'name': 'U',
@@ -72,7 +72,7 @@ def test_anomaly():
 
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'anomaly',
         'input_file': output_file_pattern.format(
             file_prefix='step2.',

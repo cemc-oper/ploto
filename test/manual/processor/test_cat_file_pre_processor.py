@@ -4,7 +4,7 @@ import os
 
 def test_cat_file_processor():
     task = {
-        'type': 'cat_file_processor',
+        'type': 'ploto.processor.cat_file_processor',
         'file_list': [
             '1.txt',
             '2.txt',

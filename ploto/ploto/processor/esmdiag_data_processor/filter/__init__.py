@@ -11,7 +11,7 @@ def run_processor(task, work_dir, config) -> bool:
 
     :param task:
         {
-            'type': 'esmdiag_data_processor',
+            'type': 'ploto.processor.esmdiag_data_processor',
             'action': 'filter',
             'input_file':'',
             'output_file': '',

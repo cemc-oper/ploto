@@ -6,7 +6,7 @@ import warnings
 def test_ddps_fetcher():
     warnings.warn("DDPS is no longer used in NWPC.", DeprecationWarning)
     data_task = {
-        'type': 'ddps_fetcher',
+        'type': 'ploto.fetcher.ddps_fetcher',
         'query_param': {
             "username": "admin",
             "password": "admin",

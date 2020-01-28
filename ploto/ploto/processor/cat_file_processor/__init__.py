@@ -4,7 +4,7 @@ Cat file.
 
 task schema:
     {
-        'type': 'cat_file_processor',
+        'type': 'ploto.processor.cat_file_processor',
         'file_list': [
             'file_path'
         ]

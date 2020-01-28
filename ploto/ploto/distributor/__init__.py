@@ -11,7 +11,7 @@ def run_step(step, work_dir, config):
     distributor_type = step['type']
     try:
         distributor_module = importlib.import_module(
-            'ploto.distributor.{distributor_type}'.format(distributor_type=distributor_type)
+            '{distributor_type}'.format(distributor_type=distributor_type)
         )
     except ImportError:
         logger.error("distributor type not supported: {distributor_type}".format(

@@ -17,7 +17,7 @@ def test_ncldraw_util():
         task_content = task_file.read()
 
     plot_task = {
-        'type': 'ncldraw_plotter',
+        'type': 'ploto.plotter.ncldraw_plotter',
         'task_files': [
             {
                 'file_path': 'task.xml',

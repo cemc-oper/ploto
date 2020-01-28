@@ -4,7 +4,7 @@ from ploto.fetcher import edp_fetcher
 
 def test_edp_fetcher():
     data_task = {
-        'type': 'edp_fetcher',
+        'type': 'ploto.fetcher.edp_fetcher',
         'query_param': {
             'type': 'nc',
             'output_dir': './data',

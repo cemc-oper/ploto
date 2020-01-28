@@ -6,7 +6,7 @@ Copy local files.
 
 task schema:
     {
-        'type': 'local_distributor',
+        'type': 'ploto.distributor.local_distributor',
         'items': [
             {
                 'from': 'source file path', # "./*.png"

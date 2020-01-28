@@ -3,7 +3,7 @@ esmdiag_data_process
 
 task schema:
     {
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action: 'vinterp',
         ...
     }

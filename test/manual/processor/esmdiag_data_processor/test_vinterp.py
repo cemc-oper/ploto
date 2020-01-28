@@ -8,7 +8,7 @@ def test_vinterp():
 
     from ploto.processor.esmdiag_data_processor.vinterp.models.gamil.vinterp import run_task
     task = {
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'vinterp',
         'model': 'gamil',
         'tasks': [

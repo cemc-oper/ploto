@@ -4,7 +4,7 @@ cdo chname
 
 task schema:
     {
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'chname',
         'params': [
             {

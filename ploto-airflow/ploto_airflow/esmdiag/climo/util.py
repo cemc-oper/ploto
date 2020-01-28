@@ -49,7 +49,7 @@ def generate_fetcher_params(drag_run_config: dict, fields: list) -> dict:
     task_config = {
         "step_type": "fetcher",
         "common": common_config,
-        "type": "edp_fetcher",
+        "type": "ploto.fetcher.edp_fetcher",
         "query_param": {
             "type": "nc",
             "output_dir": "./data",
@@ -102,7 +102,7 @@ def generate_cdo_select_params(drag_run_config: dict, field: str) -> dict:
 
     task_config = {
         "step_type": "processor",
-        "type": "cdo_processor",
+        "type": "ploto.processor.cdo_processor",
         "operator": "select",
         "params": {
             "name": field,
@@ -144,7 +144,7 @@ def generate_gw_fetcher_params(drag_run_config: dict, fields: list) -> dict:
     task_config = {
         "step_type": "fetcher",
         "common": common_config,
-        "type": "edp_fetcher",
+        "type": "ploto.fetcher.edp_fetcher",
         "query_param": {
             "type": "nc",
             "output_dir": "./data",
@@ -176,7 +176,7 @@ def generate_gw_cdo_select_params(drag_run_config: dict, field: str) -> dict:
 
     task_config = {
         "step_type": "processor",
-        "type": "cdo_processor",
+        "type": "ploto.processor.cdo_processor",
         "operator": "select",
         "params": {
             "name": "gw",
@@ -216,7 +216,7 @@ def generate_plotter_params(drag_run_config: dict) -> dict:
 
     task_config = {
         "step_type": "plotter",
-        "type": "esmdiag_plotter",
+        "type": "ploto.plotter.esmdiag_plotter",
         "metric": figure_config["metric"],
         "figure": figure_config["name"],
         "common": common_config,

@@ -6,7 +6,7 @@ Run convert command.
 
 task schema:
     {
-        'type': 'convert_processor',
+        'type': 'ploto.processor.convert_processor',
         'operator': 'general',
         'params' :[
             '-density 300',

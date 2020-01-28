@@ -5,7 +5,7 @@ import os
 def test_area_avg():
     from ploto.processor.esmdiag_data_processor import run_processor
     task = {
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'area_avg',
         'start_lon': 75.0,
         'end_lon': 100.0,

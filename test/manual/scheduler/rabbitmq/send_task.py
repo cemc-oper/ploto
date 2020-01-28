@@ -47,7 +47,7 @@ def test_send_task():
                 #     "file_name": "gmf.gra.2017070400009.grb2"
                 # },
                 {
-                    'type': 'ddps_fetcher',
+                    'type': 'ploto.fetcher.ddps_fetcher',
                     'query_param': {
                         "username": "admin",
                         "password": "admin",

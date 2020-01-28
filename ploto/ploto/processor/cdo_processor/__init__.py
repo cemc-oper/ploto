@@ -6,7 +6,7 @@ Run cdo command.
 
 task schema:
     {
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'operator',
         ...
     }

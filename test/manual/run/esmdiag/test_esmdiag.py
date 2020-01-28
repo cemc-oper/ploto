@@ -23,7 +23,7 @@ def test_esmdiag():
     task = {
         'steps': [
             {
-                'step_type': 'fetcher',
+                'step_type': 'ploto.fetcher.fetcher',
                 'common': common_config,
                 "type": "local_fetcher",
                 "action": "ln",
@@ -32,7 +32,7 @@ def test_esmdiag():
             },
             {
                 'step_type': 'processor',
-                'type': 'esmdiag_data_processor',
+                'type': 'ploto.processor.esmdiag_data_processor',
                 'action': 'vinterp',
                 'model': 'gamil',
                 'tasks': [
@@ -66,7 +66,7 @@ def test_esmdiag():
             },
             {
                 'step_type': 'plotter',
-                'type': 'esmdiag_plotter',
+                'type': 'ploto.plotter.esmdiag_plotter',
                 'metric': 'climo',
                 'figure': 'zonal_mean',
                 'common': common_config,

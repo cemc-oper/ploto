@@ -10,7 +10,7 @@ def run_step(step, work_dir, config):
     plotter_type = step['type']
 
     try:
-        plotter_module = importlib.import_module('ploto.plotter.{plotter_type}'.format(plotter_type=plotter_type))
+        plotter_module = importlib.import_module('{plotter_type}'.format(plotter_type=plotter_type))
     except ImportError:
         logger.error("plotter type is not supported: {plotter_type}".format(plotter_type=plotter_type))
         return

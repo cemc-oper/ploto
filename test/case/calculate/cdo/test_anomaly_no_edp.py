@@ -34,7 +34,7 @@ def test_anomaly():
     steps.append({
         'step_type': 'fetcher',
         'common': common_config,
-        "type": "local_fetcher",
+        "type": "ploto.fetcher.local_fetcher",
         "action": "ln",
         "directory": "/home/hujk/clusterfs/GAMIL",
         "file_name": "gamil_wu_run11.gamil.h1.*.nc",
@@ -49,7 +49,7 @@ def test_anomaly():
 
     steps.append({
         'step_type': 'processor',
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'select',
         'params': {
             'name': 'U',
@@ -68,7 +68,7 @@ def test_anomaly():
 
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'anomaly',
         'input_file': output_file_pattern.format(
             file_prefix='step2.',

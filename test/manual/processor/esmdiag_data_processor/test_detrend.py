@@ -5,7 +5,7 @@ import os
 def test_detrend():
     from ploto.processor.esmdiag_data_processor import run_processor
     task = {
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'detrend',
         'dim': 0,
         'input_file': 'GAMIL.gamil_wu_run11.PRC.daily.anomaly.area_avg_IO.1992-01-01:1993-12-31.nc',

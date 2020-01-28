@@ -4,7 +4,7 @@ Run cdo select operator.
 
 task schema:
     {
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'select',
         'params': {
             'name': 'PS',

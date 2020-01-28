@@ -9,7 +9,7 @@ def link_local_file(file_task, work_dir):
 
     :param file_task:
         {
-            "type": "local",
+            "type": "ploto.fetcher.local_fetcher",
             "directory": "/srv/files/ftp/GRAPES_GFS_ORIG_2017070400",
             "file_name": "gmf.gra.2017070400009.grb2",
         },
@@ -27,7 +27,7 @@ def link_file_by_ln(file_task, work_dir):
 
     :param file_task:
         {
-            "type": "local",
+            "type": "ploto.fetcher.local_fetcher",
             "action": "ln"
             "directory": "/srv/files/ftp/GRAPES_GFS_ORIG_2017070400",
             "file_name": "*.grb2",

@@ -6,7 +6,7 @@ def generate_steps(file_prefix, output_file_pattern, time_range_string, common_c
     # PRC.anomaly
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'anomaly',
         'input_file': output_file_pattern.format(
             file_prefix=file_prefix,
@@ -29,7 +29,7 @@ def _generate_steps_for_area_avg(file_prefix, output_file_pattern, time_range_st
     # PRC.anomaly.area_avg_IO
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'area_avg',
         'start_lon': 75.0,
         'end_lon': 100.0,
@@ -50,7 +50,7 @@ def _generate_steps_for_area_avg(file_prefix, output_file_pattern, time_range_st
     # PRC.anomaly.area_avg_IO.detrended
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'detrend',
         'dim': 0,
         'var_name': 'PRC',
@@ -68,7 +68,7 @@ def _generate_steps_for_area_avg(file_prefix, output_file_pattern, time_range_st
     # PRC.anomaly.area_avg_IO.detrended.filter
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'filter',
         'input_file': "{file_prefix}.{name}.daily.anomaly.area_avg_IO.detrended.{time_range}.nc".format(
             file_prefix=file_prefix,
@@ -91,7 +91,7 @@ def _generate_steps_for_lat_avg(file_prefix, output_file_pattern, time_range_str
     # PRC.daily.anomaly.lat_avg_lon_band
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'lat_avg',
         'start_lat': -10.0,
         'end_lat': 10.0,
@@ -111,7 +111,7 @@ def _generate_steps_for_lat_avg(file_prefix, output_file_pattern, time_range_str
     # PRC.anomaly.lat_avg_lon_band.detrended
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'detrend',
         'dim': 0,
         'var_name': 'PRC',
@@ -129,7 +129,7 @@ def _generate_steps_for_lat_avg(file_prefix, output_file_pattern, time_range_str
     # PRC.daily.anomaly.lat_avg_lon_band.detrended.filtered
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'filter',
         'input_file': "{file_prefix}.{name}.daily.anomaly.lat_avg_lon_band.detrended.{time_range}.nc".format(
             file_prefix=file_prefix,
@@ -152,7 +152,7 @@ def _generate_steps_for_lon_avg(file_prefix, output_file_pattern, time_range_str
     # PRC.daily.anomaly.lon_avg_lat_band
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'lon_avg',
         'start_lon': 80.0,
         'end_lon': 100.0,
@@ -171,7 +171,7 @@ def _generate_steps_for_lon_avg(file_prefix, output_file_pattern, time_range_str
     # PRC.anomaly.lon_avg_lat_band.detrended
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'detrend',
         'dim': 0,
         'var_name': 'PRC',
@@ -189,7 +189,7 @@ def _generate_steps_for_lon_avg(file_prefix, output_file_pattern, time_range_str
     # PRC.daily.anomaly.lon_avg_lat_band.detrended.filtered
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'filter',
         'input_file': "{file_prefix}.{name}.daily.anomaly.lon_avg_lat_band.detrended.{time_range}.nc".format(
             file_prefix=file_prefix,

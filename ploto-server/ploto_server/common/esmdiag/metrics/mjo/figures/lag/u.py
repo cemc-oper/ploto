@@ -5,7 +5,7 @@ def generate_steps(file_prefix, output_file_pattern, time_range_string, common_c
     steps = []
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'anomaly',
         'input_file': output_file_pattern.format(
             file_prefix=file_prefix,
@@ -27,7 +27,7 @@ def generate_steps(file_prefix, output_file_pattern, time_range_string, common_c
     u_levels = [850, 200]
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'vinterp',
         'model': 'gamil',
         'tasks': [
@@ -67,7 +67,7 @@ def _generate_steps_for_lat_avg(time_range_string, common_config, model_id, case
     # U.daily.anomaly.vinterp.lat_avg_lon_band
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'lat_avg',
         'start_lat': -10.0,
         'end_lat': 10.0,
@@ -120,7 +120,7 @@ def _generate_steps_for_lat_avg(time_range_string, common_config, model_id, case
     # U.daily.anomaly.lat_avg_lon_band.detrended.filtered
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'filter',
         'input_file': ("{model}.{case_id}.{name}.daily.anomaly.vinterp{levels}."
                        "lat_avg_lon_band.detrended.{time_range_string}.nc").format(
@@ -151,7 +151,7 @@ def _generate_steps_for_lon_avg(time_range_string, common_config, model_id, case
     # U.daily.anomaly.vinterp.lon_avg_lat_band
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'lon_avg',
         'start_lon': 80.0,
         'end_lon': 100.0,
@@ -177,7 +177,7 @@ def _generate_steps_for_lon_avg(time_range_string, common_config, model_id, case
     # U.daily.anomaly.vinterp.lon_avg_lat_band.detrended
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'detrend',
         'dim': 0,
         'var_name': 'U',
@@ -203,7 +203,7 @@ def _generate_steps_for_lon_avg(time_range_string, common_config, model_id, case
     # U.daily.anomaly.lon_avg_lat_band.detrended.filtered
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'filter',
         'input_file': ("{model}.{case_id}.{name}.daily.anomaly.vinterp{levels}."
                        "lon_avg_lat_band.detrended.{time_range_string}.nc").format(

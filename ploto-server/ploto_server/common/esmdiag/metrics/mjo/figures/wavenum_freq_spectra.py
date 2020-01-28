@@ -59,7 +59,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
         {
             'step_type': 'fetcher',
             'common': common_config,
-            'type': 'edp_fetcher',
+            'type': 'ploto.fetcher.edp_fetcher',
             'query_param': {
                 'type': 'nc',
                 'output_dir': './data',
@@ -89,7 +89,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
 
     steps.extend([{
         'step_type': 'processor',
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'select',
         'params': {
             'name': field,
@@ -108,7 +108,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
 
     steps.append({
         'step_type': 'processor',
-        'type': 'cdo_processor',
+        'type': 'ploto.processor.cdo_processor',
         'operator': 'chname',
         'params': [
             {
@@ -128,7 +128,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
 
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'anomaly',
         'input_file': output_file_pattern.format(
             file_prefix=file_prefix,
@@ -142,7 +142,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
 
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'anomaly',
         'input_file': output_file_pattern.format(
             file_prefix=file_prefix,
@@ -163,7 +163,7 @@ def generate_figure_task(figure_config, common_config, server_config) -> dict:
     u_levels = [850, 200]
     steps.append({
         'step_type': 'processor',
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'vinterp',
         'model': 'gamil',
         'tasks': [

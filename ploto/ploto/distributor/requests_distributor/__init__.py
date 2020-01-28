@@ -6,7 +6,7 @@ Send messages using requests.
 
 task schema:
     {
-        'type': 'requests_distributor',
+        'type': 'ploto.distributor.requests_distributor',
         'url: url, # optional, must have at least one.
         'requests': [
             {

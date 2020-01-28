@@ -29,7 +29,7 @@ def get_plotter_step(figure_config, common_config) -> dict:
     """
     task = {
         'step_type': 'plotter',
-        'type': 'esmdiag_plotter',
+        'type': 'ploto.plotter.esmdiag_plotter',
         'metric': 'climo',
         'figure': figure_config["name"],
         'common': common_config,
@@ -55,7 +55,7 @@ def get_gw_step(figure_config, common_config):
         {
             'step_type': 'fetcher',
             'common': common_config,
-            'type': 'edp_fetcher',
+            'type': 'ploto.fetcher.edp_fetcher',
             'query_param': {
                 'type': 'nc',
                 'output_dir': './data',
@@ -67,7 +67,7 @@ def get_gw_step(figure_config, common_config):
         },
         {
             'step_type': 'processor',
-            'type': 'cdo_processor',
+            'type': 'ploto.processor.cdo_processor',
             'operator': 'select',
             'params': {
                 'name': 'gw',
@@ -88,7 +88,7 @@ def get_convert_step(figure_config, common_config):
     steps = [
         {
             'step_type': 'processor',
-            'type': 'convert_processor',
+            'type': 'ploto.processor.convert_processor',
             'operator': 'general',
             'params': [
                 '-density 300',

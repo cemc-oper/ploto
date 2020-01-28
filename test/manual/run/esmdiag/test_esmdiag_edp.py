@@ -26,7 +26,7 @@ def test_esmdiag_edp():
             {
                 'step_type': 'fetcher',
                 'common': common_config,
-                'type': 'edp_fetcher',
+                'type': 'ploto.fetcher.edp_fetcher',
                 'query_param': {
                     'type': 'nc',
                     'output_dir': './data',
@@ -42,7 +42,7 @@ def test_esmdiag_edp():
                 },
             },
             {
-                'step_type': 'fetcher',
+                'step_type': 'ploto.fetcher.fetcher',
                 'common': common_config,
                 'type': 'edp_fetcher',
                 'query_param': {
@@ -58,7 +58,7 @@ def test_esmdiag_edp():
             },
             {
                 'step_type': 'processor',
-                'type': 'cdo_processor',
+                'type': 'ploto.processor.cdo_processor',
                 'operator': 'select',
                 'params': {
                     'name': 'PS',
@@ -73,7 +73,7 @@ def test_esmdiag_edp():
 
             {
                 'step_type': 'processor',
-                'type': 'cdo_processor',
+                'type': 'ploto.processor.cdo_processor',
                 'operator': 'select',
                 'params': {
                     'name': 'PRECT',
@@ -87,7 +87,7 @@ def test_esmdiag_edp():
             },
             {
                 'step_type': 'processor',
-                'type': 'cdo_processor',
+                'type': 'ploto.processor.cdo_processor',
                 'operator': 'select',
                 'params': {
                     'name': 'PRECC',
@@ -102,7 +102,7 @@ def test_esmdiag_edp():
 
             {
                 'step_type': 'processor',
-                'type': 'cdo_processor',
+                'type': 'ploto.processor.cdo_processor',
                 'operator': 'select',
                 'params': {
                     'name': 'PRECL',
@@ -116,7 +116,7 @@ def test_esmdiag_edp():
             },
             {
                 'step_type': 'processor',
-                'type': 'cdo_processor',
+                'type': 'ploto.processor.cdo_processor',
                 'operator': 'select',
                 'params': {
                     'name': 'gw',
@@ -128,7 +128,7 @@ def test_esmdiag_edp():
             },
             {
                 'step_type': 'plotter',
-                'type': 'esmdiag_plotter',
+                'type': 'ploto.plotter.esmdiag_plotter',
                 'metric': 'climo',
                 'figure': 'precip',
                 'common': common_config,

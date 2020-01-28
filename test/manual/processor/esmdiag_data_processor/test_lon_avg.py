@@ -5,7 +5,7 @@ import os
 def test_lon_avg():
     from ploto.processor.esmdiag_data_processor import run_processor
     task = {
-        'type': 'esmdiag_data_processor',
+        'type': 'ploto.processor.esmdiag_data_processor',
         'action': 'lon_avg',
         'start_lon': 80.0,
         'end_lon': 100.0,

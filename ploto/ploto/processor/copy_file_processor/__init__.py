@@ -4,7 +4,7 @@ Copy files to other location during post processing.
 
 task schema:
     {
-        'type': 'copy_file_processor',
+        'type': 'ploto.processor.copy_file_processor',
         'files': [
             {
                 'from': 'source file path',
