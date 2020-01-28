@@ -7,7 +7,7 @@ import warnings
 
 def test_ncldraw_util():
     warnings.warn("ncldraw is no longer used in NWPC.", DeprecationWarning)
-    from ploto.plotter.ncldraw_plotter import run_plotter
+    from ploto_gidat.plotter.ncldraw_plotter import run_plotter
 
     work_dir = "/space/windroc/workspace/plot/playground/test_case_1"
     config = {}
@@ -17,7 +17,7 @@ def test_ncldraw_util():
         task_content = task_file.read()
 
     plot_task = {
-        'type': 'ploto.plotter.ncldraw_plotter',
+        'type': 'ploto_gidat.plotter.ncldraw_plotter',
         'task_files': [
             {
                 'file_path': 'task.xml',

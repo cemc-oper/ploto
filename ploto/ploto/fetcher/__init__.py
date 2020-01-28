@@ -3,8 +3,7 @@ import os
 import importlib
 
 from ploto.logger import get_logger
-from ploto.fetcher import ftp_fetcher, local_fetcher, ddps_fetcher, edp_fetcher
-
+from ploto.fetcher import ftp_fetcher, local_fetcher, edp_fetcher
 
 logger = get_logger()
 

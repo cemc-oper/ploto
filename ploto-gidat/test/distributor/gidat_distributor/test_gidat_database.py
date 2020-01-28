@@ -4,7 +4,7 @@ import warnings
 
 def test_gidat_database():
     warnings.warn("this does not worked", DeprecationWarning)
-    from ploto.distributor import gidat_distributor
+    from ploto_gidat.distributor import gidat_distributor
 
     task = {
         'plot_id': 16329,

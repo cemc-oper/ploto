@@ -1,12 +1,12 @@
 # coding: utf-8
-from ploto.fetcher import ddps_fetcher
+from ploto_gidat.fetcher import ddps_fetcher
 import warnings
 
 
 def test_ddps_fetcher():
     warnings.warn("DDPS is no longer used in NWPC.", DeprecationWarning)
     data_task = {
-        'type': 'ploto.fetcher.ddps_fetcher',
+        'type': 'ploto_gidat.fetcher.ddps_fetcher',
         'query_param': {
             "username": "admin",
             "password": "admin",
