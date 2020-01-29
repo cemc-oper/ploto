@@ -12,6 +12,7 @@ RUN groupadd -g 1004 hujk \
 
 USER hujk
 
-RUN conda create -n ncl_stable -c conda-forge ncl cdo imagemagick
+RUN conda create -n ncl_stable -c conda-forge ncl cdo imagemagick \
+    && conda clean -y -a
 
 CMD ["bash"]
