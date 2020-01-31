@@ -1,8 +1,7 @@
-FROM python:3.6
+FROM nwpc-oper/ploto:base
 
 LABEL maintainer="perilalroc@gmail.com"
 
-COPY ploto/ /srv/ploto
 COPY ploto-server/ /srv/ploto-server
 
 RUN cd /srv/ploto \

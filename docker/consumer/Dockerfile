@@ -1,11 +1,9 @@
-FROM python:3.6
+FROM nwpc-oper/ploto:base
 
 LABEL maintainer="perilalroc@gmail.com"
 
-COPY ploto/ /srv/ploto
-COPY vendor/ /srv/vendor
-
 RUN cd /srv/ploto \
+    && pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
     && pip install .
 
 WORKDIR /srv/run

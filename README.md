@@ -6,19 +6,19 @@ A distributed scheduling platform for plotting system in NWPC.
 
 ### Build
 
-earth base. This build may take a lot of time. It should be run only one time.
+Base image.
 
 ```
-sudo docker build --rm --tag nwpc-oper/ploto-earth:base -f docker/earth/base/Dockerfile .
+sudo docker build --rm --tag nwpc-oper/ploto:base -f docker/base/Dockerfile .
 ```
 
-earth consumer:
+Consumer image.
 
 ```
-sudo docker build --rm --tag nwpc-oper/ploto-earth:consumer -f docker/earth/consumer/Dockerfile .
+sudo docker build --rm --tag nwpc-oper/ploto:consumer -f docker/consumer/Dockerfile .
 ```
 
-server:
+Server image.
 
 ```
 sudo docker build --rm --tag nwpc-oper/ploto-server -f docker/server/Dockerfile .
@@ -29,5 +29,3 @@ sudo docker build --rm --tag nwpc-oper/ploto-server -f docker/server/Dockerfile 
 Copyright 2017-2020, perillaroc at nwpc-oper.
 
 `ploto` is licensed under [GPL-3.0](./LICENSE.md).
-
-Components named `esmdiag` are based on [dongli/esmdiag](https://github.com/dongli/esmdiag).
