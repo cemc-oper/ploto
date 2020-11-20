@@ -2,6 +2,8 @@
 import uuid
 import os
 import json
+import pathlib
+import datetime
 
 from ploto.logger import get_logger
 
@@ -11,11 +13,13 @@ logger = get_logger()
 
 def get_work_dir(config: dict) -> str:
     base_config = config['base']
-    run_base_dir = base_config['run_base_dir']
+    run_base_dir = pathlib.Path(base_config['run_base_dir'])
 
-    temp_directory = str(uuid.uuid4())
+    temp_string = str(uuid.uuid4())
+    current_datetime = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    temp_directory = f"{current_datetime}_{temp_string}"
     os.chdir(run_base_dir)
-    work_dir = os.path.join(run_base_dir, temp_directory)
+    work_dir = pathlib.Path(run_base_dir, temp_directory)
     try:
         os.makedirs(work_dir)
     except FileExistsError as e:
