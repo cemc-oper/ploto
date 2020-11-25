@@ -24,7 +24,7 @@ def process_message(message, config):
 def run_blocking_connection(config):
     logger = get_logger()
 
-    rabbitmq_config = config['rabbitmq']
+    rabbitmq_config = config['scheduler']
     exchange_name = rabbitmq_config['exchange']
     queue_name = rabbitmq_config['queue']
 
