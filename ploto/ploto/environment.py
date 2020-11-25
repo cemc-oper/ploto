@@ -4,6 +4,7 @@ import os
 import json
 import pathlib
 import datetime
+import shutil
 
 from ploto.logger import get_logger
 
@@ -47,7 +48,14 @@ def recovery_base_environment(base_env: dict):
 
 
 def clear_environment(work_dir: str, config: dict):
-    pass
+    if (
+            "base" in config
+            and "environment" in config["base"]
+            and "clear_work_dir" in config["base"]["environment"]
+            and config["base"]["environment"]["clear_work_dir"]
+    ):
+        logger.debug(f"deleting work directory: {work_dir}")
+        shutil.rmtree(work_dir, ignore_errors=False)
 
 
 def save_task_message(message_data):
