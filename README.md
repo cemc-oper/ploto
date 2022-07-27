@@ -23,7 +23,7 @@ Server image.
 ```
 sudo docker build --rm --tag nwpc-oper/ploto-server -f docker/server/Dockerfile .
 ```
-
+ 
 ## LICENSE
 
 Copyright 2017-2020, perillaroc at nwpc-oper.
