@@ -1,6 +1,6 @@
 # Ploto
 
-A distributed scheduling platform for plotting system in NWPC.
+A distributed scheduling platform for plotting system in CEMC.
 
 ## Docker
 
@@ -26,6 +26,6 @@ sudo docker build --rm --tag nwpc-oper/ploto-server -f docker/server/Dockerfile 
  
 ## LICENSE
 
-Copyright 2017-2020, perillaroc at nwpc-oper.
+Copyright 2017-2022, perillaroc cemc-oper.
 
-`ploto` is licensed under [GPL-3.0](./LICENSE.md).
+`ploto` is licensed under [Apache License, Version 2.0](./LICENSE).
