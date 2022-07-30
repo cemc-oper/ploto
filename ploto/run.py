@@ -1,4 +1,5 @@
-# coding: utf-8
+from typing import Dict
+
 from ploto.logger import get_logger
 from ploto.step import run_steps
 from ploto.environment import (
@@ -14,7 +15,7 @@ from ploto.environment import (
 logger = get_logger()
 
 
-def run_ploto(message, config):
+def run_ploto(message: Dict, config: Dict):
     message_data = message['data']
     logger.info('begin plot...')
     base_env = store_base_environment()
@@ -22,7 +23,7 @@ def run_ploto(message, config):
     logger.info('prepare environment...')
     work_dir = prepare_environment(config=config)
 
-    logger.info("entering work dir...{work_dir}".format(work_dir=work_dir))
+    logger.info(f"entering work dir...{work_dir}")
     enter_environment(work_dir)
 
     # save message
@@ -31,7 +32,7 @@ def run_ploto(message, config):
     steps = message_data['steps']
     _ = run_steps(steps, work_dir, config)
 
-    logger.info("leaving work dir...{work_dir}".format(work_dir=work_dir))
+    logger.info(f"leaving work dir...{work_dir}")
     recovery_base_environment(base_env)
 
     logger.info('clearing environment...')

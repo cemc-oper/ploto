@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 requests distributor
 
@@ -19,12 +18,15 @@ task schema:
         ]
     }
 """
+from typing import Dict
+from pathlib import Path
+
 import requests
 
 from ploto.logger import get_logger
 
 
-def run_distributor(task: dict, work_dir, config):
+def run_distributor(task: Dict, work_dir: Path, config: Dict):
     logger = get_logger()
     url = task.get('url', None)
 

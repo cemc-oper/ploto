@@ -1,8 +1,10 @@
-# coding: utf-8
-
-import loguru
+import logging
 
 
 def get_logger(name='main'):
-    logger = loguru.logger
+    try:
+        import loguru
+        logger = loguru.logger
+    except ImportError:
+        logger = logging.getLogger(name)
     return logger

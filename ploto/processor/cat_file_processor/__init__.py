@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 Cat file.
 
@@ -13,9 +12,10 @@ task schema:
 """
 import subprocess
 from pathlib import Path
+from typing import Dict
 
 
-def run_processor(task, work_dir, config):
+def run_processor(task: Dict, work_dir: Path, config: Dict):
     command = 'cat '
     for a_file_path in task['file_list']:
         file_path = str(Path(work_dir, a_file_path))

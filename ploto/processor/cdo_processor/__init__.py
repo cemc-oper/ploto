@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 cdo processor
 
@@ -12,19 +11,19 @@ task schema:
     }
 """
 import importlib
+from typing import Dict
+from pathlib import Path
 
 from ploto.logger import get_logger
 
 
-def run_processor(task, work_dir, config):
+def run_processor(task: Dict, work_dir: Path, config: Dict):
     logger = get_logger()
     cdo_operator = task['operator']
     try:
-        operator_module = importlib.import_module(
-            ".{operator}".format(operator=cdo_operator), __package__)
+        operator_module = importlib.import_module(f".{cdo_operator}", __package__)
     except ImportError:
-        logger.error("cdo operator not supported: {operator}".format(
-            operator=cdo_operator))
+        logger.error(f"cdo operator not supported: {cdo_operator}")
         return False
     operator_module.run_cdo(task, work_dir, config)
     return True

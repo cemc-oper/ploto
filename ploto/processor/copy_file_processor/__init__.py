@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 Copy files to other location during post processing.
 
@@ -15,14 +14,22 @@ task schema:
 """
 import pathlib
 import shutil
-import os
+from pathlib import Path
+from typing import Dict
 
 
-def run_processor(task, work_dir, config):
+from ploto.logger import get_logger
+
+
+logger = get_logger()
+
+
+def run_processor(task: Dict, work_dir: Path, config: Dict):
     files = task['files']
     for file_task in files:
         from_path = pathlib.Path(work_dir, file_task['from'])
         to_path = pathlib.Path(work_dir, file_task['to'])
-        if not os.path.exists(to_path.parent):
-            os.makedirs(str(to_path.parent))
+        if not to_path.parent.exists():
+            to_path.parent.mkdir(parents=True, exist_ok=True)
+        logger.debug(f"copy file: {from_path} => {to_path}")
         shutil.copy2(str(from_path), str(to_path))

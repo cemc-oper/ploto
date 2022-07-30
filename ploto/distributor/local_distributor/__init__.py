@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 local distributor
 
@@ -15,19 +14,20 @@ task schema:
         ]
     }
 """
-import pathlib
 import shutil
+from pathlib import Path
+from typing import Dict
 
 from ploto.logger import get_logger
 
 
-def run_distributor(task: dict, work_dir, config):
+def run_distributor(task: Dict, work_dir: Path, config: Dict):
     logger = get_logger()
 
     logger.info("run local distributor...")
     for item in task['items']:
-        source_files = pathlib.Path(work_dir).glob(item['from'])
-        to_path = pathlib.Path(work_dir, item['to'])
+        source_files = Path(work_dir).glob(item['from'])
+        to_path = Path(work_dir, item['to'])
         if not to_path.parent.exists():
             to_path.parent.mkdir(parents=True)
         for source_file in source_files:

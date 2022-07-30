@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 Run cdo select operator.
 
@@ -19,18 +18,21 @@ task schema:
 """
 import subprocess
 from pathlib import Path
+from typing import Dict
+
+
 from ploto.logger import get_logger
 
 logger = get_logger()
 
 
-def run_cdo(task, work_dir, config):
+def run_cdo(task: Dict, work_dir: Path, config: Dict):
     input_files = task['input_files']
     output_file = task['output_file']
     select_params = task['params']
 
     select_argument = ','.join(
-        ['{key}={value}'.format(key=key, value=select_params[key]) for key in select_params])
+        [f'{key}={select_params[key]}' for key in select_params])
     input_files_argument = ' '.join([str(Path(work_dir, Path(item))) for item in input_files])
 
     output_file_path = Path(work_dir, Path(output_file))
@@ -41,6 +43,6 @@ def run_cdo(task, work_dir, config):
               + select_argument + ' ' + input_files_argument + ' ' + output_file_argument
 
     logger.info('run cdo command...')
-    logger.info('=> {command}'.format(command=command))
+    logger.info(f'=> {command}')
     subprocess.run([command], shell=True, start_new_session=True)
-    logger.info('run cdo command...done'.format(command=command))
+    logger.info('run cdo command...done')

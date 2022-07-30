@@ -1,6 +1,5 @@
-# coding=utf-8
 """
-cdo chname
+cdo sub
 
 task schema:
     {
@@ -22,12 +21,15 @@ task schema:
 """
 import subprocess
 from pathlib import Path
+from typing import Dict
+
 from ploto.logger import get_logger
+
 
 logger = get_logger()
 
 
-def run_cdo(task, work_dir, config):
+def run_cdo(task: Dict, work_dir: Path, config: Dict):
     output_file = task['output_file']
     params = task['params']
 
@@ -41,7 +43,7 @@ def run_cdo(task, work_dir, config):
                 item_string = str(Path(work_dir, Path(item['value'])))
                 compiled_params.append(item_string)
             else:
-                logger.error("param type is not support: {param_type}".format(param_type=param_type))
+                logger.error(f"param type is not support: {param_type}")
                 return
 
     operator_argument = ' '.join([item for item in compiled_params])
@@ -54,6 +56,6 @@ def run_cdo(task, work_dir, config):
               + operator_argument + ' ' + output_file_argument
 
     logger.info('run cdo command...')
-    logger.info('=> {command}'.format(command=command))
+    logger.info(f'=> {command}')
     subprocess.run([command], shell=True, start_new_session=True)
-    logger.info('run cdo command...done'.format(command=command))
+    logger.info('run cdo command...done')

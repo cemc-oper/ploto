@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 cdo chname
 
@@ -18,18 +17,21 @@ task schema:
 """
 import subprocess
 from pathlib import Path
+from typing import Dict
+
 from ploto.logger import get_logger
+
 
 logger = get_logger()
 
 
-def run_cdo(task, work_dir, config):
+def run_cdo(task: Dict, work_dir: Path, config: Dict):
     input_file = task['input_file']
     output_file = task['output_file']
     params = task['params']
 
     operator_argument = ','.join(
-        ['{old_name},{new_name}'.format(old_name=item['old_name'], new_name=item['new_name']) for item in params])
+        [f"{item['old_name']},{item['new_name']}" for item in params])
     input_file_argument = str(Path(work_dir, Path(input_file)))
 
     output_file_path = Path(work_dir, Path(output_file))

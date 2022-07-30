@@ -1,4 +1,3 @@
-# coding=utf-8
 """
 convert processor
 
@@ -16,13 +15,15 @@ task schema:
         ]
     }
 """
-from pathlib import Path
 import subprocess
+from pathlib import Path
+from typing import Dict
+
 
 from ploto.logger import get_logger
 
 
-def run_processor(task, work_dir, config):
+def run_processor(task: Dict, work_dir: Path, config: Dict):
     logger = get_logger()
     params = task['params']
 
@@ -36,13 +37,12 @@ def run_processor(task, work_dir, config):
                 item_string = str(Path(work_dir, Path(item['value'])))
                 compiled_params.append(item_string)
             else:
-                logger.error("param type is not support: {param_type}".format(param_type=param_type))
+                logger.error(f"param type is not support: {param_type}")
                 return
 
     operator_argument = ' '.join([item for item in compiled_params])
 
-    command = 'convert ' \
-              + operator_argument
+    command = f'convert {operator_argument}'
 
     logger.info('run convert command...')
     logger.info('=> {command}'.format(command=command))

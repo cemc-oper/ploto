@@ -1,18 +1,21 @@
-# coding=utf-8
 import json
 import subprocess
 import os
+from pathlib import Path
+from typing import Dict, Union
 
 from ploto.logger import get_logger
+
+
 logger = get_logger()
 
 
-def save_ncl_script(ncl_script_path, ncl_script):
+def save_ncl_script(ncl_script_path: Union[Path, str], ncl_script: str):
     with open(ncl_script_path, 'w') as f:
         f.write(ncl_script)
 
 
-def run_plotter(plotter_task, work_dir, config):
+def run_plotter(plotter_task: Dict, work_dir: Path, config: Dict):
     logger.info('prepare plot script...')
     ncl_script_content = plotter_task['ncl_script_content']
     image_path = plotter_task['image_path']
