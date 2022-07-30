@@ -15,6 +15,12 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 with io.open("ploto/__init__.py", "rt", encoding="utf8") as f:
     version = re.search(r'__version__ = "(.*?)"', f.read()).group(1)
 
+
+requires_all = [
+    "loguru"
+]
+
+
 setup(
     name='ploto',
 
@@ -35,9 +41,7 @@ setup(
 
     include_package_data=True,
 
-    package_data={
-        '': ['*.ncl'],
-    },
+    package_data={},
 
     zip_safe=False,
 
@@ -46,11 +50,10 @@ setup(
         'pyyaml',
         'pika',
         'requests',
-        'sqlalchemy',
-        'loguru',
     ],
 
     extras_require={
+        'all': requires_all,
         'test': [],
         'gidat': [
             'cx_Oracle'
@@ -59,7 +62,8 @@ setup(
             'celery',
             'netCDF4',
             'elasticsearch==6.3.1',
-            'redis'
+            'redis',
+            'sqlalchemy',
         ]
     }
 )
