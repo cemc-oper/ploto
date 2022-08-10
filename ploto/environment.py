@@ -22,7 +22,7 @@ def get_work_dir(config: Dict) -> Path:
     os.chdir(run_base_dir)
     work_dir = Path(run_base_dir, temp_directory)
     try:
-        os.makedirs(work_dir)
+        work_dir.mkdir(parents=True)
     except FileExistsError as e:
         logger.warn('directory already exists:', work_dir)
     return work_dir
