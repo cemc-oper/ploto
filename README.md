@@ -26,6 +26,6 @@ sudo docker build --rm --tag nwpc-oper/ploto-server -f docker/server/Dockerfile 
  
 ## LICENSE
 
-Copyright 2017-2022, perillaroc cemc-oper.
+Copyright 2017-2022, perillaroc at cemc-oper.
 
 `ploto` is licensed under [Apache License, Version 2.0](./LICENSE).

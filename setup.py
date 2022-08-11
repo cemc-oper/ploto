@@ -30,7 +30,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
 
-    url='https://github.com/perillaroc/ploto',
+    url='https://github.com/nwpc-oper/ploto',
 
     author='perillaroc',
     author_email='perillaroc@gmail.com',
